@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.3.1] - 2026-09-19
+
+### Added
+- **Memory Diagnostics & Heap Trace (`alya.runFileWithMemTrace`)**: Run any active `.alya` file with `--mem-trace` enabled directly from editor title bar icon, right-click context menu, or Quick Actions. Provides real-time heap statistics (allocations, frees, active bytes, live object counters) and leak detection.
+- **`$(pulse) Mem Trace` CodeLens**: Added 1-click memory trace CodeLens right above `function main()` / `fn main()`.
+- **Configuration Setting (`alya.run.memTrace`)**: Added workspace/user setting to toggle `--mem-trace` flag by default for all file runs.
+
+---
+
 ## [0.3.0] - 2026-09-18
 
 ### Added

@@ -134,13 +134,19 @@ export function activate(context: vscode.ExtensionContext) {
       for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
 
-        if (/^\s*(?:pub\s+)?function\s+main\s*\(/.test(line)) {
+        if (/^\s*(?:pub\s+)?(?:function|fn)\s+main\s*\(/.test(line)) {
           const range = new vscode.Range(i, 0, i, line.length);
           lenses.push(
             new vscode.CodeLens(range, {
               title: "$(play) Run",
               tooltip: "Run this file with alya run",
               command: "alya.runFile",
+              arguments: [document.uri],
+            }),
+            new vscode.CodeLens(range, {
+              title: "$(pulse) Mem Trace",
+              tooltip: "Run this file with heap trace and leak diagnostics (alya run --mem-trace)",
+              command: "alya.runFileWithMemTrace",
               arguments: [document.uri],
             })
           );
@@ -175,7 +181,23 @@ export function activate(context: vscode.ExtensionContext) {
       }
       const terminal = getAlyaTerminal();
       terminal.show();
-      terminal.sendText(`alya run "${targetUri.fsPath}"`);
+      const runConfig = vscode.workspace.getConfiguration("alya");
+      const memTraceFlag = runConfig.get<boolean>("run.memTrace") ? " --mem-trace" : "";
+      terminal.sendText(`alya run${memTraceFlag} "${targetUri.fsPath}"`);
+    }
+  );
+
+  const runFileWithMemTraceCmd = vscode.commands.registerCommand(
+    "alya.runFileWithMemTrace",
+    (uri?: vscode.Uri) => {
+      const targetUri = uri || vscode.window.activeTextEditor?.document.uri;
+      if (!targetUri) {
+        vscode.window.showErrorMessage("No active Alya file to run with memory trace.");
+        return;
+      }
+      const terminal = getAlyaTerminal();
+      terminal.show();
+      terminal.sendText(`alya run --mem-trace "${targetUri.fsPath}"`);
     }
   );
 
@@ -250,6 +272,7 @@ export function activate(context: vscode.ExtensionContext) {
     formattingProvider,
     codeLensProvider,
     runFileCmd,
+    runFileWithMemTraceCmd,
     runTestCmd,
     openReplCmd,
     showDocCmd,

@@ -62,6 +62,11 @@ export class AlyaStatusBar {
         action: () => vscode.commands.executeCommand("alya.runFile"),
       },
       {
+        label: "$(pulse) Run with Memory Trace (--mem-trace)",
+        description: "Execute active file with heap trace and leak diagnostics",
+        action: () => vscode.commands.executeCommand("alya.runFileWithMemTrace"),
+      },
+      {
         label: "$(beaker) Run Project Tests",
         description: "Run test suite (alya test)",
         action: () => vscode.commands.executeCommand("alya.runTest"),
