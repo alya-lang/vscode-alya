@@ -1,0 +1,169 @@
+{
+  "name": "alya-lsp",
+  "displayName": "Alya",
+  "description": "Language Server Protocol (LSP), formatting, CodeLens, syntax highlighting, and brand file icons for Alya",
+  "version": "0.2.1",
+  "publisher": "alya-lang",
+  "author": {
+    "name": "Taiizor",
+    "email": "taiizor@vegalya.com",
+    "url": "https://github.com/Taiizor"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/alya-lang/vscode-alya#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alya-lang/vscode-alya.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alya-lang/vscode-alya/issues"
+  },
+  "keywords": [
+    "alya",
+    "lsp",
+    "language-server",
+    "syntax-highlighting",
+    "programming-language"
+  ],
+  "icon": "./icons/alya-icon.png",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets",
+    "Formatters"
+  ],
+  "activationEvents": [
+    "onLanguage:alya"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "alya",
+        "aliases": [
+          "Alya",
+          "alya"
+        ],
+        "extensions": [
+          ".alya"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "dark": "./icons/alya-file-dark.svg",
+          "light": "./icons/alya-file-light.svg"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "alya",
+        "scopeName": "source.alya",
+        "path": "./syntaxes/alya.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "alya",
+        "path": "./snippets/alya.json"
+      }
+    ],
+    "iconThemes": [
+      {
+        "id": "alya-icons",
+        "label": "Alya File Icons",
+        "path": "./icons/alya-icon-theme.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "alya.runFile",
+        "title": "Alya: Run Current File",
+        "icon": "$(play)"
+      },
+      {
+        "command": "alya.runTest",
+        "title": "Alya: Run Tests",
+        "icon": "$(beaker)"
+      },
+      {
+        "command": "alya.openRepl",
+        "title": "Alya: Open REPL",
+        "icon": "$(terminal)"
+      },
+      {
+        "command": "alya.formatDocument",
+        "title": "Alya: Format Document"
+      },
+      {
+        "command": "alya.showDoc",
+        "title": "Alya: Generate Documentation",
+        "icon": "$(book)"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "alya.runFile",
+          "when": "resourceExtname == .alya",
+          "group": "navigation@1"
+        },
+        {
+          "command": "alya.runTest",
+          "when": "resourceExtname == .alya",
+          "group": "navigation@2"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "alya.runFile",
+          "when": "resourceExtname == .alya",
+          "group": "1_alya@1"
+        },
+        {
+          "command": "alya.runTest",
+          "when": "resourceExtname == .alya",
+          "group": "1_alya@2"
+        },
+        {
+          "command": "alya.openRepl",
+          "when": "resourceExtname == .alya",
+          "group": "1_alya@3"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Alya",
+      "properties": {
+        "alya.lsp.path": {
+          "type": "string",
+          "default": "alya",
+          "description": "Path to the alya executable"
+        },
+        "alya.lsp.arguments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "lsp"
+          ],
+          "description": "Arguments to pass to the alya command to start the language server"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "bun build ./src/extension.ts --target=node --outfile=./out/extension.js --external vscode",
+    "package": "bunx @vscode/vsce package --no-dependencies"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^10.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.1",
+    "@types/vscode": "^1.80.0",
+    "typescript": "^7.0.2"
+  }
+}

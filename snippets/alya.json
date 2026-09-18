@@ -1,0 +1,171 @@
+{
+  "Function": {
+    "prefix": "fn",
+    "body": [
+      "function ${1:name}(${2:params})${3: -> ${4:type}}",
+      "\t$0",
+      "end"
+    ],
+    "description": "Define a function"
+  },
+  "Public Function": {
+    "prefix": "pubfn",
+    "body": [
+      "pub function ${1:name}(${2:params})${3: -> ${4:type}}",
+      "\t$0",
+      "end"
+    ],
+    "description": "Define a public function"
+  },
+  "Main Function": {
+    "prefix": "main",
+    "body": [
+      "function main()",
+      "\t$0",
+      "end"
+    ],
+    "description": "Standard main entry point function"
+  },
+  "Main with Args": {
+    "prefix": "mainargs",
+    "body": [
+      "function main(args: string[]) -> int",
+      "\t$0",
+      "\treturn 0",
+      "end"
+    ],
+    "description": "Main entry point with CLI arguments"
+  },
+  "Struct": {
+    "prefix": "struct",
+    "body": [
+      "struct ${1:Name}",
+      "\t${2:field}: ${3:type},",
+      "\t$0",
+      "end"
+    ],
+    "description": "Define a struct"
+  },
+  "Public Struct": {
+    "prefix": "pubstruct",
+    "body": [
+      "pub struct ${1:Name}",
+      "\t${2:field}: ${3:type},",
+      "\t$0",
+      "end"
+    ],
+    "description": "Define a public struct"
+  },
+  "Enum": {
+    "prefix": "enum",
+    "body": [
+      "enum ${1:Name}",
+      "\t${2:Variant1},",
+      "\t${3:Variant2}",
+      "end"
+    ],
+    "description": "Define an enum"
+  },
+  "Test Block": {
+    "prefix": "test",
+    "body": [
+      "test \"${1:description}\"",
+      "\t$0",
+      "end"
+    ],
+    "description": "Alya native test block"
+  },
+  "When Matching": {
+    "prefix": "when",
+    "body": [
+      "when ${1:value}",
+      "is ${2:pattern} =>",
+      "\t${3}",
+      "else =>",
+      "\t$0",
+      "end"
+    ],
+    "description": "When pattern matching expression"
+  },
+  "If Statement": {
+    "prefix": "if",
+    "body": [
+      "if ${1:condition}",
+      "\t$0",
+      "end"
+    ],
+    "description": "If statement"
+  },
+  "If Else": {
+    "prefix": "ifelse",
+    "body": [
+      "if ${1:condition}",
+      "\t${2}",
+      "else",
+      "\t$0",
+      "end"
+    ],
+    "description": "If-else statement"
+  },
+  "While Loop": {
+    "prefix": "while",
+    "body": [
+      "while ${1:condition}",
+      "\t$0",
+      "end"
+    ],
+    "description": "While loop"
+  },
+  "For In Loop": {
+    "prefix": "for",
+    "body": [
+      "for ${1:item} in ${2:collection}",
+      "\t$0",
+      "end"
+    ],
+    "description": "For .. in loop"
+  },
+  "Try Catch Finally": {
+    "prefix": "try",
+    "body": [
+      "try",
+      "\t${1}",
+      "catch ${2:err}",
+      "\t${3}",
+      "finally",
+      "\t$0",
+      "end"
+    ],
+    "description": "Try ... catch ... finally block"
+  },
+  "Extern C FFI": {
+    "prefix": "extern",
+    "body": [
+      "extern \"C\"${1: from \"${2:lib}\"}",
+      "\tfunction ${3:name}(${4:args}) -> ${5:type}",
+      "end"
+    ],
+    "description": "Foreign Function Interface (extern C) block"
+  },
+  "Spawn Fiber": {
+    "prefix": "spawn",
+    "body": [
+      "spawn ${1:func}(${2:args})"
+    ],
+    "description": "Spawn a colorless concurrency fiber"
+  },
+  "Defer Statement": {
+    "prefix": "defer",
+    "body": [
+      "defer ${1:cleanup_call}()"
+    ],
+    "description": "Defer execution until scope exit"
+  },
+  "Say Print": {
+    "prefix": "say",
+    "body": [
+      "say ${1:\"message\"}"
+    ],
+    "description": "Print to stdout"
+  }
+}
