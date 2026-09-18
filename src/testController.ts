@@ -145,10 +145,14 @@ export class AlyaTestController {
       }
 
       const startTime = Date.now();
+      const workspaceFolder = vscode.workspace.getWorkspaceFolder(uri)?.uri.fsPath;
+      const cwd = workspaceFolder || path.dirname(uri.fsPath);
+
       await new Promise<void>((resolve) => {
         cp.execFile(
           this.serverPath,
           ["test", uri.fsPath],
+          { cwd },
           (err, stdout, stderr) => {
             const duration = Date.now() - startTime;
             const output = stdout + "\n" + stderr;
