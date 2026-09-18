@@ -8,7 +8,10 @@
       "## - `${2:param}`: ${3:description}",
       "##",
       "## ### Returns",
-      "## ${4:description}"
+      "## ${4:description}",
+      "##",
+      "## ### Throws",
+      "## `${5:Error}` if ${6:condition}."
     ],
     "description": "Generate Alya Markdown docstring (##)"
   },
