@@ -1,13 +1,13 @@
 {
   "name": "alya-lsp",
   "displayName": "Alya",
-  "description": "Language Server Protocol (LSP), formatting, CodeLens, syntax highlighting, and brand file icons for Alya",
-  "version": "0.2.1",
+  "description": "Language Server Protocol (LSP), native assembly viewer, Test Explorer, formatting, CodeLens, syntax highlighting, and brand file icons for Alya",
+  "version": "0.3.0",
   "publisher": "alya-lang",
   "author": {
     "name": "Taiizor",
     "email": "taiizor@vegalya.com",
-    "url": "https://github.com/Taiizor"
+    "url": "https://github.com/alya-lang"
   },
   "license": "MIT",
   "homepage": "https://github.com/alya-lang/vscode-alya#readme",
@@ -23,7 +23,9 @@
     "lsp",
     "language-server",
     "syntax-highlighting",
-    "programming-language"
+    "programming-language",
+    "assembly",
+    "testing"
   ],
   "icon": "./icons/alya-icon.png",
   "engines": {
@@ -32,7 +34,8 @@
   "categories": [
     "Programming Languages",
     "Snippets",
-    "Formatters"
+    "Formatters",
+    "Testing"
   ],
   "activationEvents": [
     "onLanguage:alya"
@@ -88,6 +91,30 @@
         "icon": "$(beaker)"
       },
       {
+        "command": "alya.viewAssembly",
+        "title": "Alya: View Assembly Output (-S)",
+        "icon": "$(file-binary)"
+      },
+      {
+        "command": "alya.viewAst",
+        "title": "Alya: View Abstract Syntax Tree (AST)",
+        "icon": "$(symbol-structure)"
+      },
+      {
+        "command": "alya.viewTokens",
+        "title": "Alya: View Tokens (Lexer)",
+        "icon": "$(symbol-key)"
+      },
+      {
+        "command": "alya.showMenu",
+        "title": "Alya: Open Quick Actions Menu"
+      },
+      {
+        "command": "alya.restartLsp",
+        "title": "Alya: Restart Language Server",
+        "icon": "$(refresh)"
+      },
+      {
         "command": "alya.openRepl",
         "title": "Alya: Open REPL",
         "icon": "$(terminal)"
@@ -113,6 +140,11 @@
           "command": "alya.runTest",
           "when": "resourceExtname == .alya",
           "group": "navigation@2"
+        },
+        {
+          "command": "alya.viewAssembly",
+          "when": "resourceExtname == .alya",
+          "group": "navigation@3"
         }
       ],
       "editor/context": [
@@ -127,9 +159,19 @@
           "group": "1_alya@2"
         },
         {
-          "command": "alya.openRepl",
+          "command": "alya.viewAssembly",
           "when": "resourceExtname == .alya",
           "group": "1_alya@3"
+        },
+        {
+          "command": "alya.viewAst",
+          "when": "resourceExtname == .alya",
+          "group": "1_alya@4"
+        },
+        {
+          "command": "alya.openRepl",
+          "when": "resourceExtname == .alya",
+          "group": "1_alya@5"
         }
       ]
     },
@@ -159,11 +201,11 @@
     "package": "bunx @vscode/vsce package --no-dependencies"
   },
   "dependencies": {
-    "vscode-languageclient": "^10.1.1"
+    "vscode-languageclient": "^9.0.1"
   },
   "devDependencies": {
-    "@types/node": "^26.6.1",
+    "@types/node": "^20.0.0",
     "@types/vscode": "^1.80.0",
-    "typescript": "^7.0.2"
+    "typescript": "^5.0.0"
   }
 }

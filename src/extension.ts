@@ -9,6 +9,10 @@ import {
   ServerOptions,
 } from "vscode-languageclient/node";
 
+import { AlyaAssemblyViewer } from "./assemblyViewer";
+import { AlyaStatusBar } from "./statusBar";
+import { AlyaTestController } from "./testController";
+
 let client: LanguageClient | undefined;
 let alyaTerminal: vscode.Terminal | undefined;
 
@@ -24,35 +28,45 @@ export function activate(context: vscode.ExtensionContext) {
   const serverPath = config.get<string>("lsp.path") || "alya";
   const serverArgs = config.get<string[]>("lsp.arguments") || ["lsp"];
 
-  // 1. Initialize LSP Client
-  const serverOptions: ServerOptions = {
-    run: {
-      command: serverPath,
-      args: serverArgs,
-    },
-    debug: {
-      command: serverPath,
-      args: serverArgs,
-    },
-  };
+  // 1. Status Bar Item
+  const statusBar = new AlyaStatusBar(context, serverPath);
 
-  const clientOptions: LanguageClientOptions = {
-    documentSelector: [{ scheme: "file", language: "alya" }],
-    synchronize: {
-      fileEvents: vscode.workspace.createFileSystemWatcher("**/*.alya"),
-    },
-  };
+  // 2. Assembly & AST Inspector
+  const assemblyViewer = new AlyaAssemblyViewer(serverPath);
 
-  client = new LanguageClient(
-    "alya-lsp",
-    "Alya Language Server",
-    serverOptions,
-    clientOptions
-  );
+  // 3. Official Test Explorer Controller
+  new AlyaTestController(context, serverPath);
 
-  client.start();
+  // 4. Initialize LSP Client
+  function startLspClient() {
+    const serverOptions: ServerOptions = {
+      run: { command: serverPath, args: serverArgs },
+      debug: { command: serverPath, args: serverArgs },
+    };
 
-  // 2. Register Document Formatting Provider (integrates with `alya fmt`)
+    const clientOptions: LanguageClientOptions = {
+      documentSelector: [{ scheme: "file", language: "alya" }],
+      synchronize: {
+        fileEvents: vscode.workspace.createFileSystemWatcher("**/*.alya"),
+      },
+    };
+
+    client = new LanguageClient(
+      "alya-lsp",
+      "Alya Language Server",
+      serverOptions,
+      clientOptions
+    );
+
+    client.start().then(
+      () => statusBar.setLspStatus("Ready"),
+      () => statusBar.setLspStatus("Error")
+    );
+  }
+
+  startLspClient();
+
+  // 5. Document Formatting Provider (`alya fmt`)
   const formattingProvider = vscode.languages.registerDocumentFormattingEditProvider(
     "alya",
     {
@@ -88,7 +102,7 @@ export function activate(context: vscode.ExtensionContext) {
                 }
               }
             } catch {
-              // Ignore cleanup/read errors
+              // Ignore
             } finally {
               if (fs.existsSync(tempFile)) {
                 try {
@@ -105,19 +119,17 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
 
-  // 3. Register CodeLens Provider (Run / Test buttons)
+  // 6. CodeLens Provider (`function main()` -> Run, `test "..."` -> Run Test)
   const codeLensProvider = vscode.languages.registerCodeLensProvider("alya", {
     provideCodeLenses(
       document: vscode.TextDocument
     ): vscode.ProviderResult<vscode.CodeLens[]> {
       const lenses: vscode.CodeLens[] = [];
-      const text = document.getText();
-      const lines = text.split(/\r?\n/);
+      const lines = document.getText().split(/\r?\n/);
 
       for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
 
-        // Match main function
         if (/^\s*(?:pub\s+)?function\s+main\s*\(/.test(line)) {
           const range = new vscode.Range(i, 0, i, line.length);
           lenses.push(
@@ -130,7 +142,6 @@ export function activate(context: vscode.ExtensionContext) {
           );
         }
 
-        // Match test block
         const testMatch = line.match(/^\s*test\s+"([^"]+)"/);
         if (testMatch) {
           const range = new vscode.Range(i, 0, i, line.length);
@@ -149,7 +160,7 @@ export function activate(context: vscode.ExtensionContext) {
     },
   });
 
-  // 4. Register Interactive Commands
+  // 7. Interactive Commands
   const runFileCmd = vscode.commands.registerCommand(
     "alya.runFile",
     (uri?: vscode.Uri) => {
@@ -199,6 +210,38 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
 
+  const viewAssemblyCmd = vscode.commands.registerCommand(
+    "alya.viewAssembly",
+    (uri?: vscode.Uri) => assemblyViewer.viewAssembly(uri)
+  );
+
+  const viewAstCmd = vscode.commands.registerCommand(
+    "alya.viewAst",
+    (uri?: vscode.Uri) => assemblyViewer.viewAst(uri)
+  );
+
+  const viewTokensCmd = vscode.commands.registerCommand(
+    "alya.viewTokens",
+    (uri?: vscode.Uri) => assemblyViewer.viewTokens(uri)
+  );
+
+  const showMenuCmd = vscode.commands.registerCommand(
+    "alya.showMenu",
+    () => statusBar.showQuickMenu()
+  );
+
+  const restartLspCmd = vscode.commands.registerCommand(
+    "alya.restartLsp",
+    async () => {
+      statusBar.setLspStatus("Restarting");
+      if (client) {
+        await client.stop();
+      }
+      startLspClient();
+      vscode.window.showInformationMessage("Alya Language Server restarted.");
+    }
+  );
+
   context.subscriptions.push(
     formattingProvider,
     codeLensProvider,
@@ -207,6 +250,11 @@ export function activate(context: vscode.ExtensionContext) {
     openReplCmd,
     showDocCmd,
     formatDocCmd,
+    viewAssemblyCmd,
+    viewAstCmd,
+    viewTokensCmd,
+    showMenuCmd,
+    restartLspCmd,
     {
       dispose: () => {
         if (client) {

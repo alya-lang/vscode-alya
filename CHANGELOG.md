@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.3.0] - 2026-09-18
+
+### Added
+- **Official VS Code Test Explorer**: Full native integration with VS Code's Testing sidebar via the Test Controller API. Automatically discovers `test "..."` blocks, runs suites, and reports pass/fail with execution durations.
+- **Native Assembly Inspector (`Alya: View Assembly Output`)**: Compile any `.alya` file directly to native GNU/Mach-O assembly (`-S`) and display it side-by-side with assembly syntax highlighting.
+- **AST & Token Inspector**: Instant side-by-side visualization of parsed Abstract Syntax Trees (`Alya: View AST Dump`) and lexical token streams (`Alya: View Tokens`).
+- **Interactive Status Bar**: Real-time compiler version indicator and LSP status (`Ready`, `Starting`, `Restarting`) in the bottom status bar, with a 1-click quick actions menu.
+- **LSP Lifecycle Management**: Added `Alya: Restart Language Server` command.
+
+---
+
 ## [0.2.1] - 2026-09-18
 
 ### Added
@@ -23,13 +34,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Integrated Formatter**: Direct formatting support using native `alya fmt` (`Format Document` & `Format on Save`).
 - **CodeLens**: One-click `▶ Run` above `function main()` and `🧪 Run Test` above `test "..."` blocks.
 - **Title Bar & Context Menus**: Run File and Run Tests buttons in the editor title bar and right-click menu.
-- **Interactive Commands**:
-  - `Alya: Run Current File`
-  - `Alya: Run Tests`
-  - `Alya: Open REPL`
-  - `Alya: Format Document`
-  - `Alya: Generate Documentation`
-- **Rich Code Snippets**: Comprehensive templates for functions (`fn`, `pubfn`), entry points (`main`, `mainargs`), `struct`, `enum`, `when`, `if`, `while`, `for`, `try`, `extern "C"`, `spawn`, `defer`, and `say`.
+- **Interactive Commands**: Run Current File, Run Tests, Open REPL, Format Document, Generate Documentation.
+- **Rich Code Snippets**: Comprehensive templates for functions, entry points, `struct`, `enum`, `when`, `if`, `while`, `for`, `try`, `extern "C"`, `spawn`, `defer`, and `say`.
 
 ---
 
