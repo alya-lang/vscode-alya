@@ -54,15 +54,39 @@ Tab-triggered templates for all major language idioms:
 * `spawn` ➔ Colorless concurrency fiber dispatch
 * `defer` ➔ Scope-exit deferred cleanup
 
-### 6. 🛠️ Interactive Commands & Menus
+### 6. 📝 Smart Docstring & Summary Generator
+* **Automatic Specification Alignment**: Generates canonical `##` docstrings adhering to `Src/spec` (Section 1.2).
+* **Context-Aware Inference**: Analyzes function verbs (`calculate`, `get`, `is`, `parse`...), parameters, and returns.
+* **Throws Detection**: Automatically inspects function bodies for `throw` statements and populates `### Throws`.
+* **Struct & Enum Introspection**: Generates `### Fields` and `### Variants` based on declared members.
+* **Instant Activation**:
+  * Keyboard shortcut: `Ctrl+Alt+D`
+  * Lightbulb / CodeAction: Click the 💡 icon on any function or struct declaration.
+  * Right-click editor context menu: `Generate Alya Docstring`.
+
+### 7. 🧪 Official VS Code Test Explorer
+* Dedicated sidebar tree view via the VS Code Test Controller API.
+* Automatically discovers and organizes all `test "..."` blocks across your workspace.
+* One-click execution with real-time pass/fail indicators and test run durations.
+
+### 8. 🔬 Native Assembly & AST Inspectors
+* **Assembly Inspector (`Alya: View Assembly Output`)**: Compile directly to native GNU/Mach-O assembly (`-S`) and inspect side-by-side.
+* **AST & Token Inspector**: Side-by-side visualization of parsed Abstract Syntax Trees (`--ast`) and lexical tokens (`--tokens`).
+
+### 9. 🛠️ Interactive Commands & Menus
+* **Status Bar**: Real-time compiler version and LSP status (`Ready`, `Error`) with a 1-click quick actions menu.
 * **Title Bar Buttons**: Instant `▶` Run and `🧪` Test buttons on every `.alya` file.
-* **Context Menu**: Right-click anywhere in an `.alya` file to run, test, or open the REPL.
+* **Context Menu**: Right-click anywhere in an `.alya` file to run, test, format, or generate docs.
 * **Command Palette (`Ctrl+Shift+P`)**:
   * `Alya: Run Current File`
   * `Alya: Run Tests`
   * `Alya: Open REPL`
   * `Alya: Format Document`
   * `Alya: Generate Documentation`
+  * `Alya: Generate Docstring (Summary)`
+  * `Alya: View Assembly Output (-S)`
+  * `Alya: View Abstract Syntax Tree (AST)`
+  * `Alya: Restart Language Server`
 
 ---
 
