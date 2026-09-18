@@ -10,6 +10,7 @@ import {
 } from "vscode-languageclient/node";
 
 import { AlyaAssemblyViewer } from "./assemblyViewer";
+import { registerDocGenerator } from "./docGenerator";
 import { AlyaStatusBar } from "./statusBar";
 import { AlyaTestController } from "./testController";
 
@@ -37,7 +38,10 @@ export function activate(context: vscode.ExtensionContext) {
   // 3. Official Test Explorer Controller
   new AlyaTestController(context, serverPath);
 
-  // 4. Initialize LSP Client
+  // 4. Automatic Docstring & Summary Generator
+  registerDocGenerator(context);
+
+  // 5. Initialize LSP Client
   function startLspClient() {
     const serverOptions: ServerOptions = {
       run: { command: serverPath, args: serverArgs },

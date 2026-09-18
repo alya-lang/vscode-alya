@@ -127,6 +127,18 @@
         "command": "alya.showDoc",
         "title": "Alya: Generate Documentation",
         "icon": "$(book)"
+      },
+      {
+        "command": "alya.generateDocstring",
+        "title": "Alya: Generate Docstring (Summary)",
+        "icon": "$(comment)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "alya.generateDocstring",
+        "key": "ctrl+alt+d",
+        "when": "editorTextFocus && editorLangId == alya"
       }
     ],
     "menus": {
@@ -172,6 +184,11 @@
           "command": "alya.openRepl",
           "when": "resourceExtname == .alya",
           "group": "1_alya@5"
+        },
+        {
+          "command": "alya.generateDocstring",
+          "when": "resourceExtname == .alya",
+          "group": "1_alya@6"
         }
       ]
     },

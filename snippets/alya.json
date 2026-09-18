@@ -1,4 +1,25 @@
 {
+  "Docstring": {
+    "prefix": "doc",
+    "body": [
+      "## ${1:Summary description.}",
+      "##",
+      "## ### Parameters",
+      "## - `${2:param}`: ${3:description}",
+      "##",
+      "## ### Returns",
+      "## ${4:description}"
+    ],
+    "description": "Generate Alya Markdown docstring (##)"
+  },
+  "Summary": {
+    "prefix": "summary",
+    "body": [
+      "## ${1:Brief summary of this function or component.}",
+      "## $0"
+    ],
+    "description": "Brief ## summary comment"
+  },
   "Function": {
     "prefix": "fn",
     "body": [
