@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.3.0] - 2026-09-18
 
+### Added
 - **Smart Docstring & Summary Generator (`Ctrl+Alt+D` / Lightbulb)**: Context-aware docstring generator adhering to `Src/spec`. Automatically humanizes function names into natural language summaries, infers parameter and return descriptions, inspects function bodies for `throw` statements to generate `### Throws`, and parses `struct` fields, `enum` variants, and `interface` methods.
 - **Official VS Code Test Explorer**: Full native integration with VS Code's Testing sidebar via the Test Controller API. Automatically discovers `test "..."` blocks, runs suites, and reports pass/fail with execution durations.
 - **Native Assembly Inspector (`Alya: View Assembly Output`)**: Compile any `.alya` file directly to native GNU/Mach-O assembly (`-S`) and display it side-by-side with assembly syntax highlighting.
