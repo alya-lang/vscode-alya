@@ -31,6 +31,7 @@ export class AlyaAssemblyViewer {
           cp.execFile(
             this.serverPath,
             ["build", filePath, "-S", "-o", tempAsm],
+            { maxBuffer: 50 * 1024 * 1024 },
             async (err, _stdout, stderr) => {
               try {
                 if (err || !fs.existsSync(tempAsm)) {
@@ -82,23 +83,56 @@ export class AlyaAssemblyViewer {
     }
 
     const filePath = targetUri.fsPath;
-    cp.execFile(this.serverPath, ["ast", filePath], async (err, stdout, stderr) => {
-      if (err) {
-        vscode.window.showErrorMessage(`AST dump failed: ${stderr || err.message}`);
-        return;
+
+    vscode.window.withProgress(
+      {
+        location: vscode.ProgressLocation.Notification,
+        title: "Alya: Generating AST dump...",
+        cancellable: false,
+      },
+      () => {
+        return new Promise<void>((resolve) => {
+          const child = cp.spawn(this.serverPath, ["ast", filePath]);
+          const stdoutChunks: Buffer[] = [];
+          const stderrChunks: Buffer[] = [];
+
+          child.stdout.on("data", (chunk: Buffer) => stdoutChunks.push(chunk));
+          child.stderr.on("data", (chunk: Buffer) => stderrChunks.push(chunk));
+
+          child.on("error", (err) => {
+            vscode.window.showErrorMessage(`AST dump failed: ${err.message}`);
+            resolve();
+          });
+
+          child.on("close", async (code) => {
+            if (code !== 0) {
+              const stderr = Buffer.concat(stderrChunks).toString("utf8");
+              vscode.window.showErrorMessage(
+                `AST dump failed: ${stderr || `Process exited with code ${code}`}`
+              );
+              return resolve();
+            }
+
+            try {
+              const stdout = Buffer.concat(stdoutChunks).toString("utf8");
+              const doc = await vscode.workspace.openTextDocument({
+                content: stdout,
+                language: "rust",
+              });
+
+              await vscode.window.showTextDocument(doc, {
+                viewColumn: vscode.ViewColumn.Beside,
+                preview: true,
+                preserveFocus: true,
+              });
+            } catch (e: any) {
+              vscode.window.showErrorMessage(`Error displaying AST: ${e.message}`);
+            }
+            resolve();
+          });
+        });
       }
-
-      const doc = await vscode.workspace.openTextDocument({
-        content: stdout,
-        language: "rust",
-      });
-
-      await vscode.window.showTextDocument(doc, {
-        viewColumn: vscode.ViewColumn.Beside,
-        preview: true,
-        preserveFocus: true,
-      });
-    });
+    );
   }
 
   public async viewTokens(uri?: vscode.Uri) {
@@ -109,22 +143,55 @@ export class AlyaAssemblyViewer {
     }
 
     const filePath = targetUri.fsPath;
-    cp.execFile(this.serverPath, ["tokens", filePath], async (err, stdout, stderr) => {
-      if (err) {
-        vscode.window.showErrorMessage(`Tokenization failed: ${stderr || err.message}`);
-        return;
+
+    vscode.window.withProgress(
+      {
+        location: vscode.ProgressLocation.Notification,
+        title: "Alya: Inspecting tokens (lexer)...",
+        cancellable: false,
+      },
+      () => {
+        return new Promise<void>((resolve) => {
+          const child = cp.spawn(this.serverPath, ["tokens", filePath]);
+          const stdoutChunks: Buffer[] = [];
+          const stderrChunks: Buffer[] = [];
+
+          child.stdout.on("data", (chunk: Buffer) => stdoutChunks.push(chunk));
+          child.stderr.on("data", (chunk: Buffer) => stderrChunks.push(chunk));
+
+          child.on("error", (err) => {
+            vscode.window.showErrorMessage(`Tokenization failed: ${err.message}`);
+            resolve();
+          });
+
+          child.on("close", async (code) => {
+            if (code !== 0) {
+              const stderr = Buffer.concat(stderrChunks).toString("utf8");
+              vscode.window.showErrorMessage(
+                `Tokenization failed: ${stderr || `Process exited with code ${code}`}`
+              );
+              return resolve();
+            }
+
+            try {
+              const stdout = Buffer.concat(stdoutChunks).toString("utf8");
+              const doc = await vscode.workspace.openTextDocument({
+                content: stdout,
+                language: "rust",
+              });
+
+              await vscode.window.showTextDocument(doc, {
+                viewColumn: vscode.ViewColumn.Beside,
+                preview: true,
+                preserveFocus: true,
+              });
+            } catch (e: any) {
+              vscode.window.showErrorMessage(`Error displaying tokens: ${e.message}`);
+            }
+            resolve();
+          });
+        });
       }
-
-      const doc = await vscode.workspace.openTextDocument({
-        content: stdout,
-        language: "rust",
-      });
-
-      await vscode.window.showTextDocument(doc, {
-        viewColumn: vscode.ViewColumn.Beside,
-        preview: true,
-        preserveFocus: true,
-      });
-    });
+    );
   }
 }

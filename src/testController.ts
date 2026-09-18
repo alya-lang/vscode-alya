@@ -152,7 +152,7 @@ export class AlyaTestController {
         cp.execFile(
           this.serverPath,
           ["test", uri.fsPath],
-          { cwd },
+          { cwd, maxBuffer: 50 * 1024 * 1024 },
           (err, stdout, stderr) => {
             const duration = Date.now() - startTime;
             const output = stdout + "\n" + stderr;

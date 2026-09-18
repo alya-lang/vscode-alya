@@ -2,7 +2,7 @@
   "name": "alya-lsp",
   "displayName": "Alya",
   "description": "Language Server Protocol (LSP), native assembly viewer, Test Explorer, formatting, CodeLens, syntax highlighting, and brand file icons for Alya",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "publisher": "alya-lang",
   "author": {
     "name": "Taiizor",

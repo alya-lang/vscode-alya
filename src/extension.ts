@@ -91,7 +91,11 @@ export function activate(context: vscode.ExtensionContext) {
             return resolve([]);
           }
 
-          cp.execFile(serverPath, ["fmt", tempFile], (err) => {
+          cp.execFile(
+            serverPath,
+            ["fmt", tempFile],
+            { maxBuffer: 50 * 1024 * 1024 },
+            (err) => {
             try {
               if (!err && fs.existsSync(tempFile)) {
                 const formatted = fs.readFileSync(tempFile, "utf8");
@@ -261,7 +265,11 @@ export function activate(context: vscode.ExtensionContext) {
     async () => {
       statusBar.setLspStatus("Restarting");
       if (client) {
-        await client.stop();
+        try {
+          await client.stop();
+        } catch {
+          // Ignore process termination / EPIPE errors during restart
+        }
       }
       startLspClient();
       vscode.window.showInformationMessage("Alya Language Server restarted.");
@@ -285,7 +293,11 @@ export function activate(context: vscode.ExtensionContext) {
     {
       dispose: () => {
         if (client) {
-          client.stop();
+          try {
+            client.stop();
+          } catch {
+            // Ignore
+          }
         }
       },
     }
@@ -296,5 +308,5 @@ export function deactivate(): Thenable<void> | undefined {
   if (!client) {
     return undefined;
   }
-  return client.stop();
+  return client.stop().catch(() => {});
 }
