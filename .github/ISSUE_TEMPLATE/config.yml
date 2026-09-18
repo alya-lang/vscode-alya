@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Alya Language Official Website
+    url: https://alya-lang.org
+    about: Official documentation, guides, and standard library reference.
+  - name: Alya Compiler Core Issues
+    url: https://github.com/alya-lang/alya/issues
+    about: For compiler bugs, parser errors, runtime crashes, or standard library issues.
+  - name: Discussions & Community
+    url: https://github.com/alya-lang/alya/discussions
+    about: Ask questions, share feedback, and discuss ideas with the community.
