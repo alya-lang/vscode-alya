@@ -3,38 +3,107 @@
   "name": "Alya",
   "scopeName": "source.alya",
   "patterns": [
-    {
-      "include": "#comments"
-    },
-    {
-      "include": "#strings"
-    },
-    {
-      "include": "#keywords"
-    },
-    {
-      "include": "#constants"
-    },
-    {
-      "include": "#types"
-    },
-    {
-      "include": "#numbers"
-    },
-    {
-      "include": "#functions"
-    }
+    { "include": "#comments" },
+    { "include": "#strings-interpolated" },
+    { "include": "#strings-raw" },
+    { "include": "#strings-multiline" },
+    { "include": "#strings-single" },
+    { "include": "#strings-double" },
+    { "include": "#keywords" },
+    { "include": "#builtins" },
+    { "include": "#attributes" },
+    { "include": "#constants" },
+    { "include": "#types" },
+    { "include": "#numbers" },
+    { "include": "#functions" },
+    { "include": "#operators" }
   ],
   "repository": {
     "comments": {
       "patterns": [
         {
+          "name": "comment.block.documentation.alya",
+          "match": "^\\s*##.*$"
+        },
+        {
           "name": "comment.line.number-sign.alya",
           "match": "#.*$"
+        },
+        {
+          "name": "comment.block.alya",
+          "begin": "/\\*",
+          "end": "\\*/"
         }
       ]
     },
-    "strings": {
+    "strings-interpolated": {
+      "patterns": [
+        {
+          "name": "string.interpolated.alya",
+          "begin": "\\b(f)(\")",
+          "beginCaptures": {
+            "1": { "name": "storage.type.string.alya" },
+            "2": { "name": "punctuation.definition.string.begin.alya" }
+          },
+          "end": "\"",
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.string.end.alya" }
+          },
+          "patterns": [
+            {
+              "name": "constant.character.escape.alya",
+              "match": "\\\\."
+            },
+            {
+              "name": "meta.interpolation.alya",
+              "begin": "\\{",
+              "beginCaptures": {
+                "0": { "name": "punctuation.section.interpolation.begin.alya" }
+              },
+              "end": "\\}",
+              "endCaptures": {
+                "0": { "name": "punctuation.section.interpolation.end.alya" }
+              },
+              "patterns": [
+                { "include": "$self" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "strings-raw": {
+      "patterns": [
+        {
+          "name": "string.quoted.raw.alya",
+          "begin": "\\b(r)(\")",
+          "beginCaptures": {
+            "1": { "name": "storage.type.string.alya" },
+            "2": { "name": "punctuation.definition.string.begin.alya" }
+          },
+          "end": "\"",
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.string.end.alya" }
+          }
+        }
+      ]
+    },
+    "strings-multiline": {
+      "patterns": [
+        {
+          "name": "string.quoted.triple.alya",
+          "begin": "\"\"\"",
+          "end": "\"\"\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.alya",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "strings-double": {
       "patterns": [
         {
           "name": "string.quoted.double.alya",
@@ -49,19 +118,55 @@
         }
       ]
     },
+    "strings-single": {
+      "patterns": [
+        {
+          "name": "string.quoted.single.rune.alya",
+          "match": "'(?:[^'\\\\]|\\\\.)*'"
+        }
+      ]
+    },
     "keywords": {
       "patterns": [
         {
-          "name": "keyword.control.alya",
-          "match": "\\b(if|else|while|for|in|return|break|continue|match|async|await)\\b"
+          "name": "keyword.control.end.alya",
+          "match": "\\b(end)\\b"
+        },
+        {
+          "name": "keyword.control.flow.alya",
+          "match": "\\b(if|then|elif|else|when|is|while|for|in|repeat|return|break|continue|defer|try|catch|finally|throw)\\b"
         },
         {
           "name": "keyword.declaration.alya",
-          "match": "\\b(fn|let|mut|struct|enum|impl|trait|type|pub|use|mod|const|static)\\b"
+          "match": "\\b(function|fn|let|mut|const|struct|enum|interface|impl|type|pub|import|as|from|extern|spawn|select|comptime)\\b"
         },
         {
-          "name": "variable.language.alya",
-          "match": "\\b(self|Self)\\b"
+          "name": "keyword.other.unit-testing.alya",
+          "match": "\\b(test|bench|say|assert)\\b"
+        },
+        {
+          "name": "keyword.operator.logical.alya",
+          "match": "\\b(and|or|not)\\b"
+        },
+        {
+          "name": "keyword.other.system.alya",
+          "match": "\\b(weak|sizeof|alignof|typeof)\\b"
+        }
+      ]
+    },
+    "builtins": {
+      "patterns": [
+        {
+          "name": "support.function.builtin.alya",
+          "match": "\\b(assert_eq|assert_ne|assert_gt|assert_ge|assert_lt|assert_le|assert_true|assert_false|assert_throws|print|println|panic|len)\\b"
+        }
+      ]
+    },
+    "attributes": {
+      "patterns": [
+        {
+          "name": "entity.other.attribute-name.alya",
+          "match": "@[a-zA-Z_][a-zA-Z0-9_]*\\b"
         }
       ]
     },
@@ -72,13 +177,21 @@
           "match": "\\b(true|false)\\b"
         },
         {
-          "name": "constant.language.nil.alya",
-          "match": "\\bnil\\b"
+          "name": "constant.language.null.alya",
+          "match": "\\b(null|nil)\\b"
+        },
+        {
+          "name": "variable.language.special.alya",
+          "match": "\\b(self|Self)\\b"
         }
       ]
     },
     "types": {
       "patterns": [
+        {
+          "name": "support.type.primitive.alya",
+          "match": "\\b(int|i8|i16|i32|i64|u8|u16|u32|u64|float|f32|f64|bool|str|string|char|rune|ptr|void|any)\\b"
+        },
         {
           "name": "entity.name.type.alya",
           "match": "\\b[A-Z][a-zA-Z0-9_]*\\b"
@@ -88,23 +201,78 @@
     "numbers": {
       "patterns": [
         {
+          "name": "constant.numeric.hex.alya",
+          "match": "\\b0[xX][0-9a-fA-F_]+\\b"
+        },
+        {
+          "name": "constant.numeric.binary.alya",
+          "match": "\\b0[bB][01_]+\\b"
+        },
+        {
+          "name": "constant.numeric.octal.alya",
+          "match": "\\b0[oO][0-7_]+\\b"
+        },
+        {
           "name": "constant.numeric.float.alya",
-          "match": "\\b[0-9]+\\.[0-9]+([eE][+-]?[0-9]+)?\\b"
+          "match": "\\b[0-9][0-9_]*\\.[0-9_]+([eE][+-]?[0-9_]+)?\\b"
         },
         {
           "name": "constant.numeric.integer.alya",
-          "match": "\\b[0-9]+\\b"
+          "match": "\\b[0-9][0-9_]*\\b"
         }
       ]
     },
     "functions": {
       "patterns": [
         {
-          "match": "\\b(fn)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
+          "match": "\\b(?:function|fn)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
           "captures": {
-            "1": { "name": "keyword.declaration.alya" },
-            "2": { "name": "entity.name.function.alya" }
+            "1": { "name": "entity.name.function.definition.alya" }
           }
+        },
+        {
+          "match": "\\.([a-zA-Z_][a-zA-Z0-9_]*)\\s*(?=\\()",
+          "captures": {
+            "1": { "name": "entity.name.function.member.alya" }
+          }
+        },
+        {
+          "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*(?=\\()",
+          "captures": {
+            "1": { "name": "entity.name.function.call.alya" }
+          }
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.arrow.alya",
+          "match": "(->|=>)"
+        },
+        {
+          "name": "keyword.operator.comparison.alya",
+          "match": "(==|!=|<=|>=|<|>)"
+        },
+        {
+          "name": "keyword.operator.assignment.alya",
+          "match": "(\\+=|-=|\\*=|/=|%=|&=|\\|=|\\^=|<<=|>>=|=)"
+        },
+        {
+          "name": "keyword.operator.arithmetic.alya",
+          "match": "(\\+|-|\\*|/|%)"
+        },
+        {
+          "name": "keyword.operator.coalescing.alya",
+          "match": "(\\?\\?|\\?)"
+        },
+        {
+          "name": "keyword.operator.range.alya",
+          "match": "(\\.\\.=|\\.\\.)"
+        },
+        {
+          "name": "keyword.operator.bitwise.alya",
+          "match": "(&|\\||\\^|~|<<|>>)"
         }
       ]
     }
