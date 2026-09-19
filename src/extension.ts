@@ -1,7 +1,4 @@
 import * as cp from "child_process";
-import * as fs from "fs";
-import * as os from "os";
-import * as path from "path";
 import * as vscode from "vscode";
 import {
   LanguageClient,
@@ -41,7 +38,7 @@ export function activate(context: vscode.ExtensionContext) {
   // 4. Automatic Docstring & Summary Generator
   registerDocGenerator(context);
 
-  // 5. Initialize LSP Client
+  // 5. Initialize LSP Client (Native LSP handles formatting, symbols, references, folding)
   function startLspClient() {
     const serverOptions: ServerOptions = {
       run: { command: serverPath, args: serverArgs },
@@ -69,63 +66,6 @@ export function activate(context: vscode.ExtensionContext) {
   }
 
   startLspClient();
-
-  // 5. Document Formatting Provider (`alya fmt`)
-  const formattingProvider = vscode.languages.registerDocumentFormattingEditProvider(
-    "alya",
-    {
-      provideDocumentFormattingEdits(
-        document: vscode.TextDocument
-      ): Promise<vscode.TextEdit[]> {
-        return new Promise((resolve) => {
-          const originalText = document.getText();
-          const tempDir = os.tmpdir();
-          const tempFile = path.join(
-            tempDir,
-            `alya_fmt_${Date.now()}_${Math.random().toString(36).substring(7)}.alya`
-          );
-
-          try {
-            fs.writeFileSync(tempFile, originalText, "utf8");
-          } catch {
-            return resolve([]);
-          }
-
-          cp.execFile(
-            serverPath,
-            ["fmt", tempFile],
-            { maxBuffer: 50 * 1024 * 1024 },
-            (err) => {
-            try {
-              if (!err && fs.existsSync(tempFile)) {
-                const formatted = fs.readFileSync(tempFile, "utf8");
-                fs.unlinkSync(tempFile);
-
-                if (formatted !== originalText) {
-                  const fullRange = new vscode.Range(
-                    document.positionAt(0),
-                    document.positionAt(originalText.length)
-                  );
-                  return resolve([vscode.TextEdit.replace(fullRange, formatted)]);
-                }
-              }
-            } catch {
-              // Ignore
-            } finally {
-              if (fs.existsSync(tempFile)) {
-                try {
-                  fs.unlinkSync(tempFile);
-                } catch {
-                  // Ignore
-                }
-              }
-            }
-            resolve([]);
-          });
-        });
-      },
-    }
-  );
 
   // 6. CodeLens Provider (`function main()` -> Run, `test "..."` -> Run Test)
   const codeLensProvider = vscode.languages.registerCodeLensProvider("alya", {
@@ -308,7 +248,6 @@ export function activate(context: vscode.ExtensionContext) {
   });
 
   context.subscriptions.push(
-    formattingProvider,
     codeLensProvider,
     runFileCmd,
     runFileWithMemTraceCmd,

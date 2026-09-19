@@ -4,7 +4,7 @@ This document outlines the strategic roadmap, planned architectural enhancements
 
 ---
 
-## 🎯 Current Status (v0.3.2)
+## 🎯 Current Status (v0.4.0)
 
 - [x] Full text document synchronization (`textDocumentSync: 1`)
 - [x] Syntax and Gradual Type checking diagnostics (`textDocument/publishDiagnostics`)
@@ -12,7 +12,10 @@ This document outlines the strategic roadmap, planned architectural enhancements
 - [x] Identifier, keyword, and member completion (`textDocument/completion`)
 - [x] Markdown docstring hover inspection (`textDocument/hover`)
 - [x] Definition navigation (`textDocument/definition`)
-- [x] External document formatting via child process (`alya fmt`)
+- [x] Native in-memory document formatting (`textDocument/formatting`)
+- [x] Hierarchical document symbols and Outline navigation (`textDocument/documentSymbol`)
+- [x] Find All References across open documents (`textDocument/references`)
+- [x] AST-driven block, comment, and import folding ranges (`textDocument/foldingRange`)
 - [x] CodeLens execution (`main` run, `test` blocks)
 - [x] Initial Test Explorer controller (`AlyaTestController`)
 - [x] Official SVG brand file icon theme (Light/Dark)
@@ -21,36 +24,36 @@ This document outlines the strategic roadmap, planned architectural enhancements
 
 ---
 
-## 🚀 Milestone 1: Core LSP Navigation & Structural Intelligence (v0.4.0)
+## 🚀 Milestone 1: Core LSP Navigation & Structural Intelligence (v0.4.0) ✅
 
 Enhance code navigation, workspace structural comprehension, and in-memory formatting.
 
 ### 1.1 Document Symbols & Outline (`textDocument/documentSymbol`)
-- [ ] Provide hierarchical outline symbols for:
+- [x] Provide hierarchical outline symbols for:
   - `Function` (`function`, `pub function`, struct methods `Struct.method`)
   - `Struct` (`struct`, `pub struct`)
   - `Enum` (`enum`, `pub enum`) and their variants
   - `Interface` (`interface`, `pub interface`)
   - `Constant` (`const`, `pub const`)
-- [ ] Enable VS Code **Outline view** in the File Explorer.
-- [ ] Enable **Breadcrumbs** navigation at the top of the editor.
-- [ ] Support **Go to Symbol in File** (`Ctrl+Shift+O`).
+- [x] Enable VS Code **Outline view** in the File Explorer.
+- [x] Enable **Breadcrumbs** navigation at the top of the editor.
+- [x] Support **Go to Symbol in File** (`Ctrl+Shift+O`).
 
 ### 1.2 In-Memory Native LSP Formatting (`textDocument/formatting`)
-- [ ] Migrate document formatting from extension-side temp files (`os.tmpdir()` + `cp.execFile`) to native LSP `textDocument/formatting`.
-- [ ] Format directly in memory inside the `alya lsp` process, eliminating child process spawning and disk I/O overhead.
-- [ ] Enable formatting support for other LSP clients (Neovim, Helix, Zed, Emacs).
+- [x] Migrate document formatting from extension-side temp files (`os.tmpdir()` + `cp.execFile`) to native LSP `textDocument/formatting`.
+- [x] Format directly in memory inside the `alya lsp` process, eliminating child process spawning and disk I/O overhead.
+- [x] Enable formatting support for other LSP clients (Neovim, Helix, Zed, Emacs).
 
 ### 1.3 Find All References (`textDocument/references`)
-- [ ] Implement `textDocument/references` to discover all usages of variables, functions, structs, and enum variants.
-- [ ] Support `Shift+F12` ("Find All References") and reference count CodeLens.
+- [x] Implement `textDocument/references` to discover all usages of variables, functions, structs, and enum variants.
+- [x] Support `Shift+F12` ("Find All References") and reference count CodeLens.
 
 ### 1.4 Workspace & Document Folding Ranges (`textDocument/foldingRange`)
-- [ ] AST-driven folding ranges for:
+- [x] AST-driven folding ranges for:
   - Block declarations (`function ... end`, `struct ... end`, `enum ... end`, `interface ... end`)
   - Control flow structures (`if ... elif ... else ... end`, `while ... end`, `for ... end`, `repeat ... end`)
   - Multi-line block comments (`/* ... */`) and documentation comments (`## ...`)
-- [ ] Eliminates reliance on indentation-based folding.
+- [x] Eliminates reliance on indentation-based folding.
 
 ---
 

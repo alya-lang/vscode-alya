@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.4.0] - 2026-09-20
+
+### Added
+- **Document Symbols & Outline (`textDocument/documentSymbol`)**: Full hierarchical symbol discovery supporting functions, structs (with field items), enums (with variant items), interfaces (with methods), and constants. Powers VS Code's Outline view, Editor Breadcrumbs, and Go to Symbol in File (`Ctrl+Shift+O`).
+- **Native In-Memory Formatting (`textDocument/formatting`)**: Replaced extension-side temporary file formatting hack with native LSP formatting. Formats code in memory directly inside the language server, eliminating child process spawning and disk I/O.
+- **Find All References (`textDocument/references`)**: Full symbol reference search (`Shift+F12`) across current document and all active workspace documents.
+- **AST & Block Folding Ranges (`textDocument/foldingRange`)**: Accurate block folding for functions, structs, enums, interfaces, control flow blocks (`if`, `while`, `for`, `repeat`, `when`, `try`), test/bench blocks, consecutive comment blocks, and import groups.
+
+---
+
 ## [0.3.2] - 2026-09-19
 
 ### Fixed
