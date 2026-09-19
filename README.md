@@ -75,10 +75,11 @@ Tab-triggered templates for all major language idioms:
 
 ### 9. 🛠️ Interactive Commands & Menus
 * **Status Bar**: Real-time compiler version and LSP status (`Ready`, `Error`) with a 1-click quick actions menu.
-* **Title Bar Buttons**: Instant `▶` Run and `🧪` Test buttons on every `.alya` file.
-* **Context Menu**: Right-click anywhere in an `.alya` file to run, test, format, or generate docs.
+* **Title Bar Buttons**: Instant `▶` Run, `🐞` Debug, and `🧪` Test buttons on every `.alya` file.
+* **Context Menu**: Right-click anywhere in an `.alya` file to run, debug, test, format, or generate docs.
 * **Command Palette (`Ctrl+Shift+P`)**:
   * `Alya: Run Current File`
+  * `Alya: Debug Current File`
   * `Alya: Run Tests`
   * `Alya: Open REPL`
   * `Alya: Format Document`
@@ -87,6 +88,16 @@ Tab-triggered templates for all major language idioms:
   * `Alya: View Assembly Output (-S)`
   * `Alya: View Abstract Syntax Tree (AST)`
   * `Alya: Restart Language Server`
+
+### 10. 🐞 Debug Adapter Protocol (DAP)
+Powered by the native `alya dap` engine:
+* **Interactive Breakpoints & Stepping**: Set line breakpoints (`F9`), step over (`F10`), step into (`F11`), and step out (`Shift+F11`).
+* **Stack & Variable Inspection**: Inspect call stack frames, local variables, constants, and concurrency states in the Run & Debug pane.
+* **Expression Evaluation**: Evaluate variables and expressions on hover, in the Watch window, or via the Debug Console.
+* **Predefined Launch Configurations**:
+  * `Alya: Launch Current File`: Instant F5 debugging for active scripts.
+  * `Alya: Run Tests`: Step through test suites with full variable inspection.
+  * `Alya: Run with Memory Leak Trace`: Debug programs with live allocation profiling and memory leak tracing.
 
 ---
 

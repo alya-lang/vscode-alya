@@ -118,9 +118,9 @@ Provide first-class editing ergonomics and safe refactoring tools.
 Complete the IDE toolchain with debugging capabilities and automated releases.
 
 ### 4.1 Debug Adapter Protocol (DAP)
-- [ ] Implement Alya Debug Adapter Protocol (DAP) integration.
-- [ ] Support breakpoints, step in / step over / step out, and variable evaluation.
-- [ ] Provide predefined `launch.json` templates:
+- [x] Implement Alya Debug Adapter Protocol (DAP) integration.
+- [x] Support breakpoints, step in / step over / step out, and variable evaluation.
+- [x] Provide predefined `launch.json` templates:
   - `Alya: Launch Current File`
   - `Alya: Run Tests`
   - `Alya: Run with Memory Leak Trace`

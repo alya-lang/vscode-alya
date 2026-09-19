@@ -1,4 +1,5 @@
 import * as cp from "child_process";
+import * as path from "path";
 import * as vscode from "vscode";
 import {
   LanguageClient,
@@ -10,6 +11,10 @@ import { AlyaAssemblyViewer } from "./assemblyViewer";
 import { registerDocGenerator } from "./docGenerator";
 import { AlyaStatusBar } from "./statusBar";
 import { AlyaTestController } from "./testController";
+import {
+  AlyaDebugConfigurationProvider,
+  AlyaDebugAdapterDescriptorFactory,
+} from "./debugAdapter";
 
 let client: LanguageClient | undefined;
 let alyaTerminal: vscode.Terminal | undefined;
@@ -85,6 +90,12 @@ export function activate(context: vscode.ExtensionContext) {
               title: "$(play) Run",
               tooltip: "Run this file with alya run",
               command: "alya.runFile",
+              arguments: [document.uri],
+            }),
+            new vscode.CodeLens(range, {
+              title: "$(debug-alt) Debug",
+              tooltip: "Debug this file with Alya DAP debugger",
+              command: "alya.debugFile",
               arguments: [document.uri],
             }),
             new vscode.CodeLens(range, {
@@ -304,10 +315,39 @@ export function activate(context: vscode.ExtensionContext) {
     }
   });
 
+  const debugFileCmd = vscode.commands.registerCommand(
+    "alya.debugFile",
+    (uri?: vscode.Uri) => {
+      const targetUri = uri || vscode.window.activeTextEditor?.document.uri;
+      if (!targetUri) {
+        vscode.window.showErrorMessage("No active Alya file to debug.");
+        return;
+      }
+      vscode.debug.startDebugging(undefined, {
+        type: "alya",
+        name: `Alya Debug: ${path.basename(targetUri.fsPath)}`,
+        request: "launch",
+        program: targetUri.fsPath,
+        stopOnEntry: false,
+      });
+    }
+  );
+
+  // 8. Debug Adapter Protocol (DAP) Integration
+  const debugConfigProvider = new AlyaDebugConfigurationProvider();
+  const debugAdapterFactory = new AlyaDebugAdapterDescriptorFactory();
+  const debugConfigDisposable =
+    vscode.debug.registerDebugConfigurationProvider("alya", debugConfigProvider);
+  const debugFactoryDisposable =
+    vscode.debug.registerDebugAdapterDescriptorFactory("alya", debugAdapterFactory);
+
   context.subscriptions.push(
     codeLensProvider,
+    debugConfigDisposable,
+    debugFactoryDisposable,
     runFileCmd,
     runFileWithMemTraceCmd,
+    debugFileCmd,
     runTestCmd,
     runTestAtCursorCmd,
     debugTestCmd,

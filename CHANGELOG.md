@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.7.0] - 2026-09-20
+
+### Added
+- **Debug Adapter Protocol (DAP) Integration (`alya dap`)**:
+  - Full native DAP server implementation communicating over stdio framing.
+  - Implemented standard DAP lifecycle: `initialize`, `setBreakPoints`, `launch`, `configurationDone`, `threads`, `stackTrace`, `scopes`, `variables`, `evaluate`, `next` (step over), `stepIn` (step into), `stepOut` (step out), `continue`, `pause`, and `disconnect`.
+- **Breakpoints, Stepping & Variable Inspection**:
+  - Verified breakpoint resolution and tracking with file & line matching.
+  - Call stack inspection with function names and current source line coordinates.
+  - Scopes tree view: Locals (`initial_price`, parameters, local variables), Globals (`PI`, constants), and Concurrency state.
+  - Interactive variable evaluation for hover tooltips, Watch window, and Debug Console.
+- **Predefined `launch.json` Templates & Snippets**:
+  - `Alya: Launch Current File`: Zero-configuration F5 debugging for active `.alya` documents.
+  - `Alya: Run Tests`: Integrated test suite debugging with breakpoints and assertion inspection.
+  - `Alya: Run with Memory Leak Trace`: Interactive debugging with memory allocation analysis and leak detection (`--mem-trace`).
+- **Test Explorer & Editor DAP Actions**:
+  - Directly debug tests from Test Explorer or editor context menus (`Alya: Debug Test at Cursor / Active File`).
+  - CodeLens integration: Added `Debug` lens alongside `Run` on `main()` functions.
+
+---
+
 ## [0.6.0] - 2026-09-20
 
 ### Added

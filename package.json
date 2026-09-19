@@ -1,8 +1,8 @@
 {
   "name": "alya-lsp",
   "displayName": "Alya",
-  "description": "Language Server Protocol (LSP), native assembly viewer, Test Explorer, formatting, CodeLens, syntax highlighting, and brand file icons for Alya",
-  "version": "0.6.0",
+  "description": "Language Server Protocol (LSP), Debug Adapter Protocol (DAP), native assembly viewer, Test Explorer, formatting, CodeLens, syntax highlighting, and brand file icons for Alya",
+  "version": "0.7.0",
   "publisher": "alya-lang",
   "author": {
     "name": "Taiizor",
@@ -159,6 +159,11 @@
         "icon": "$(debug-alt)"
       },
       {
+        "command": "alya.debugFile",
+        "title": "Alya: Debug Current File",
+        "icon": "$(debug-alt)"
+      },
+      {
         "command": "alya.rerunFailedTests",
         "title": "Alya: Re-run Failed Tests",
         "icon": "$(refresh)"
@@ -171,12 +176,136 @@
         "when": "editorTextFocus && editorLangId == alya"
       }
     ],
+    "breakpoints": [
+      {
+        "language": "alya"
+      }
+    ],
+    "debuggers": [
+      {
+        "type": "alya",
+        "label": "Alya Debugger",
+        "languages": [
+          "alya"
+        ],
+        "configurationAttributes": {
+          "launch": {
+            "required": [
+              "program"
+            ],
+            "properties": {
+              "program": {
+                "type": "string",
+                "description": "Path to the Alya source file or test directory to debug",
+                "default": "${file}"
+              },
+              "stopOnEntry": {
+                "type": "boolean",
+                "description": "Automatically pause execution at the first line of the program",
+                "default": false
+              },
+              "memTrace": {
+                "type": "boolean",
+                "description": "Enable memory tracing and leak detection during debugging",
+                "default": false
+              },
+              "args": {
+                "type": "array",
+                "description": "Command line arguments passed to the program",
+                "items": {
+                  "type": "string"
+                },
+                "default": []
+              },
+              "cwd": {
+                "type": "string",
+                "description": "Current working directory for the debug session",
+                "default": "${workspaceFolder}"
+              }
+            }
+          }
+        },
+        "initialConfigurations": [
+          {
+            "type": "alya",
+            "request": "launch",
+            "name": "Alya: Launch Current File",
+            "program": "${file}",
+            "stopOnEntry": false,
+            "memTrace": false
+          },
+          {
+            "type": "alya",
+            "request": "launch",
+            "name": "Alya: Run Tests",
+            "program": "${workspaceFolder}/tests",
+            "stopOnEntry": false,
+            "args": [
+              "test"
+            ]
+          },
+          {
+            "type": "alya",
+            "request": "launch",
+            "name": "Alya: Run with Memory Leak Trace",
+            "program": "${file}",
+            "stopOnEntry": false,
+            "memTrace": true
+          }
+        ],
+        "configurationSnippets": [
+          {
+            "label": "Alya: Launch Current File",
+            "description": "Debug the currently active Alya source file",
+            "body": {
+              "type": "alya",
+              "request": "launch",
+              "name": "Alya: Launch Current File",
+              "program": "^\"\\${file}\"",
+              "stopOnEntry": false,
+              "memTrace": false
+            }
+          },
+          {
+            "label": "Alya: Run Tests",
+            "description": "Debug Alya test suites with DAP breakpoints and variable inspection",
+            "body": {
+              "type": "alya",
+              "request": "launch",
+              "name": "Alya: Run Tests",
+              "program": "^\"\\${workspaceFolder}/tests\"",
+              "stopOnEntry": false,
+              "args": [
+                "test"
+              ]
+            }
+          },
+          {
+            "label": "Alya: Run with Memory Leak Trace",
+            "description": "Debug Alya file with comprehensive memory leak tracing and allocation analysis",
+            "body": {
+              "type": "alya",
+              "request": "launch",
+              "name": "Alya: Run with Memory Leak Trace",
+              "program": "^\"\\${file}\"",
+              "stopOnEntry": false,
+              "memTrace": true
+            }
+          }
+        ]
+      }
+    ],
     "menus": {
       "editor/title": [
         {
           "command": "alya.runFile",
           "when": "resourceExtname == .alya",
           "group": "navigation@1"
+        },
+        {
+          "command": "alya.debugFile",
+          "when": "resourceExtname == .alya",
+          "group": "navigation@1.1"
         },
         {
           "command": "alya.runFileWithMemTrace",
@@ -199,6 +328,11 @@
           "command": "alya.runFile",
           "when": "resourceExtname == .alya",
           "group": "1_alya@1"
+        },
+        {
+          "command": "alya.debugFile",
+          "when": "resourceExtname == .alya",
+          "group": "1_alya@1.1"
         },
         {
           "command": "alya.runFileWithMemTrace",
@@ -294,6 +428,11 @@
           "type": "boolean",
           "default": true,
           "description": "Enable inline type annotations and parameter name hints in the editor"
+        },
+        "alya.debug.path": {
+          "type": "string",
+          "default": "alya",
+          "description": "Path to the alya executable used for DAP debugging"
         }
       }
     }

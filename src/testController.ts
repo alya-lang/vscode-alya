@@ -507,17 +507,30 @@ export class AlyaTestController {
       return;
     }
 
-    const terminal =
-      vscode.window.terminals.find((t) => t.name === "Alya Test Debug") ||
-      vscode.window.createTerminal("Alya Test Debug");
-    terminal.show();
-    terminal.sendText(`alya run --mem-trace "${targetItem.uri.fsPath}"`);
-
     run.started(targetItem);
     run.appendOutput(
-      `[Debug Session] Launched: alya run --mem-trace "${targetItem.uri.fsPath}" in terminal.\r\n`
+      `[Debug Session] Initiating DAP debug session for "${targetItem.label}" (${targetItem.uri.fsPath})...\r\n`
     );
-    run.passed(targetItem, 0);
+
+    const started = await vscode.debug.startDebugging(undefined, {
+      type: "alya",
+      name: `Alya Debug Test: ${targetItem.label}`,
+      request: "launch",
+      program: targetItem.uri.fsPath,
+      memTrace: true,
+      stopOnEntry: false,
+    });
+
+    if (started) {
+      run.appendOutput(`[Debug Session] DAP session started successfully.\r\n`);
+      run.passed(targetItem, 0);
+    } else {
+      run.appendOutput(`[Debug Session] Failed to start DAP session.\r\n`);
+      run.failed(
+        targetItem,
+        new vscode.TestMessage("Failed to start Alya DAP debug session.")
+      );
+    }
     run.end();
   }
 
