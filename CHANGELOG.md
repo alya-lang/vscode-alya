@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.6.0] - 2026-09-20
+
+### Added
+- **Signature Help & Parameter Info (`textDocument/signatureHelp`)**:
+  - Automatic signature help triggered when typing `(` or `,`.
+  - Displays function parameter labels, type annotations, and default parameter values.
+  - Highlights active parameter index in real time as the developer types arguments.
+  - Supports Markdown doc comments extracted from function headers and standard library builtins (`say`, `assert`, `len`, `push`, `pop`, `panic`).
+- **Symbol Renaming & Safe Refactoring (`textDocument/rename` & `textDocument/prepareRename`)**:
+  - Safe symbol renaming across workspace documents via `F2`.
+  - Rejects invalid identifiers and reserved language keywords.
+  - Returns transactional `WorkspaceEdit` preventing partial or corrupted renames.
+- **Inlay Hints (`textDocument/inlayHint`)**:
+  - Type hints displaying compiler-inferred types for untyped declarations (`let count: int = 42`).
+  - Parameter name hints inline at call sites (`scale(factor: 2.5, delta: 10)`).
+  - Configurable toggle (`alya.inlayHints.enabled`).
+- **Smart Bracket & Keyword Autocompletion**:
+  - Added `indentationRules` and `onEnterRules` in `language-configuration.json` for automatic indentation after block headers (`function`, `struct`, `enum`, `interface`, `if`, `while`, `for`, `repeat`, `when`, `try`, `test`, `bench`, `else`, `catch`, `finally`).
+  - Electric pairs and surrounding pairs for quotes, backticks, string interpolations (`{"..."}`), and runes (`'...'`).
+- **AST-Driven Semantic Highlighting (`textDocument/semanticTokens/full`)**:
+  - Native semantic token classifications: distinct colors for structs, enums, interfaces, methods, functions, enum variants, properties, and parameters.
+  - Highlights readonly constants and default library types (`Tensor`, `f64x4`, `Channel`, `Mutex`, `WaitGroup`, `Fiber`).
+  - Standard LSP 3.16+ delta encoding stream for high-performance editor rendering.
+
+---
+
 ## [0.5.0] - 2026-09-20
 
 ### Added

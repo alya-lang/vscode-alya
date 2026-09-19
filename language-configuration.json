@@ -12,14 +12,34 @@
     { "open": "[", "close": "]" },
     { "open": "(", "close": ")" },
     { "open": "\"", "close": "\"", "notIn": ["string"] },
-    { "open": "'", "close": "'", "notIn": ["string", "comment"] }
+    { "open": "'", "close": "'", "notIn": ["string", "comment"] },
+    { "open": "`", "close": "`", "notIn": ["string", "comment"] }
   ],
   "surroundingPairs": [
     ["{", "}"],
     ["[", "]"],
     ["(", ")"],
     ["\"", "\""],
-    ["'", "'"]
+    ["'", "'"],
+    ["`", "`"]
+  ],
+  "indentationRules": {
+    "increaseIndentPattern": "^\\s*(pub\\s+)?(function|fn|struct|enum|interface|if|else|elif|while|for|repeat|when|try|catch|finally|test|bench)\\b.*$",
+    "decreaseIndentPattern": "^\\s*(end|else|elif|catch|finally)\\b.*$"
+  },
+  "onEnterRules": [
+    {
+      "beforeText": "^\\s*(pub\\s+)?(function|fn|struct|enum|interface|if|while|for|repeat|when|try|test|bench)\\b.*$",
+      "action": {
+        "indent": "indent"
+      }
+    },
+    {
+      "beforeText": "^\\s*(else|elif|catch|finally)\\b.*$",
+      "action": {
+        "indent": "indent"
+      }
+    }
   ],
   "folding": {
     "markers": {

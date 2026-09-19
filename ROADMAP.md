@@ -86,27 +86,27 @@ Upgrade the test controller from regex line-matching to a robust package-aware t
 Provide first-class editing ergonomics and safe refactoring tools.
 
 ### 3.1 Signature Help & Parameter Info (`textDocument/signatureHelp`)
-- [ ] Automatically trigger signature help when typing `(` or `,`.
-- [ ] Display parameter names, type annotations, and default parameter values.
-- [ ] Highlight active parameter as the developer types arguments.
+- [x] Automatically trigger signature help when typing `(` or `,`.
+- [x] Display parameter names, type annotations, and default parameter values.
+- [x] Highlight active parameter as the developer types arguments.
 
 ### 3.2 Symbol Renaming & Safe Refactoring (`textDocument/rename`)
-- [ ] Implement `textDocument/prepareRename` and `textDocument/rename`.
-- [ ] Allow safe, workspace-wide symbol renaming with `F2`.
-- [ ] Return transactional `WorkspaceEdit` preventing partial/corrupt renames.
+- [x] Implement `textDocument/prepareRename` and `textDocument/rename`.
+- [x] Allow safe, workspace-wide symbol renaming with `F2`.
+- [x] Return transactional `WorkspaceEdit` preventing partial/corrupt renames.
 
 ### 3.3 Inlay Hints for Inferred Types & Parameters (`textDocument/inlayHint`)
-- [ ] Inlay type hints: Display compiler-inferred types for untyped declarations (`let count /* : int */ = 42`).
-- [ ] Parameter name hints: Display parameter names inline for call sites (`scale(/*factor:*/ 2.5)`).
-- [ ] Configurable toggle (`alya.inlayHints.enabled`).
+- [x] Inlay type hints: Display compiler-inferred types for untyped declarations (`let count /* : int */ = 42`).
+- [x] Parameter name hints: Display parameter names inline for call sites (`scale(/*factor:*/ 2.5)`).
+- [x] Configurable toggle (`alya.inlayHints.enabled`).
 
 ### 3.4 Smart Bracket & Keyword Autocompletion
-- [ ] Implement `onEnterRules` in `language-configuration.json`:
+- [x] Implement `onEnterRules` in `language-configuration.json`:
   - Automatically indent and insert matching `end` after typing `function`, `if`, `while`, `for`, `struct`, `repeat`, `enum`, `interface`.
-- [ ] Electric pairs for quotes, backticks, string interpolations (`{"..."}`), and runes (`'...'`).
+- [x] Electric pairs for quotes, backticks, string interpolations (`{"..."}`), and runes (`'...'`).
 
 ### 3.5 Semantic Highlighting (`textDocument/semanticTokens/full`)
-- [ ] AST-driven semantic token classification:
+- [x] AST-driven semantic token classification:
   - Distinct colors for custom types, interfaces, and struct members.
   - Distinguish between mutable local variables, parameters, and constants.
   - Enum variant discrimination.
