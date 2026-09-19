@@ -276,6 +276,37 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
 
+  const lintFileCmd = vscode.commands.registerCommand(
+    "alya.lintFile",
+    (uri?: vscode.Uri) => {
+      const targetUri = uri || vscode.window.activeTextEditor?.document.uri;
+      const targetPath = targetUri ? `"${targetUri.fsPath}"` : "";
+      const terminal = getAlyaTerminal();
+      terminal.show();
+      terminal.sendText(`alya lint ${targetPath}`.trim());
+    }
+  );
+
+  const lintFixCmd = vscode.commands.registerCommand(
+    "alya.lintFix",
+    (uri?: vscode.Uri) => {
+      const targetUri = uri || vscode.window.activeTextEditor?.document.uri;
+      const targetPath = targetUri ? `"${targetUri.fsPath}"` : "";
+      const terminal = getAlyaTerminal();
+      terminal.show();
+      terminal.sendText(`alya lint ${targetPath} --fix`.trim());
+    }
+  );
+
+  const onSaveDisposable = vscode.workspace.onDidSaveTextDocument((doc) => {
+    if (doc.languageId === "alya") {
+      const lintConfig = vscode.workspace.getConfiguration("alya.lint");
+      if (lintConfig.get<boolean>("runOnSave")) {
+        cp.execFile(serverPath, ["lint", doc.uri.fsPath, "--fix"], () => {});
+      }
+    }
+  });
+
   context.subscriptions.push(
     formattingProvider,
     codeLensProvider,
@@ -290,6 +321,9 @@ export function activate(context: vscode.ExtensionContext) {
     viewTokensCmd,
     showMenuCmd,
     restartLspCmd,
+    lintFileCmd,
+    lintFixCmd,
+    onSaveDisposable,
     {
       dispose: () => {
         if (client) {

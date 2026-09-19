@@ -137,6 +137,16 @@
         "command": "alya.generateDocstring",
         "title": "Alya: Generate Docstring (Summary)",
         "icon": "$(comment)"
+      },
+      {
+        "command": "alya.lintFile",
+        "title": "Alya: Lint Current File",
+        "icon": "$(search)"
+      },
+      {
+        "command": "alya.lintFix",
+        "title": "Alya: Lint and Fix Current File",
+        "icon": "$(wrench)"
       }
     ],
     "keybindings": [
@@ -204,6 +214,16 @@
           "command": "alya.generateDocstring",
           "when": "resourceExtname == .alya",
           "group": "1_alya@6"
+        },
+        {
+          "command": "alya.lintFile",
+          "when": "resourceExtname == .alya",
+          "group": "1_alya@7"
+        },
+        {
+          "command": "alya.lintFix",
+          "when": "resourceExtname == .alya",
+          "group": "1_alya@8"
         }
       ]
     },
@@ -229,6 +249,16 @@
           "type": "boolean",
           "default": false,
           "description": "Always pass --mem-trace to 'alya run' for memory diagnostics and leak detection"
+        },
+        "alya.lint.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable real-time static code analysis and linter diagnostics in language server"
+        },
+        "alya.lint.runOnSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically run 'alya lint --fix' when saving an Alya source file"
         }
       }
     }
