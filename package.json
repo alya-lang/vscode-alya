@@ -2,7 +2,7 @@
   "name": "alya-lsp",
   "displayName": "Alya",
   "description": "Language Server Protocol (LSP), native assembly viewer, Test Explorer, formatting, CodeLens, syntax highlighting, and brand file icons for Alya",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "publisher": "alya-lang",
   "author": {
     "name": "Taiizor",
@@ -147,6 +147,21 @@
         "command": "alya.lintFix",
         "title": "Alya: Lint and Fix Current File",
         "icon": "$(wrench)"
+      },
+      {
+        "command": "alya.runTestAtCursor",
+        "title": "Alya: Run Test at Cursor",
+        "icon": "$(beaker)"
+      },
+      {
+        "command": "alya.debugTest",
+        "title": "Alya: Debug Test at Cursor / Active File",
+        "icon": "$(debug-alt)"
+      },
+      {
+        "command": "alya.rerunFailedTests",
+        "title": "Alya: Re-run Failed Tests",
+        "icon": "$(refresh)"
       }
     ],
     "keybindings": [
@@ -194,6 +209,16 @@
           "command": "alya.runTest",
           "when": "resourceExtname == .alya",
           "group": "1_alya@2"
+        },
+        {
+          "command": "alya.runTestAtCursor",
+          "when": "resourceExtname == .alya",
+          "group": "1_alya@2.1"
+        },
+        {
+          "command": "alya.debugTest",
+          "when": "resourceExtname == .alya",
+          "group": "1_alya@2.2"
         },
         {
           "command": "alya.viewAssembly",
@@ -259,6 +284,11 @@
           "type": "boolean",
           "default": false,
           "description": "Automatically run 'alya lint --fix' when saving an Alya source file"
+        },
+        "alya.testing.autoRunOnSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically re-run package tests when an Alya source file is saved"
         }
       }
     }

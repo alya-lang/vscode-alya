@@ -4,7 +4,7 @@ This document outlines the strategic roadmap, planned architectural enhancements
 
 ---
 
-## 🎯 Current Status (v0.4.0)
+## 🎯 Current Status (v0.5.0)
 
 - [x] Full text document synchronization (`textDocumentSync: 1`)
 - [x] Syntax and Gradual Type checking diagnostics (`textDocument/publishDiagnostics`)
@@ -16,8 +16,10 @@ This document outlines the strategic roadmap, planned architectural enhancements
 - [x] Hierarchical document symbols and Outline navigation (`textDocument/documentSymbol`)
 - [x] Find All References across open documents (`textDocument/references`)
 - [x] AST-driven block, comment, and import folding ranges (`textDocument/foldingRange`)
-- [x] CodeLens execution (`main` run, `test` blocks)
-- [x] Initial Test Explorer controller (`AlyaTestController`)
+- [x] Package & Benchmark Test Explorer (`tests/*.alya`, `benches/*.alya`, `test_suite`, `bench_runner`)
+- [x] Native `vscode.TestRun` reporting with clickable failure locations and visual diffs
+- [x] Re-run failed tests & auto-run on save (`alya.testing.autoRunOnSave`)
+- [x] CodeLens execution (`main` run, `test` blocks, `test_suite`, `bench_runner`)
 - [x] Official SVG brand file icon theme (Light/Dark)
 - [x] Automatic docstring generator (`alya.generateDocstring`, `Ctrl+Alt+D`)
 - [x] Native assembly (`-S`), AST, and token inspector webviews
@@ -57,25 +59,25 @@ Enhance code navigation, workspace structural comprehension, and in-memory forma
 
 ---
 
-## 🧪 Milestone 2: Comprehensive Test Explorer & Package Testing (v0.5.0)
+## 🧪 Milestone 2: Comprehensive Test Explorer & Package Testing (v0.5.0) ✅
 
 Upgrade the test controller from regex line-matching to a robust package-aware test runner.
 
 ### 2.1 Package & Suite Discovery
-- [ ] Automatically discover all standard package test suites in `tests/*.alya` (matching `alya test` CLI discovery).
-- [ ] Support both inline `test "..."` keyword blocks and `std/test` suite runners (`test_suite(...)`, `runner_new()`, `main()`).
-- [ ] Discover benchmark suites in `benches/*.alya` (`bench_runner(...)`).
+- [x] Automatically discover all standard package test suites in `tests/*.alya` (matching `alya test` CLI discovery).
+- [x] Support both inline `test "..."` keyword blocks and `std/test` suite runners (`test_suite(...)`, `runner_new()`, `main()`).
+- [x] Discover benchmark suites in `benches/*.alya` (`bench_runner(...)`).
 
 ### 2.2 Rich Test Execution & Reporting
-- [ ] Replace plain terminal output with native `vscode.TestRun` API reporting:
+- [x] Replace plain terminal output with native `vscode.TestRun` API reporting:
   - Per-test pass/fail status
   - Individual assertion count and elapsed duration
   - Exact failure line numbers with visual diffs and assertion messages
-- [ ] Support "Run Test at Cursor" and "Debug Test" shortcuts.
+- [x] Support "Run Test at Cursor" and "Debug Test" shortcuts.
 
 ### 2.3 Smart Re-Run & Coverage Readiness
-- [ ] Re-run only failed tests.
-- [ ] Auto-run tests on file save (configurable: `alya.testing.autoRunOnSave`).
+- [x] Re-run only failed tests.
+- [x] Auto-run tests on file save (configurable: `alya.testing.autoRunOnSave`).
 
 ---
 

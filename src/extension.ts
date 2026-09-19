@@ -33,7 +33,7 @@ export function activate(context: vscode.ExtensionContext) {
   const assemblyViewer = new AlyaAssemblyViewer(serverPath);
 
   // 3. Official Test Explorer Controller
-  new AlyaTestController(context, serverPath);
+  const testController = new AlyaTestController(context, serverPath);
 
   // 4. Automatic Docstring & Summary Generator
   registerDocGenerator(context);
@@ -67,7 +67,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   startLspClient();
 
-  // 6. CodeLens Provider (`function main()` -> Run, `test "..."` -> Run Test)
+  // 6. CodeLens Provider (`function main()` -> Run, `test "..."` -> Run Test, suites, benches)
   const codeLensProvider = vscode.languages.registerCodeLensProvider("alya", {
     provideCodeLenses(
       document: vscode.TextDocument
@@ -96,14 +96,52 @@ export function activate(context: vscode.ExtensionContext) {
           );
         }
 
-        const testMatch = line.match(/^\s*test\s+"([^"]+)"/);
+        const testMatch = line.match(/^\s*(?:pub\s+)?test\s+"([^"]+)"/);
         if (testMatch) {
           const range = new vscode.Range(i, 0, i, line.length);
           lenses.push(
             new vscode.CodeLens(range, {
               title: "$(beaker) Run Test",
               tooltip: `Run test: ${testMatch[1]}`,
+              command: "alya.runTestAtCursor",
+            })
+          );
+        }
+
+        const suiteMatch = line.match(/test_suite\s*\(\s*"([^"]+)"\s*\)/);
+        if (suiteMatch) {
+          const range = new vscode.Range(i, 0, i, line.length);
+          lenses.push(
+            new vscode.CodeLens(range, {
+              title: "$(beaker) Run Suite",
+              tooltip: `Run test suite: ${suiteMatch[1]}`,
               command: "alya.runTest",
+              arguments: [document.uri],
+            })
+          );
+        }
+
+        const benchRunnerMatch = line.match(/bench_runner\s*\(\s*"([^"]+)"\s*\)/);
+        if (benchRunnerMatch) {
+          const range = new vscode.Range(i, 0, i, line.length);
+          lenses.push(
+            new vscode.CodeLens(range, {
+              title: "$(dashboard) Run Benchmarks",
+              tooltip: `Run benchmark suite: ${benchRunnerMatch[1]}`,
+              command: "alya.runFile",
+              arguments: [document.uri],
+            })
+          );
+        }
+
+        const benchMatch = line.match(/^\s*(?:pub\s+)?bench\s+"([^"]+)"/);
+        if (benchMatch) {
+          const range = new vscode.Range(i, 0, i, line.length);
+          lenses.push(
+            new vscode.CodeLens(range, {
+              title: "$(dashboard) Run Benchmark",
+              tooltip: `Run benchmark: ${benchMatch[1]}`,
+              command: "alya.runFile",
               arguments: [document.uri],
             })
           );
@@ -238,11 +276,30 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
 
+  const runTestAtCursorCmd = vscode.commands.registerCommand(
+    "alya.runTestAtCursor",
+    () => testController.runTestAtCursor()
+  );
+
+  const debugTestCmd = vscode.commands.registerCommand(
+    "alya.debugTest",
+    () => testController.debugTestAtCursor()
+  );
+
+  const rerunFailedTestsCmd = vscode.commands.registerCommand(
+    "alya.rerunFailedTests",
+    () => testController.rerunFailedTests()
+  );
+
   const onSaveDisposable = vscode.workspace.onDidSaveTextDocument((doc) => {
     if (doc.languageId === "alya") {
       const lintConfig = vscode.workspace.getConfiguration("alya.lint");
       if (lintConfig.get<boolean>("runOnSave")) {
         cp.execFile(serverPath, ["lint", doc.uri.fsPath, "--fix"], () => {});
+      }
+      const testConfig = vscode.workspace.getConfiguration("alya.testing");
+      if (testConfig.get<boolean>("autoRunOnSave")) {
+        testController.autoRunOnSave(doc);
       }
     }
   });
@@ -252,6 +309,9 @@ export function activate(context: vscode.ExtensionContext) {
     runFileCmd,
     runFileWithMemTraceCmd,
     runTestCmd,
+    runTestAtCursorCmd,
+    debugTestCmd,
+    rerunFailedTestsCmd,
     openReplCmd,
     showDocCmd,
     formatDocCmd,

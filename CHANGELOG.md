@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.5.0] - 2026-09-20
+
+### Added
+- **Package Test & Benchmark Suite Discovery**:
+  - Full automatic discovery of package test suites in `tests/*.alya` matching `alya test` CLI patterns.
+  - Robust support for both inline `test "..."` keyword blocks and `std/test` suite runners (`test_suite(...)`, `runner_new()`, `runner_assert*`, `suite.test(...)`).
+  - Benchmark suite discovery in `benches/*.alya` supporting `bench_runner(...)`, `bench_stop(...)`, and inline `bench "..."` blocks.
+- **Rich Test Execution & Visual Diff Reporting**:
+  - Replaced basic terminal runs with native `vscode.TestRun` API reporting with granular per-test status indicators.
+  - Exact failure line numbers with clickable editor location badges and inline side-by-side expected vs actual visual diff comparisons.
+  - Precise timing and assertion statistics per test case.
+  - "Run Test at Cursor" (`alya.runTestAtCursor`) and "Debug Test at Cursor" (`alya.debugTest`) with memory trace (`--mem-trace`).
+- **Smart Re-Run & Auto-Run on Save**:
+  - Re-run only failed tests with 1 click (`alya.rerunFailedTests`).
+  - Configurable auto-run on save (`alya.testing.autoRunOnSave`).
+  - Enhanced CodeLenses for test suites (`$(beaker) Run Suite`), benchmark suites (`$(dashboard) Run Benchmarks`), and benchmarks (`$(dashboard) Run Benchmark`).
+
+---
+
 ## [0.4.0] - 2026-09-20
 
 ### Added
