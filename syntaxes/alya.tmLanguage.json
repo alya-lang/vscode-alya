@@ -190,7 +190,7 @@
       "patterns": [
         {
           "name": "support.type.primitive.alya",
-          "match": "\\b(int|i8|i16|i32|i64|u8|u16|u32|u64|byte|usize|isize|float|f32|f64|bool|str|string|char|rune|ptr|void|any|array|map)\\b"
+          "match": "\\b(int|i8|i16|i32|i64|u8|u16|u32|u64|byte|usize|isize|float|f32|f64|bool|str|string|char|rune|ptr|void|any|array|map|f64x4|f32x8|i32x8|i64x4)\\b"
         },
         {
           "name": "entity.name.type.alya",
