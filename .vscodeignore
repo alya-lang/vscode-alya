@@ -7,3 +7,5 @@ bun.lock
 .vscodeignore
 **/*.map
 *.vsix
+test/**
+bunfig.toml
