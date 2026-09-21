@@ -72,13 +72,6 @@
         "path": "./snippets/alya.json"
       }
     ],
-    "iconThemes": [
-      {
-        "id": "alya-icons",
-        "label": "Alya File Icons",
-        "path": "./icons/alya-icon-theme.json"
-      }
-    ],
     "commands": [
       {
         "command": "alya.runFile",
