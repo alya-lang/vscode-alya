@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.9.0] - 2026-09-22
+
+### Added
+- **20-language UI coverage**: added `package.nls.*.json` + `l10n/bundle.l10n.*.json` for zh-cn, zh-tw, fr, de, it, nl, ru, pt-br, pl, uk, id, el, cs, hu, sv, ja, ko (EN/TR/ES already present). No code changes — VS Code loads the matching bundle automatically from `vscode.env.language`.
+
+---
+
 ## [0.8.5] - 2026-09-22
 
 ### Removed
