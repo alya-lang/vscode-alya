@@ -2,7 +2,7 @@
   "name": "alya-lsp",
   "displayName": "Alya",
   "description": "Language Server Protocol (LSP), Debug Adapter Protocol (DAP), native assembly viewer, Test Explorer, formatting, CodeLens, syntax highlighting, and brand file icons for Alya",
-  "version": "0.8.1",
+  "version": "0.8.5",
   "publisher": "alya-lang",
   "author": {
     "name": "Taiizor",
@@ -41,6 +41,7 @@
     "onLanguage:alya"
   ],
   "main": "./out/extension.js",
+  "l10n": "./l10n",
   "contributes": {
     "languages": [
       {

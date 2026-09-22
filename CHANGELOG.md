@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.8.5] - 2026-09-22
+
+### Removed
+- Temporary diagnostic command `Alya: Show Locale Info` (`alya.showLocaleInfo`) and its `package.nls` keys — i18n issue resolved.
+
+---
+
+## [0.8.4] - 2026-09-22
+
+### Fixed
+- **Broken TR/ES runtime bundles**: `l10n/bundle.l10n.tr.json` and `l10n/bundle.l10n.es.json` contained trailing duplicate `}` braces after the closing object, making them invalid JSON. VS Code silently rejected the whole file and fell back to English for every `l10n.t()` string. Both files repaired and validated (89/89 keys, full parity with the source bundle).
+
+---
+
+## [0.8.3] - 2026-09-22
+
+### Fixed
+- Runtime localization now actually loads: added the required top-level `"l10n": "./l10n"` entry to the extension manifest (`package.json`). Without it VS Code ignores `l10n/bundle.l10n.*.json` and `vscode.l10n.t()` falls back to English.
+
+---
+
+## [0.8.2] - 2026-09-22
+
+### Added
+- Diagnostic command `Alya: Show Locale Info` (`alya.showLocaleInfo`) reporting `vscode.env.language` and a sample `l10n.t()` translation for i18n troubleshooting.
+
+---
+
 ## [0.8.1] - 2026-09-22
 
 ### Fixed
