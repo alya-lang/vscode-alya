@@ -48,9 +48,12 @@ export class AlyaStatusBar {
       this.version === "offline" || this.version === "loading..."
         ? vscode.l10n.t(this.version)
         : this.version;
+    const title = vscode.l10n.t("Alya Language Toolchain");
+    const compilerLabel = vscode.l10n.t("Compiler");
+    const hint = vscode.l10n.t("Click for quick actions");
     this.statusBarItem.text = `$(symbol-property) Alya ${displayVersion} | ${localizedStatus}`;
     this.statusBarItem.tooltip = new vscode.MarkdownString(
-      `**Alya Language Toolchain**\n\n- **Compiler**: ${displayVersion}\n- **LSP**: ${localizedStatus}\n\n*Click for quick actions*`
+      `**${title}**\n\n- **${compilerLabel}**: ${displayVersion}\n- **LSP**: ${localizedStatus}\n\n*${hint}*`
     );
   }
 

@@ -84,6 +84,10 @@
   "Launch Current Alya File": "Geçerli Alya Dosyasını Başlat",
   "Cannot start Alya debugging: No active Alya file or 'program' attribute specified in launch.json.": "Alya hata ayıklama başlatılamıyor: Etkin Alya dosyası yok veya launch.json içinde 'program' özniteliği belirtilmemiş.",
   "loading...": "yükleniyor...",
-  "offline": "çevrimdışı"
+  "offline": "çevrimdışı",
+  "Alya Language Toolchain": "Alya Dil Araç Zinciri",
+  "Compiler": "Derleyici",
+  "Click for quick actions": "Hızlı eylemler için tıklayın"
+}
 }
 }

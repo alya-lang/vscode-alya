@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.8.1] - 2026-09-22
+
+### Fixed
+- Status bar tooltip now fully localized (`Alya Language Toolchain`, `Compiler`, `Click for quick actions` added to EN/TR/ES bundles).
+
+---
+
 ## [0.8.0] - 2026-09-22
 
 ### Added

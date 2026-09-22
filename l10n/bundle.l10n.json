@@ -84,5 +84,8 @@
   "Launch Current Alya File": "Launch Current Alya File",
   "Cannot start Alya debugging: No active Alya file or 'program' attribute specified in launch.json.": "Cannot start Alya debugging: No active Alya file or 'program' attribute specified in launch.json.",
   "loading...": "loading...",
-  "offline": "offline"
+  "offline": "offline",
+  "Alya Language Toolchain": "Alya Language Toolchain",
+  "Compiler": "Compiler",
+  "Click for quick actions": "Click for quick actions"
 }

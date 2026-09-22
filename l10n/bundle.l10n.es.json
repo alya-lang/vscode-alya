@@ -84,6 +84,10 @@
   "Launch Current Alya File": "Iniciar archivo Alya actual",
   "Cannot start Alya debugging: No active Alya file or 'program' attribute specified in launch.json.": "No se puede iniciar la depuración de Alya: no hay ningún archivo Alya activo ni atributo 'program' especificado en launch.json.",
   "loading...": "cargando...",
-  "offline": "sin conexión"
+  "offline": "sin conexión",
+  "Alya Language Toolchain": "Cadena de herramientas del lenguaje Alya",
+  "Compiler": "Compilador",
+  "Click for quick actions": "Clic para acciones rápidas"
+}
 }
 }
