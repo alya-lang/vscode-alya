@@ -2,6 +2,18 @@ import { mock } from "bun:test";
 
 mock.module("vscode", () => {
   return {
+    l10n: {
+      // Mirrors vscode.l10n.t fallback: return source with {0} args substituted
+      t: (message: string, ...args: Array<string | number | boolean>) => {
+        let out = message;
+        args.forEach((a, i) => {
+          out = out.split(`{${i}}`).join(String(a));
+        });
+        return out;
+      },
+      bundle: undefined,
+      uri: undefined,
+    },
     window: {
       activeTextEditor: undefined,
       showErrorMessage: () => {},
