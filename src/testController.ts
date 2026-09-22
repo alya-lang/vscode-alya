@@ -22,13 +22,13 @@ export class AlyaTestController {
   ) {
     this.controller = vscode.tests.createTestController(
       "alyaTestController",
-      "Alya Tests"
+      vscode.l10n.t("Alya Tests")
     );
     context.subscriptions.push(this.controller);
 
     // 1. Run Profile (executes alya test / alya run)
     this.controller.createRunProfile(
-      "Run",
+      vscode.l10n.t("Run"),
       vscode.TestRunProfileKind.Run,
       (request, token) => this.runTests(request, token),
       true
@@ -36,7 +36,7 @@ export class AlyaTestController {
 
     // 2. Debug Profile (runs in terminal with --mem-trace and diagnostics)
     this.controller.createRunProfile(
-      "Debug",
+      vscode.l10n.t("Debug"),
       vscode.TestRunProfileKind.Debug,
       (request, token) => this.runDebugTests(request, token),
       false
@@ -166,7 +166,7 @@ export class AlyaTestController {
       if (suiteMatch) {
         discovered.push({
           id: `${uri.toString()}::suite::${suiteMatch[1]}`,
-          name: `[Suite] ${suiteMatch[1]}`,
+          name: vscode.l10n.t("[Suite] {0}", suiteMatch[1]),
           line: i,
           isBenchmark: false,
           isSuite: true,
@@ -179,7 +179,7 @@ export class AlyaTestController {
       if (benchRunnerMatch) {
         discovered.push({
           id: `${uri.toString()}::bench_suite::${benchRunnerMatch[1]}`,
-          name: `[Bench] ${benchRunnerMatch[1]}`,
+          name: vscode.l10n.t("[Bench] {0}", benchRunnerMatch[1]),
           line: i,
           isBenchmark: true,
           isSuite: true,
@@ -237,7 +237,9 @@ export class AlyaTestController {
         if (/^\s*(?:pub\s+)?(?:function|fn)\s+main\s*\(/.test(lines[i])) {
           discovered.push({
             id: `${uri.toString()}::main`,
-            name: isBenchFile ? "Benchmark Suite" : "Package Test Suite",
+            name: isBenchFile
+              ? vscode.l10n.t("Benchmark Suite")
+              : vscode.l10n.t("Package Test Suite"),
             line: i,
             isBenchmark: isBenchFile,
             isSuite: true,
@@ -263,9 +265,9 @@ export class AlyaTestController {
     }
 
     fileItem.description = isBenchFile
-      ? "benchmark"
+      ? vscode.l10n.t("benchmark")
       : isTestFile
-      ? "package test"
+      ? vscode.l10n.t("package test")
       : undefined;
 
     // Populate children items
@@ -280,9 +282,9 @@ export class AlyaTestController {
           lines[endLine]?.length || 0
         );
         if (d.isBenchmark) {
-          item.description = "bench";
+          item.description = vscode.l10n.t("bench");
         } else if (d.isSuite) {
-          item.description = "suite";
+          item.description = vscode.l10n.t("suite");
         }
         return item;
       })
@@ -332,7 +334,7 @@ export class AlyaTestController {
       run.started(fileItem);
       items.forEach((it) => run.started(it));
 
-      const isBench = fileItem.description === "benchmark";
+      const isBench = fileItem.description === vscode.l10n.t("benchmark");
       const cmdArgs = isBench ? ["run", uri.fsPath] : ["test", uri.fsPath];
       const workspaceFolder =
         vscode.workspace.getWorkspaceFolder(uri)?.uri.fsPath;
@@ -502,7 +504,9 @@ export class AlyaTestController {
     }
 
     if (!targetItem || !targetItem.uri) {
-      vscode.window.showErrorMessage("No test selected for debug execution.");
+      vscode.window.showErrorMessage(
+        vscode.l10n.t("No test selected for debug execution.")
+      );
       run.end();
       return;
     }
@@ -514,7 +518,7 @@ export class AlyaTestController {
 
     const started = await vscode.debug.startDebugging(undefined, {
       type: "alya",
-      name: `Alya Debug Test: ${targetItem.label}`,
+      name: vscode.l10n.t("Alya Debug Test: {0}", targetItem.label),
       request: "launch",
       program: targetItem.uri.fsPath,
       memTrace: true,
@@ -528,7 +532,9 @@ export class AlyaTestController {
       run.appendOutput(`[Debug Session] Failed to start DAP session.\r\n`);
       run.failed(
         targetItem,
-        new vscode.TestMessage("Failed to start Alya DAP debug session.")
+        new vscode.TestMessage(
+          vscode.l10n.t("Failed to start Alya DAP debug session.")
+        )
       );
     }
     run.end();
@@ -538,7 +544,7 @@ export class AlyaTestController {
     const editor = vscode.window.activeTextEditor;
     if (!editor || editor.document.languageId !== "alya") {
       vscode.window.showInformationMessage(
-        "Open an Alya test file to run the test at cursor."
+        vscode.l10n.t("Open an Alya test file to run the test at cursor.")
       );
       return;
     }
@@ -549,7 +555,7 @@ export class AlyaTestController {
 
     if (!fileItem) {
       vscode.window.showWarningMessage(
-        "No tests discovered in the current file."
+        vscode.l10n.t("No tests discovered in the current file.")
       );
       return;
     }
@@ -569,7 +575,9 @@ export class AlyaTestController {
   public async debugTestAtCursor(): Promise<void> {
     const editor = vscode.window.activeTextEditor;
     if (!editor || editor.document.languageId !== "alya") {
-      vscode.window.showInformationMessage("Open an Alya test file to debug.");
+      vscode.window.showInformationMessage(
+        vscode.l10n.t("Open an Alya test file to debug.")
+      );
       return;
     }
 
@@ -588,7 +596,9 @@ export class AlyaTestController {
 
   public async rerunFailedTests(): Promise<void> {
     if (this.failedTestIds.size === 0) {
-      vscode.window.showInformationMessage("No failed tests to re-run.");
+      vscode.window.showInformationMessage(
+        vscode.l10n.t("No failed tests to re-run.")
+      );
       return;
     }
 
@@ -609,7 +619,7 @@ export class AlyaTestController {
     if (itemsToRerun.length === 0) {
       this.failedTestIds.clear();
       vscode.window.showInformationMessage(
-        "No failed tests found in the current workspace."
+        vscode.l10n.t("No failed tests found in the current workspace.")
       );
       return;
     }

@@ -2,7 +2,7 @@
   "name": "alya-lsp",
   "displayName": "Alya",
   "description": "Language Server Protocol (LSP), Debug Adapter Protocol (DAP), native assembly viewer, Test Explorer, formatting, CodeLens, syntax highlighting, and brand file icons for Alya",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "publisher": "alya-lang",
   "author": {
     "name": "Taiizor",
@@ -75,90 +75,90 @@
     "commands": [
       {
         "command": "alya.runFile",
-        "title": "Alya: Run Current File",
+        "title": "%command.runFile%",
         "icon": "$(play)"
       },
       {
         "command": "alya.runFileWithMemTrace",
-        "title": "Alya: Run with Memory Trace (--mem-trace)",
+        "title": "%command.runFileWithMemTrace%",
         "icon": "$(pulse)"
       },
       {
         "command": "alya.runTest",
-        "title": "Alya: Run Tests",
+        "title": "%command.runTest%",
         "icon": "$(beaker)"
       },
       {
         "command": "alya.viewAssembly",
-        "title": "Alya: View Assembly Output (-S)",
+        "title": "%command.viewAssembly%",
         "icon": "$(file-binary)"
       },
       {
         "command": "alya.viewAst",
-        "title": "Alya: View Abstract Syntax Tree (AST)",
+        "title": "%command.viewAst%",
         "icon": "$(symbol-structure)"
       },
       {
         "command": "alya.viewTokens",
-        "title": "Alya: View Tokens (Lexer)",
+        "title": "%command.viewTokens%",
         "icon": "$(symbol-key)"
       },
       {
         "command": "alya.showMenu",
-        "title": "Alya: Open Quick Actions Menu"
+        "title": "%command.showMenu%"
       },
       {
         "command": "alya.restartLsp",
-        "title": "Alya: Restart Language Server",
+        "title": "%command.restartLsp%",
         "icon": "$(refresh)"
       },
       {
         "command": "alya.openRepl",
-        "title": "Alya: Open REPL",
+        "title": "%command.openRepl%",
         "icon": "$(terminal)"
       },
       {
         "command": "alya.formatDocument",
-        "title": "Alya: Format Document"
+        "title": "%command.formatDocument%"
       },
       {
         "command": "alya.showDoc",
-        "title": "Alya: Generate Documentation",
+        "title": "%command.showDoc%",
         "icon": "$(book)"
       },
       {
         "command": "alya.generateDocstring",
-        "title": "Alya: Generate Docstring (Summary)",
+        "title": "%command.generateDocstring%",
         "icon": "$(comment)"
       },
       {
         "command": "alya.lintFile",
-        "title": "Alya: Lint Current File",
+        "title": "%command.lintFile%",
         "icon": "$(search)"
       },
       {
         "command": "alya.lintFix",
-        "title": "Alya: Lint and Fix Current File",
+        "title": "%command.lintFix%",
         "icon": "$(wrench)"
       },
       {
         "command": "alya.runTestAtCursor",
-        "title": "Alya: Run Test at Cursor",
+        "title": "%command.runTestAtCursor%",
         "icon": "$(beaker)"
       },
       {
         "command": "alya.debugTest",
-        "title": "Alya: Debug Test at Cursor / Active File",
+        "title": "%command.debugTest%",
         "icon": "$(debug-alt)"
       },
       {
         "command": "alya.debugFile",
-        "title": "Alya: Debug Current File",
+        "title": "%command.debugFile%",
         "icon": "$(debug-alt)"
       },
       {
         "command": "alya.rerunFailedTests",
-        "title": "Alya: Re-run Failed Tests",
+        "title": "%command.rerunFailedTests%",
         "icon": "$(refresh)"
       }
     ],
@@ -177,7 +177,7 @@
     "debuggers": [
       {
         "type": "alya",
-        "label": "Alya Debugger",
+        "label": "%debugger.label%",
         "languages": [
           "alya"
         ],
@@ -189,22 +189,22 @@
             "properties": {
               "program": {
                 "type": "string",
-                "description": "Path to the Alya source file or test directory to debug",
+                "description": "%debugger.program.description%",
                 "default": "${file}"
               },
               "stopOnEntry": {
                 "type": "boolean",
-                "description": "Automatically pause execution at the first line of the program",
+                "description": "%debugger.stopOnEntry.description%",
                 "default": false
               },
               "memTrace": {
                 "type": "boolean",
-                "description": "Enable memory tracing and leak detection during debugging",
+                "description": "%debugger.memTrace.description%",
                 "default": false
               },
               "args": {
                 "type": "array",
-                "description": "Command line arguments passed to the program",
+                "description": "%debugger.args.description%",
                 "items": {
                   "type": "string"
                 },
@@ -212,7 +212,7 @@
               },
               "cwd": {
                 "type": "string",
-                "description": "Current working directory for the debug session",
+                "description": "%debugger.cwd.description%",
                 "default": "${workspaceFolder}"
               }
             }
@@ -248,8 +248,8 @@
         ],
         "configurationSnippets": [
           {
-            "label": "Alya: Launch Current File",
-            "description": "Debug the currently active Alya source file",
+            "label": "%debugger.snippet.launch.label%",
+            "description": "%debugger.snippet.launch.description%",
             "body": {
               "type": "alya",
               "request": "launch",
@@ -260,8 +260,8 @@
             }
           },
           {
-            "label": "Alya: Run Tests",
-            "description": "Debug Alya test suites with DAP breakpoints and variable inspection",
+            "label": "%debugger.snippet.tests.label%",
+            "description": "%debugger.snippet.tests.description%",
             "body": {
               "type": "alya",
               "request": "launch",
@@ -274,8 +274,8 @@
             }
           },
           {
-            "label": "Alya: Run with Memory Leak Trace",
-            "description": "Debug Alya file with comprehensive memory leak tracing and allocation analysis",
+            "label": "%debugger.snippet.memTrace.label%",
+            "description": "%debugger.snippet.memTrace.description%",
             "body": {
               "type": "alya",
               "request": "launch",
@@ -380,12 +380,12 @@
       ]
     },
     "configuration": {
-      "title": "Alya",
+      "title": "%config.title%",
       "properties": {
         "alya.lsp.path": {
           "type": "string",
           "default": "alya",
-          "description": "Path to the alya executable"
+          "description": "%config.lsp.path%"
         },
         "alya.lsp.arguments": {
           "type": "array",
@@ -395,37 +395,37 @@
           "default": [
             "lsp"
           ],
-          "description": "Arguments to pass to the alya command to start the language server"
+          "description": "%config.lsp.arguments%"
         },
         "alya.run.memTrace": {
           "type": "boolean",
           "default": false,
-          "description": "Always pass --mem-trace to 'alya run' for memory diagnostics and leak detection"
+          "description": "%config.run.memTrace%"
         },
         "alya.lint.enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Enable real-time static code analysis and linter diagnostics in language server"
+          "description": "%config.lint.enabled%"
         },
         "alya.lint.runOnSave": {
           "type": "boolean",
           "default": false,
-          "description": "Automatically run 'alya lint --fix' when saving an Alya source file"
+          "description": "%config.lint.runOnSave%"
         },
         "alya.testing.autoRunOnSave": {
           "type": "boolean",
           "default": false,
-          "description": "Automatically re-run package tests when an Alya source file is saved"
+          "description": "%config.testing.autoRunOnSave%"
         },
         "alya.inlayHints.enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Enable inline type annotations and parameter name hints in the editor"
+          "description": "%config.inlayHints.enabled%"
         },
         "alya.debug.path": {
           "type": "string",
           "default": "alya",
-          "description": "Path to the alya executable used for DAP debugging"
+          "description": "%config.debug.path%"
         }
       }
     }

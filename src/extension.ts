@@ -59,7 +59,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     client = new LanguageClient(
       "alya-lsp",
-      "Alya Language Server",
+      vscode.l10n.t("Alya Language Server"),
       serverOptions,
       clientOptions
     );
@@ -87,20 +87,22 @@ export function activate(context: vscode.ExtensionContext) {
           const range = new vscode.Range(i, 0, i, line.length);
           lenses.push(
             new vscode.CodeLens(range, {
-              title: "$(play) Run",
-              tooltip: "Run this file with alya run",
+              title: vscode.l10n.t("$(play) Run"),
+              tooltip: vscode.l10n.t("Run this file with alya run"),
               command: "alya.runFile",
               arguments: [document.uri],
             }),
             new vscode.CodeLens(range, {
-              title: "$(debug-alt) Debug",
-              tooltip: "Debug this file with Alya DAP debugger",
+              title: vscode.l10n.t("$(debug-alt) Debug"),
+              tooltip: vscode.l10n.t("Debug this file with Alya DAP debugger"),
               command: "alya.debugFile",
               arguments: [document.uri],
             }),
             new vscode.CodeLens(range, {
-              title: "$(pulse) Mem Trace",
-              tooltip: "Run this file with heap trace and leak diagnostics (alya run --mem-trace)",
+              title: vscode.l10n.t("$(pulse) Mem Trace"),
+              tooltip: vscode.l10n.t(
+                "Run this file with heap trace and leak diagnostics (alya run --mem-trace)"
+              ),
               command: "alya.runFileWithMemTrace",
               arguments: [document.uri],
             })
@@ -112,8 +114,8 @@ export function activate(context: vscode.ExtensionContext) {
           const range = new vscode.Range(i, 0, i, line.length);
           lenses.push(
             new vscode.CodeLens(range, {
-              title: "$(beaker) Run Test",
-              tooltip: `Run test: ${testMatch[1]}`,
+              title: vscode.l10n.t("$(beaker) Run Test"),
+              tooltip: vscode.l10n.t("Run test: {0}", testMatch[1]),
               command: "alya.runTestAtCursor",
             })
           );
@@ -124,8 +126,8 @@ export function activate(context: vscode.ExtensionContext) {
           const range = new vscode.Range(i, 0, i, line.length);
           lenses.push(
             new vscode.CodeLens(range, {
-              title: "$(beaker) Run Suite",
-              tooltip: `Run test suite: ${suiteMatch[1]}`,
+              title: vscode.l10n.t("$(beaker) Run Suite"),
+              tooltip: vscode.l10n.t("Run test suite: {0}", suiteMatch[1]),
               command: "alya.runTest",
               arguments: [document.uri],
             })
@@ -137,8 +139,11 @@ export function activate(context: vscode.ExtensionContext) {
           const range = new vscode.Range(i, 0, i, line.length);
           lenses.push(
             new vscode.CodeLens(range, {
-              title: "$(dashboard) Run Benchmarks",
-              tooltip: `Run benchmark suite: ${benchRunnerMatch[1]}`,
+              title: vscode.l10n.t("$(dashboard) Run Benchmarks"),
+              tooltip: vscode.l10n.t(
+                "Run benchmark suite: {0}",
+                benchRunnerMatch[1]
+              ),
               command: "alya.runFile",
               arguments: [document.uri],
             })
@@ -150,8 +155,8 @@ export function activate(context: vscode.ExtensionContext) {
           const range = new vscode.Range(i, 0, i, line.length);
           lenses.push(
             new vscode.CodeLens(range, {
-              title: "$(dashboard) Run Benchmark",
-              tooltip: `Run benchmark: ${benchMatch[1]}`,
+              title: vscode.l10n.t("$(dashboard) Run Benchmark"),
+              tooltip: vscode.l10n.t("Run benchmark: {0}", benchMatch[1]),
               command: "alya.runFile",
               arguments: [document.uri],
             })
@@ -169,7 +174,9 @@ export function activate(context: vscode.ExtensionContext) {
     (uri?: vscode.Uri) => {
       const targetUri = uri || vscode.window.activeTextEditor?.document.uri;
       if (!targetUri) {
-        vscode.window.showErrorMessage("No active Alya file to run.");
+        vscode.window.showErrorMessage(
+          vscode.l10n.t("No active Alya file to run.")
+        );
         return;
       }
       const terminal = getAlyaTerminal();
@@ -185,7 +192,9 @@ export function activate(context: vscode.ExtensionContext) {
     (uri?: vscode.Uri) => {
       const targetUri = uri || vscode.window.activeTextEditor?.document.uri;
       if (!targetUri) {
-        vscode.window.showErrorMessage("No active Alya file to run with memory trace.");
+        vscode.window.showErrorMessage(
+          vscode.l10n.t("No active Alya file to run with memory trace.")
+        );
         return;
       }
       const terminal = getAlyaTerminal();
@@ -261,7 +270,9 @@ export function activate(context: vscode.ExtensionContext) {
         }
       }
       startLspClient();
-      vscode.window.showInformationMessage("Alya Language Server restarted.");
+      vscode.window.showInformationMessage(
+        vscode.l10n.t("Alya Language Server restarted.")
+      );
     }
   );
 
@@ -320,12 +331,14 @@ export function activate(context: vscode.ExtensionContext) {
     (uri?: vscode.Uri) => {
       const targetUri = uri || vscode.window.activeTextEditor?.document.uri;
       if (!targetUri) {
-        vscode.window.showErrorMessage("No active Alya file to debug.");
+        vscode.window.showErrorMessage(
+          vscode.l10n.t("No active Alya file to debug.")
+        );
         return;
       }
       vscode.debug.startDebugging(undefined, {
         type: "alya",
-        name: `Alya Debug: ${path.basename(targetUri.fsPath)}`,
+        name: vscode.l10n.t("Alya Debug: {0}", path.basename(targetUri.fsPath)),
         request: "launch",
         program: targetUri.fsPath,
         stopOnEntry: false,

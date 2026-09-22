@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.8.0] - 2026-09-22
+
+### Added
+- **Multi-language support (EN/TR/ES) via `vscode.l10n`**:
+  - Runtime UI strings migrated to `vscode.l10n.t()` across `extension`, `statusBar`, `assemblyViewer`, `docGenerator`, `debugAdapter`, and `testController`.
+  - Translation bundles: `l10n/bundle.l10n.json` (EN), `l10n/bundle.l10n.tr.json` (TR), `l10n/bundle.l10n.es.json` (ES).
+  - `package.nls.json` + `.tr` + `.es` for command titles, configuration descriptions, and debugger labels/snippets (`%command.*%`, `%config.*%`, `%debugger.*%`).
+  - Display language is followed automatically from VS Code; no manual setting required.
+  - New languages can be added by copying the `package.nls.*.json` and `bundle.l10n.*.json` files — no code changes needed.
+
+### Fixed
+- Test runner bench detection now compares against the localized `benchmark` label instead of a hardcoded English string.
+
+---
+
 ## [0.7.0] - 2026-09-20
 
 ### Added

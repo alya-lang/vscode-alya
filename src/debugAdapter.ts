@@ -18,7 +18,7 @@ export class AlyaDebugConfigurationProvider
       {
         type: "alya",
         request: "launch",
-        name: "Alya: Launch Current File",
+        name: vscode.l10n.t("Alya: Launch Current File"),
         program: "${file}",
         stopOnEntry: false,
         memTrace: false,
@@ -26,7 +26,7 @@ export class AlyaDebugConfigurationProvider
       {
         type: "alya",
         request: "launch",
-        name: "Alya: Run Tests",
+        name: vscode.l10n.t("Alya: Run Tests"),
         program: "${workspaceFolder}/tests",
         stopOnEntry: false,
         args: ["test"],
@@ -34,7 +34,7 @@ export class AlyaDebugConfigurationProvider
       {
         type: "alya",
         request: "launch",
-        name: "Alya: Run with Memory Leak Trace",
+        name: vscode.l10n.t("Alya: Run with Memory Leak Trace"),
         program: "${file}",
         stopOnEntry: false,
         memTrace: true,
@@ -55,7 +55,7 @@ export class AlyaDebugConfigurationProvider
       const editor = vscode.window.activeTextEditor;
       if (editor && editor.document.languageId === "alya") {
         config.type = "alya";
-        config.name = "Launch Current Alya File";
+        config.name = vscode.l10n.t("Launch Current Alya File");
         config.request = "launch";
         config.program = "${file}";
         config.stopOnEntry = false;
@@ -69,7 +69,9 @@ export class AlyaDebugConfigurationProvider
         config.program = editor.document.uri.fsPath;
       } else {
         vscode.window.showErrorMessage(
-          "Cannot start Alya debugging: No active Alya file or 'program' attribute specified in launch.json."
+          vscode.l10n.t(
+            "Cannot start Alya debugging: No active Alya file or 'program' attribute specified in launch.json."
+          )
         );
         return undefined;
       }

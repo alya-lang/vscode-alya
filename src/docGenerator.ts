@@ -18,7 +18,9 @@ export function registerDocGenerator(context: vscode.ExtensionContext) {
       const target = parseTargetDefinition(lines, position.line);
       if (!target) {
         vscode.window.showInformationMessage(
-          "Place cursor on or above a function, struct, enum, or interface to generate documentation."
+          vscode.l10n.t(
+            "Place cursor on or above a function, struct, enum, or interface to generate documentation."
+          )
         );
         return;
       }
@@ -46,12 +48,12 @@ export function registerDocGenerator(context: vscode.ExtensionContext) {
         }
 
         const action = new vscode.CodeAction(
-          `Generate Docstring for ${target.name}`,
+          vscode.l10n.t("Generate Docstring for {0}", target.name),
           vscode.CodeActionKind.RefactorRewrite
         );
         action.command = {
           command: "alya.generateDocstring",
-          title: "Generate Alya Docstring",
+          title: vscode.l10n.t("Generate Alya Docstring"),
         };
         return [action];
       },

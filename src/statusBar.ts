@@ -43,10 +43,14 @@ export class AlyaStatusBar {
 
   private update() {
     const isOk = this.version !== "offline";
-    const icon = isOk ? "$(check)" : "$(warning)";
-    this.statusBarItem.text = `$(symbol-property) Alya ${this.version} | ${this.lspStatus}`;
+    const localizedStatus = vscode.l10n.t(this.lspStatus);
+    const displayVersion =
+      this.version === "offline" || this.version === "loading..."
+        ? vscode.l10n.t(this.version)
+        : this.version;
+    this.statusBarItem.text = `$(symbol-property) Alya ${displayVersion} | ${localizedStatus}`;
     this.statusBarItem.tooltip = new vscode.MarkdownString(
-      `**Alya Language Toolchain**\n\n- **Compiler**: ${this.version}\n- **LSP**: ${this.lspStatus}\n\n*Click for quick actions*`
+      `**Alya Language Toolchain**\n\n- **Compiler**: ${displayVersion}\n- **LSP**: ${localizedStatus}\n\n*Click for quick actions*`
     );
   }
 
@@ -57,59 +61,63 @@ export class AlyaStatusBar {
 
     const items: MenuItem[] = [
       {
-        label: "$(play) Run Current File",
-        description: "Execute active .alya file (alya run)",
+        label: vscode.l10n.t("$(play) Run Current File"),
+        description: vscode.l10n.t("Execute active .alya file (alya run)"),
         action: () => vscode.commands.executeCommand("alya.runFile"),
       },
       {
-        label: "$(pulse) Run with Memory Trace (--mem-trace)",
-        description: "Execute active file with heap trace and leak diagnostics",
+        label: vscode.l10n.t("$(pulse) Run with Memory Trace (--mem-trace)"),
+        description: vscode.l10n.t(
+          "Execute active file with heap trace and leak diagnostics"
+        ),
         action: () => vscode.commands.executeCommand("alya.runFileWithMemTrace"),
       },
       {
-        label: "$(beaker) Run Project Tests",
-        description: "Run test suite (alya test)",
+        label: vscode.l10n.t("$(beaker) Run Project Tests"),
+        description: vscode.l10n.t("Run test suite (alya test)"),
         action: () => vscode.commands.executeCommand("alya.runTest"),
       },
       {
-        label: "$(file-code) View Assembly Output (-S)",
-        description: "Compile to native assembly and view side-by-side",
+        label: vscode.l10n.t("$(file-code) View Assembly Output (-S)"),
+        description: vscode.l10n.t(
+          "Compile to native assembly and view side-by-side"
+        ),
         action: () => vscode.commands.executeCommand("alya.viewAssembly"),
       },
       {
-        label: "$(symbol-structure) View Abstract Syntax Tree (AST)",
-        description: "Inspect parsed AST hierarchy (alya ast)",
+        label: vscode.l10n.t("$(symbol-structure) View Abstract Syntax Tree (AST)"),
+        description: vscode.l10n.t("Inspect parsed AST hierarchy (alya ast)"),
         action: () => vscode.commands.executeCommand("alya.viewAst"),
       },
       {
-        label: "$(symbol-key) View Tokens (Lexer)",
-        description: "Inspect token stream from lexical analysis",
+        label: vscode.l10n.t("$(symbol-key) View Tokens (Lexer)"),
+        description: vscode.l10n.t("Inspect token stream from lexical analysis"),
         action: () => vscode.commands.executeCommand("alya.viewTokens"),
       },
       {
-        label: "$(terminal) Open Interactive REPL",
-        description: "Launch alya repl in integrated terminal",
+        label: vscode.l10n.t("$(terminal) Open Interactive REPL"),
+        description: vscode.l10n.t("Launch alya repl in integrated terminal"),
         action: () => vscode.commands.executeCommand("alya.openRepl"),
       },
       {
-        label: "$(paintcan) Format Document",
-        description: "Format active document using alya fmt",
+        label: vscode.l10n.t("$(paintcan) Format Document"),
+        description: vscode.l10n.t("Format active document using alya fmt"),
         action: () => vscode.commands.executeCommand("alya.formatDocument"),
       },
       {
-        label: "$(book) Generate Documentation",
-        description: "Generate HTML/Markdown docs (alya doc)",
+        label: vscode.l10n.t("$(book) Generate Documentation"),
+        description: vscode.l10n.t("Generate HTML/Markdown docs (alya doc)"),
         action: () => vscode.commands.executeCommand("alya.showDoc"),
       },
       {
-        label: "$(refresh) Restart Language Server",
-        description: "Restart alya lsp background process",
+        label: vscode.l10n.t("$(refresh) Restart Language Server"),
+        description: vscode.l10n.t("Restart alya lsp background process"),
         action: () => vscode.commands.executeCommand("alya.restartLsp"),
       },
     ];
 
     const selected = await vscode.window.showQuickPick(items, {
-      placeHolder: "Alya Toolchain Quick Actions",
+      placeHolder: vscode.l10n.t("Alya Toolchain Quick Actions"),
     });
 
     if (selected) {

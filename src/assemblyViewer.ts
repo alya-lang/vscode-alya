@@ -10,7 +10,9 @@ export class AlyaAssemblyViewer {
   public async viewAssembly(uri?: vscode.Uri) {
     const targetUri = uri || vscode.window.activeTextEditor?.document.uri;
     if (!targetUri) {
-      vscode.window.showErrorMessage("No active Alya file to compile.");
+      vscode.window.showErrorMessage(
+        vscode.l10n.t("No active Alya file to compile.")
+      );
       return;
     }
 
@@ -23,7 +25,7 @@ export class AlyaAssemblyViewer {
     vscode.window.withProgress(
       {
         location: vscode.ProgressLocation.Notification,
-        title: "Alya: Emitting native assembly...",
+        title: vscode.l10n.t("Alya: Emitting native assembly..."),
         cancellable: false,
       },
       () => {
@@ -36,7 +38,10 @@ export class AlyaAssemblyViewer {
               try {
                 if (err || !fs.existsSync(tempAsm)) {
                   vscode.window.showErrorMessage(
-                    `Assembly generation failed: ${stderr || err?.message}`
+                    vscode.l10n.t(
+                      "Assembly generation failed: {0}",
+                      stderr || err?.message || ""
+                    )
                   );
                   return resolve();
                 }
@@ -56,7 +61,7 @@ export class AlyaAssemblyViewer {
                 });
               } catch (e: any) {
                 vscode.window.showErrorMessage(
-                  `Error opening assembly view: ${e.message}`
+                  vscode.l10n.t("Error opening assembly view: {0}", e.message)
                 );
               } finally {
                 if (fs.existsSync(tempAsm)) {
@@ -78,7 +83,9 @@ export class AlyaAssemblyViewer {
   public async viewAst(uri?: vscode.Uri) {
     const targetUri = uri || vscode.window.activeTextEditor?.document.uri;
     if (!targetUri) {
-      vscode.window.showErrorMessage("No active Alya file to inspect.");
+      vscode.window.showErrorMessage(
+        vscode.l10n.t("No active Alya file to inspect.")
+      );
       return;
     }
 
@@ -87,7 +94,7 @@ export class AlyaAssemblyViewer {
     vscode.window.withProgress(
       {
         location: vscode.ProgressLocation.Notification,
-        title: "Alya: Generating AST dump...",
+        title: vscode.l10n.t("Alya: Generating AST dump..."),
         cancellable: false,
       },
       () => {
@@ -100,7 +107,9 @@ export class AlyaAssemblyViewer {
           child.stderr.on("data", (chunk: Buffer) => stderrChunks.push(chunk));
 
           child.on("error", (err) => {
-            vscode.window.showErrorMessage(`AST dump failed: ${err.message}`);
+            vscode.window.showErrorMessage(
+              vscode.l10n.t("AST dump failed: {0}", err.message)
+            );
             resolve();
           });
 
@@ -108,7 +117,10 @@ export class AlyaAssemblyViewer {
             if (code !== 0) {
               const stderr = Buffer.concat(stderrChunks).toString("utf8");
               vscode.window.showErrorMessage(
-                `AST dump failed: ${stderr || `Process exited with code ${code}`}`
+                vscode.l10n.t(
+                  "AST dump failed: {0}",
+                  stderr || `Process exited with code ${code}`
+                )
               );
               return resolve();
             }
@@ -126,7 +138,9 @@ export class AlyaAssemblyViewer {
                 preserveFocus: true,
               });
             } catch (e: any) {
-              vscode.window.showErrorMessage(`Error displaying AST: ${e.message}`);
+              vscode.window.showErrorMessage(
+                vscode.l10n.t("Error displaying AST: {0}", e.message)
+              );
             }
             resolve();
           });
@@ -138,7 +152,9 @@ export class AlyaAssemblyViewer {
   public async viewTokens(uri?: vscode.Uri) {
     const targetUri = uri || vscode.window.activeTextEditor?.document.uri;
     if (!targetUri) {
-      vscode.window.showErrorMessage("No active Alya file to tokenize.");
+      vscode.window.showErrorMessage(
+        vscode.l10n.t("No active Alya file to tokenize.")
+      );
       return;
     }
 
@@ -147,7 +163,7 @@ export class AlyaAssemblyViewer {
     vscode.window.withProgress(
       {
         location: vscode.ProgressLocation.Notification,
-        title: "Alya: Inspecting tokens (lexer)...",
+        title: vscode.l10n.t("Alya: Inspecting tokens (lexer)..."),
         cancellable: false,
       },
       () => {
@@ -160,7 +176,9 @@ export class AlyaAssemblyViewer {
           child.stderr.on("data", (chunk: Buffer) => stderrChunks.push(chunk));
 
           child.on("error", (err) => {
-            vscode.window.showErrorMessage(`Tokenization failed: ${err.message}`);
+            vscode.window.showErrorMessage(
+              vscode.l10n.t("Tokenization failed: {0}", err.message)
+            );
             resolve();
           });
 
@@ -168,7 +186,10 @@ export class AlyaAssemblyViewer {
             if (code !== 0) {
               const stderr = Buffer.concat(stderrChunks).toString("utf8");
               vscode.window.showErrorMessage(
-                `Tokenization failed: ${stderr || `Process exited with code ${code}`}`
+                vscode.l10n.t(
+                  "Tokenization failed: {0}",
+                  stderr || `Process exited with code ${code}`
+                )
               );
               return resolve();
             }
@@ -186,7 +207,9 @@ export class AlyaAssemblyViewer {
                 preserveFocus: true,
               });
             } catch (e: any) {
-              vscode.window.showErrorMessage(`Error displaying tokens: ${e.message}`);
+              vscode.window.showErrorMessage(
+                vscode.l10n.t("Error displaying tokens: {0}", e.message)
+              );
             }
             resolve();
           });
