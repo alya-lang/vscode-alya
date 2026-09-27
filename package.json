@@ -524,8 +524,10 @@
               "image": {
                 "dark": "./media/walkthrough/step1-terminal-dark.svg",
                 "light": "./media/walkthrough/step1-terminal-light.svg",
-                "altText": "%walkthrough.step1.alt%"
-              }
+                "hc": "./media/walkthrough/step1-terminal-dark.svg",
+                "hcLight": "./media/walkthrough/step1-terminal-light.svg"
+              },
+              "altText": "%walkthrough.step1.alt%"
             },
             "completionEvents": ["onCommand:alya.checkCompiler"]
           },
@@ -537,10 +539,12 @@
               "image": {
                 "dark": "./media/walkthrough/step2-file-dark.svg",
                 "light": "./media/walkthrough/step2-file-light.svg",
-                "altText": "%walkthrough.step2.alt%"
-              }
+                "hc": "./media/walkthrough/step2-file-dark.svg",
+                "hcLight": "./media/walkthrough/step2-file-light.svg"
+              },
+              "altText": "%walkthrough.step2.alt%"
             },
-            "completionEvents": ["onLanguage:alya"]
+            "completionEvents": ["onContext:resourceLangId == alya"]
           },
           {
             "id": "runFile",
@@ -550,7 +554,10 @@
               "image": {
                 "dark": "./media/walkthrough/step3-run-dark.svg",
                 "light": "./media/walkthrough/step3-run-light.svg",
-                "altText": "%walkthrough.step3.alt%"
+                "hc": "./media/walkthrough/step3-run-dark.svg",
+                "hcLight": "./media/walkthrough/step3-run-light.svg"
+              },
+              "altText": "%walkthrough.step3.alt%"
               }
             },
             "completionEvents": ["onCommand:alya.runFile"]
@@ -563,7 +570,10 @@
               "image": {
                 "dark": "./media/walkthrough/step4-theme-dark.svg",
                 "light": "./media/walkthrough/step4-theme-light.svg",
-                "altText": "%walkthrough.step4.alt%"
+                "hc": "./media/walkthrough/step4-theme-dark.svg",
+                "hcLight": "./media/walkthrough/step4-theme-light.svg"
+              },
+              "altText": "%walkthrough.step4.alt%"
               }
             },
             "completionEvents": ["onSettingChanged:workbench.colorTheme"]
@@ -576,7 +586,10 @@
               "image": {
                 "dark": "./media/walkthrough/step5-docs-dark.svg",
                 "light": "./media/walkthrough/step5-docs-light.svg",
-                "altText": "%walkthrough.step5.alt%"
+                "hc": "./media/walkthrough/step5-docs-dark.svg",
+                "hcLight": "./media/walkthrough/step5-docs-light.svg"
+              },
+              "altText": "%walkthrough.step5.alt%"
               }
             },
             "completionEvents": ["onCommand:vscode.open"]

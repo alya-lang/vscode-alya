@@ -19,20 +19,43 @@ describe("walkthrough contribution", () => {
   it("declares five steps with media and completion events", () => {
     expect(wt.id).toBe("alya.getStarted");
     expect(wt.steps.length).toBe(5);
+    // Event types mirrored from gettingStartedService.ts: anything else
+    // logs "Unknown completionEvent" and never auto-completes.
+    const known = new Set([
+      "onCommand",
+      "onContext",
+      "onView",
+      "onSettingChanged",
+      "onLink",
+      "onEvent",
+      "onExtensionInstalled",
+      "extensionInstalled",
+      "onStepSelected",
+      "stepSelected",
+    ]);
     for (const step of wt.steps) {
       expect(typeof step.id).toBe("string");
       expect(typeof step.title).toBe("string");
       expect(typeof step.description).toBe("string");
       expect(Array.isArray(step.completionEvents)).toBe(true);
       expect(step.completionEvents.length).toBeGreaterThan(0);
-      for (const variant of ["dark", "light"]) {
+      for (const event of step.completionEvents as string[]) {
+        expect(known.has(event.split(":")[0])).toBe(true);
+      }
+      // Media shape mirrored from gettingStartedService.ts: altText is a
+      // SIBLING of image (nested altText reads as missing and aborts
+      // registration), and hc/hcLight are required (missing hc crashes
+      // path conversion with undefined.startsWith).
+      expect(typeof step.media.image).toBe("object");
+      for (const variant of ["dark", "light", "hc", "hcLight"]) {
         const rel = step.media.image[variant] as string;
         expect(typeof rel).toBe("string");
         const full = path.join(root, rel);
         expect(fs.existsSync(full)).toBe(true);
         expect(fs.statSync(full).size).toBeGreaterThan(200);
       }
-      expect(typeof step.media.image.altText).toBe("string");
+      expect(typeof step.media.altText).toBe("string");
+      expect("altText" in step.media.image).toBe(false);
     }
   });
 
