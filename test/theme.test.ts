@@ -93,6 +93,7 @@ describe.each(THEMES)("Alya theme $label", (theme) => {
       "constant.language",
       "entity.name.function",
       "entity.name.type",
+      "entity.name.namespace",
       "support.function",
       "variable.language",
       "invalid",
@@ -112,6 +113,7 @@ describe.each(THEMES)("Alya theme $label", (theme) => {
   it("maps the semantic types the Alya LSP emits", () => {
     for (const type of [
       "type",
+      "namespace",
       "enum",
       "enumMember",
       "struct",

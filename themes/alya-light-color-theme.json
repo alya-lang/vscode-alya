@@ -101,7 +101,7 @@
       "settings": { "foreground": "#0369a1" }
     },
     {
-      "scope": ["entity.name.type", "support.type", "support.class"],
+      "scope": ["entity.name.type", "entity.name.namespace", "support.type", "support.class"],
       "settings": { "foreground": "#0e7490" }
     },
     {
@@ -127,6 +127,7 @@
   ],
   "semanticTokenColors": {
     "type": "#0e7490",
+    "namespace": "#0e7490",
     "class": "#0e7490",
     "enum": "#0e7490",
     "enumMember": "#0284c7",
