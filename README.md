@@ -101,8 +101,13 @@ Powered by the native `alya dap` engine:
 
 ---
 
-## 🚀 Prerequisites
+### 11. 🌈 Bracket Pair Colorization
+Powered by VSCode's native bracket engine (no dependencies, theme-aware):
+* **Rainbow `()`, `[]`, `{}`**: matching pairs colored per nesting level, enabled for Alya out of the box with active-pair guides.
+* **Toggle**: `alya.rainbowBrackets` setting (default `true`) mirrors into Alya files; or use the standard `editor.bracketPairColorization.enabled` globally / per `[alya]`.
+* **Quote punctuation**: `"..."`, `'...'`, raw/backtick strings get distinct `punctuation.definition.string` scopes via the grammar.
 
+## 🚀 Prerequisites
 Ensure the `alya` compiler is installed and available in your system `PATH`:
 
 ```bash

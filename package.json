@@ -427,7 +427,18 @@
           "type": "string",
           "default": "alya",
           "description": "%config.debug.path%"
+        },
+        "alya.rainbowBrackets": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.rainbowBrackets%"
         }
+      }
+    },
+    "configurationDefaults": {
+      "[alya]": {
+        "editor.bracketPairColorization.enabled": true,
+        "editor.guides.bracketPairs": "active"
       }
     }
   },

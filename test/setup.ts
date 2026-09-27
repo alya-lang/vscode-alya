@@ -25,9 +25,11 @@ mock.module("vscode", () => {
     workspace: {
       getConfiguration: () => ({
         get: (_key: string, defaultValue: any) => defaultValue,
+        update: () => Promise.resolve(),
       }),
       workspaceFolders: [],
       onDidSaveTextDocument: () => ({ dispose: () => {} }),
+      onDidChangeConfiguration: () => ({ dispose: () => {} }),
       createFileSystemWatcher: () => ({ dispose: () => {} }),
     },
     commands: {
@@ -92,6 +94,11 @@ mock.module("vscode", () => {
     },
     Uri: {
       file: (p: string) => ({ scheme: "file", fsPath: p }),
+    },
+    ConfigurationTarget: {
+      Global: 1,
+      Workspace: 2,
+      WorkspaceFolder: 3,
     },
   };
 });

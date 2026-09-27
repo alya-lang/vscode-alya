@@ -6,6 +6,7 @@
     { "include": "#comments" },
     { "include": "#strings-interpolated" },
     { "include": "#strings-raw" },
+    { "include": "#strings-backtick" },
     { "include": "#strings-multiline" },
     { "include": "#strings-single" },
     { "include": "#strings-double" },
@@ -82,6 +83,21 @@
             "2": { "name": "punctuation.definition.string.begin.alya" }
           },
           "end": "\"",
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.string.end.alya" }
+          }
+        }
+      ]
+    },
+    "strings-backtick": {
+      "patterns": [
+        {
+          "name": "string.quoted.backtick.alya",
+          "begin": "`",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.string.begin.alya" }
+          },
+          "end": "`",
           "endCaptures": {
             "0": { "name": "punctuation.definition.string.end.alya" }
           }

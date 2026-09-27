@@ -8,6 +8,7 @@ import {
 } from "vscode-languageclient/node";
 
 import { AlyaAssemblyViewer } from "./assemblyViewer";
+import { registerRainbowBracketsToggle } from "./bracketColors";
 import { registerDocGenerator } from "./docGenerator";
 import { AlyaDocumentLinkProvider } from "./documentLinks";
 import { AlyaStatusBar } from "./statusBar";
@@ -364,6 +365,7 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     codeLensProvider,
     documentLinkProvider,
+    registerRainbowBracketsToggle(vscode),
     debugConfigDisposable,
     debugFactoryDisposable,
     runFileCmd,

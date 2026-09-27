@@ -25,6 +25,7 @@
   "config.lint.runOnSave": "Automatically run 'alya lint --fix' when saving an Alya source file",
   "config.testing.autoRunOnSave": "Automatically re-run package tests when an Alya source file is saved",
   "config.inlayHints.enabled": "Enable inline type annotations and parameter name hints in the editor",
+  "config.rainbowBrackets": "Colorize matching bracket pairs ((), [], {}) per nesting level using the native bracket-pair engine; toggle mirrors the setting into Alya files",
   "config.debug.path": "Path to the alya executable used for DAP debugging",
   "debugger.label": "Alya Debugger",
   "debugger.program.description": "Path to the Alya source file or test directory to debug",

@@ -25,6 +25,7 @@
   "config.lint.runOnSave": "Alya kaynak dosyası kaydedildiğinde otomatik olarak 'alya lint --fix' çalıştır",
   "config.testing.autoRunOnSave": "Alya kaynak dosyası kaydedildiğinde paket testlerini otomatik olarak yeniden çalıştır",
   "config.inlayHints.enabled": "Düzenleyicide satır içi tür ek açıklamalarını ve parametre adı ipuçlarını etkinleştir",
+  "config.rainbowBrackets": "Eşleşen parantez çiftlerini ((), [], {}) iç içe geçme seviyesine göre, yerleşik parantez-eşleştirme motoruyla renklendir; anahtar, ayarı Alya dosyalarına yansıtır",
   "config.debug.path": "DAP hata ayıklama için kullanılan alya yürütülebilir dosyasının yolu",
   "debugger.label": "Alya Hata Ayıklayıcı",
   "debugger.program.description": "Hata ayıklanacak Alya kaynak dosyasının veya test dizininin yolu",
