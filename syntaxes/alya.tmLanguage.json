@@ -56,20 +56,25 @@
               "name": "constant.character.escape.alya",
               "match": "\\\\."
             },
-            {
-              "name": "meta.interpolation.alya",
-              "begin": "\\{",
-              "beginCaptures": {
-                "0": { "name": "punctuation.section.interpolation.begin.alya" }
-              },
-              "end": "\\}",
-              "endCaptures": {
-                "0": { "name": "punctuation.section.interpolation.end.alya" }
-              },
-              "patterns": [
-                { "include": "$self" }
-              ]
-            }
+            { "include": "#interpolation" }
+          ]
+        }
+      ]
+    },
+    "interpolation": {
+      "patterns": [
+        {
+          "name": "meta.interpolation.alya",
+          "begin": "\\{",
+          "beginCaptures": {
+            "0": { "name": "punctuation.section.interpolation.begin.alya" }
+          },
+          "end": "\\}",
+          "endCaptures": {
+            "0": { "name": "punctuation.section.interpolation.end.alya" }
+          },
+          "patterns": [
+            { "include": "$self" }
           ]
         }
       ]
@@ -86,7 +91,10 @@
           "end": "\"",
           "endCaptures": {
             "0": { "name": "punctuation.definition.string.end.alya" }
-          }
+          },
+          "patterns": [
+            { "include": "#interpolation" }
+          ]
         }
       ]
     },
@@ -101,7 +109,10 @@
           "end": "`",
           "endCaptures": {
             "0": { "name": "punctuation.definition.string.end.alya" }
-          }
+          },
+          "patterns": [
+            { "include": "#interpolation" }
+          ]
         }
       ]
     },
@@ -115,7 +126,8 @@
             {
               "name": "constant.character.escape.alya",
               "match": "\\\\."
-            }
+            },
+            { "include": "#interpolation" }
           ]
         }
       ]
@@ -130,7 +142,8 @@
             {
               "name": "constant.character.escape.alya",
               "match": "\\\\."
-            }
+            },
+            { "include": "#interpolation" }
           ]
         }
       ]

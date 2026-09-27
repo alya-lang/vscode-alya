@@ -31,12 +31,20 @@ export interface EnvVscodeShim {
       appendLine(line: string): void;
       show(preserveFocus?: boolean): void;
     };
+    showWarningMessage(
+      message: string,
+      ...items: string[]
+    ): any;
   };
   commands: {
     registerCommand(
       command: string,
       callback: (...args: unknown[]) => unknown
     ): vscode.Disposable;
+    executeCommand(command: string, ...rest: unknown[]): unknown;
+  };
+  l10n: {
+    t(message: string, ...args: Array<string | number | boolean>): string;
   };
 }
 
@@ -114,8 +122,7 @@ export function collectEnvInfo(
 export function registerEnvInfoCommand(
   vscodeNs: EnvVscodeShim,
   context: vscode.ExtensionContext
-): void {
-  const channel = vscodeNs.window.createOutputChannel("Alya");
+): void {  const channel = vscodeNs.window.createOutputChannel("Alya");
   context.subscriptions.push(
     vscodeNs.commands.registerCommand("alya.showEnvInfo", () => {
       const lspPath =
@@ -140,4 +147,32 @@ export function registerEnvInfoCommand(
       channel.show(true);
     }) as vscode.Disposable
   );
+}
+
+/**
+ * One-time activation check: when the configured server binary predates
+ * current extension features, warn once with a shortcut to the
+ * environment report. Silent on probe failure (a missing binary already
+ * surfaces through the LSP status) and when fresh. Returns whether it
+ * warned, for tests.
+ */
+export async function warnIfStaleBinary(
+  vscodeNs: EnvVscodeShim,
+  _lspPath: string,
+  runHelp: () => string | undefined
+): Promise<boolean> {
+  if (probeBinarySortImports(runHelp) !== "no (stale binary)") {
+    return false;
+  }
+  const action = "Show Environment Info";
+  const picked = await vscodeNs.window.showWarningMessage(
+    vscodeNs.l10n.t(
+      "The Alya language server looks outdated: some extension features need a newer `alya` binary. Update it, then reload the window."
+    ),
+    action
+  );
+  if (picked === action) {
+    await vscodeNs.commands.executeCommand("alya.showEnvInfo");
+  }
+  return true;
 }

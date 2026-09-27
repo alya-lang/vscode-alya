@@ -132,4 +132,26 @@ describe("bracket colorization static config", () => {
     expect(rule.begin).toBe("`");
     expect(rule.end).toBe("`");
   });
+
+  it("embeds interpolation in every interpolating string kind", () => {
+    const grammar = JSON.parse(
+      fs.readFileSync(
+        path.join(root, "syntaxes", "alya.tmLanguage.json"),
+        "utf8"
+      )
+    );
+    const repo = grammar.repository;
+    expect(repo["interpolation"]).toBeDefined();
+    // f, plain, triple, raw, and backtick strings all interpolate at
+    // runtime; single-char runes cannot hold holes.
+    for (const key of [
+      "strings-interpolated",
+      "strings-double",
+      "strings-multiline",
+      "strings-raw",
+      "strings-backtick",
+    ]) {
+      expect(JSON.stringify(repo[key])).toContain("#interpolation");
+    }
+  });
 });

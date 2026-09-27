@@ -1,4 +1,11 @@
 import * as vscode from "vscode";
+import {
+  mirrorEditorBoolean,
+  registerAlyaMirror,
+  type VscodeShim,
+} from "./editorSync";
+
+export type { EditorConfigShim, VscodeShim } from "./editorSync";
 
 /**
  * Rainbow brackets toggle.
@@ -14,50 +21,17 @@ import * as vscode from "vscode";
 export const RAINBOW_SETTING_SECTION = "alya";
 export const RAINBOW_SETTING_KEY = "rainbowBrackets";
 
-export interface EditorConfigShim {
-  update(section: string, value: unknown, target: unknown): any;
-}
-
-export interface VscodeShim {
-  workspace: {
-    getConfiguration(
-      section?: string,
-      scope?: unknown
-    ): EditorConfigShim & {
-      get<T>(key: string, defaultValue: T): T;
-    };
-    onDidChangeConfiguration(
-      listener: (e: { affectsConfiguration(section: string): boolean }) => void
-    ): vscode.Disposable;
-  };
-  ConfigurationTarget: { Global: unknown };
-}
-
 /** One-way sync: our toggle -> native `[alya]` bracket colorization. */
 export async function syncRainbowBrackets(
   vscodeNs: VscodeShim,
   enabled: boolean
 ): Promise<void> {
-  const editor = vscodeNs.workspace.getConfiguration("editor", {
-    languageId: "alya",
-  });
-  await editor.update(
-    "bracketPairColorization.enabled",
-    enabled,
-    vscodeNs.ConfigurationTarget.Global
-  );
+  return mirrorEditorBoolean(vscodeNs, "bracketPairColorization.enabled", enabled);
 }
 
 /** Listens for `alya.rainbowBrackets` changes and mirrors them natively. */
 export function registerRainbowBracketsToggle(
   vscodeNs: VscodeShim
 ): vscode.Disposable {
-  return vscodeNs.workspace.onDidChangeConfiguration((e) => {
-    if (e.affectsConfiguration(`${RAINBOW_SETTING_SECTION}.${RAINBOW_SETTING_KEY}`)) {
-      const enabled = vscodeNs.workspace
-        .getConfiguration(RAINBOW_SETTING_SECTION)
-        .get<boolean>(RAINBOW_SETTING_KEY, true);
-      void syncRainbowBrackets(vscodeNs, enabled);
-    }
-  });
+  return registerAlyaMirror(vscodeNs, RAINBOW_SETTING_KEY, "bracketPairColorization.enabled");
 }

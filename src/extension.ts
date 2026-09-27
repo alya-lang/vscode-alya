@@ -10,7 +10,8 @@ import {
 import { AlyaAssemblyViewer } from "./assemblyViewer";
 import { registerRainbowBracketsToggle } from "./bracketColors";
 import { registerDocGenerator } from "./docGenerator";
-import { registerEnvInfoCommand } from "./envInfo";
+import { registerInlayHintsToggle } from "./editorSync";
+import { registerEnvInfoCommand, warnIfStaleBinary } from "./envInfo";
 import { AlyaDocumentLinkProvider } from "./documentLinks";
 import { AlyaStatusBar } from "./statusBar";
 import { AlyaTestController } from "./testController";
@@ -48,6 +49,22 @@ export function activate(context: vscode.ExtensionContext) {
 
   // 4b. Environment diagnostics (`Alya: Show Environment Info`)
   registerEnvInfoCommand(vscode, context);
+
+  // 4c. Inlay hints follow the Alya toggle (the setting was declared
+  // but never wired); stale server binaries get a one-time warning.
+  context.subscriptions.push(registerInlayHintsToggle(vscode));
+  void warnIfStaleBinary(vscode, serverPath, () => {
+    try {
+      const out = cp.execFileSync(serverPath, ["fmt", "--help"], {
+        timeout: 8000,
+        encoding: "utf8",
+        windowsHide: true,
+      });
+      return typeof out === "string" ? out : undefined;
+    } catch {
+      return undefined;
+    }
+  });
 
   // 5. Initialize LSP Client (Native LSP handles formatting, symbols, references, folding)
   function startLspClient() {

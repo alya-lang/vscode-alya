@@ -1,0 +1,19 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vscode/main/src/vs/base/common/productIconThemeSchema.json",
+  "iconDefinitions": {
+    "_alya_file_dark": {
+      "iconPath": "./alya-file-dark.svg"
+    },
+    "_alya_file_light": {
+      "iconPath": "./alya-file-light.svg"
+    }
+  },
+  "fileExtensions": {
+    "alya": "_alya_file_dark"
+  },
+  "light": {
+    "fileExtensions": {
+      "alya": "_alya_file_light"
+    }
+  }
+}

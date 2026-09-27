@@ -146,3 +146,24 @@ describe.each(THEMES)("Alya theme $label", (theme) => {
     expect(fs.existsSync(path.join(root, entry.path))).toBe(true);
   });
 });
+
+describe("Alya File Icons theme", () => {
+  it("maps .alya files to the bundled brand icons", () => {
+    const pkg = JSON.parse(
+      fs.readFileSync(path.join(root, "package.json"), "utf8")
+    );
+    const entry = (pkg.contributes.iconThemes as Array<any>).find(
+      (t) => t.id === "alya-file-icons"
+    );
+    expect(entry).toBeDefined();
+    const theme = JSON.parse(
+      fs.readFileSync(path.join(root, entry.path), "utf8")
+    );
+    expect(theme.fileExtensions["alya"]).toBeDefined();
+    expect(theme.light.fileExtensions["alya"]).toBeDefined();
+    for (const key of [theme.fileExtensions["alya"], theme.light.fileExtensions["alya"]]) {
+      const iconPath = path.join(root, "icons", theme.iconDefinitions[key].iconPath.replace(/^\.\//, ""));
+      expect(fs.existsSync(iconPath)).toBe(true);
+    }
+  });
+});

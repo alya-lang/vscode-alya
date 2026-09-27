@@ -3,6 +3,7 @@ import {
   collectEnvInfo,
   probeBinarySortImports,
   registerEnvInfoCommand,
+  warnIfStaleBinary,
   type EnvVscodeShim,
 } from "../src/envInfo";
 
@@ -21,6 +22,9 @@ function stubEnv(overrides: Record<string, any> = {}): EnvVscodeShim {
         id === "alya-lang.alya-lsp"
           ? { packageJSON: { version: "0.10.0-test" } }
           : undefined,
+    },
+    l10n: {
+      t: (message: string, ..._args: Array<string | number | boolean>) => message,
     },
     workspace: {
       getConfiguration: (section?: string, scope?: any) => ({
@@ -84,6 +88,38 @@ describe("probeBinarySortImports", () => {
         throw new Error("spawn");
       })
     ).toBe("unknown (probe failed)");
+  });
+});
+
+describe("warnIfStaleBinary", () => {
+  it("warns once with an env-report action for stale binaries", async () => {
+    const stub = stubEnv() as any;
+    let warned = "";
+    const executed: string[] = [];
+    stub.window.showWarningMessage = async (msg: string, ..._items: string[]) => {
+      warned = msg;
+      return "Show Environment Info";
+    };
+    stub.commands.executeCommand = async (cmd: string) => {
+      executed.push(cmd);
+      return undefined;
+    };
+    const result = await warnIfStaleBinary(stub, "alya", () => "alya fmt [path]");
+    expect(result).toBe(true);
+    expect(warned).toContain("outdated");
+    expect(executed).toEqual(["alya.showEnvInfo"]);
+  });
+
+  it("stays silent for fresh binaries and failed probes", async () => {
+    const stub = stubEnv() as any;
+    let calls = 0;
+    stub.window.showWarningMessage = async () => {
+      calls += 1;
+      return undefined;
+    };
+    expect(await warnIfStaleBinary(stub, "alya", () => "x --sort-imports")).toBe(false);
+    expect(await warnIfStaleBinary(stub, "alya", () => undefined)).toBe(false);
+    expect(calls).toBe(0);
   });
 });
 

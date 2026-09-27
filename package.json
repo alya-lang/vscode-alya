@@ -67,6 +67,13 @@
         "path": "./syntaxes/alya.tmLanguage.json"
       }
     ],
+    "iconThemes": [
+      {
+        "id": "alya-file-icons",
+        "label": "Alya File Icons",
+        "path": "./icons/alya-file-icon-theme.json"
+      }
+    ],
     "themes": [
       {
         "label": "Alya Dark",
