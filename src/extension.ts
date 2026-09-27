@@ -9,6 +9,7 @@ import {
 
 import { AlyaAssemblyViewer } from "./assemblyViewer";
 import { registerDocGenerator } from "./docGenerator";
+import { AlyaDocumentLinkProvider } from "./documentLinks";
 import { AlyaStatusBar } from "./statusBar";
 import { AlyaTestController } from "./testController";
 import {
@@ -354,8 +355,15 @@ export function activate(context: vscode.ExtensionContext) {
   const debugFactoryDisposable =
     vscode.debug.registerDebugAdapterDescriptorFactory("alya", debugAdapterFactory);
 
+  // 9. Import path links (`import "..."` / `from "..." import ...` -> file)
+  const documentLinkProvider = vscode.languages.registerDocumentLinkProvider(
+    "alya",
+    new AlyaDocumentLinkProvider()
+  );
+
   context.subscriptions.push(
     codeLensProvider,
+    documentLinkProvider,
     debugConfigDisposable,
     debugFactoryDisposable,
     runFileCmd,

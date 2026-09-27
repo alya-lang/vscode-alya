@@ -36,6 +36,7 @@ mock.module("vscode", () => {
     },
     languages: {
       registerCodeLensProvider: () => ({ dispose: () => {} }),
+      registerDocumentLinkProvider: () => ({ dispose: () => {} }),
     },
     debug: {
       registerDebugConfigurationProvider: () => ({ dispose: () => {} }),
@@ -80,6 +81,17 @@ mock.module("vscode", () => {
         this.line = line;
         this.character = character;
       }
+    },
+    DocumentLink: class {
+      range: any;
+      target: any;
+      constructor(range: any, target: any) {
+        this.range = range;
+        this.target = target;
+      }
+    },
+    Uri: {
+      file: (p: string) => ({ scheme: "file", fsPath: p }),
     },
   };
 });
