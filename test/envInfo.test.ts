@@ -1,6 +1,7 @@
 import { describe, it, expect } from "bun:test";
 import {
   collectEnvInfo,
+  probeBinarySortImports,
   registerEnvInfoCommand,
   type EnvVscodeShim,
 } from "../src/envInfo";
@@ -66,6 +67,23 @@ describe("collectEnvInfo", () => {
   it("marks missing values as unset instead of crashing", () => {
     const lines = collectEnvInfo(stubEnv({ "workbench|colorTheme": undefined }));
     expect(lines.join("\n")).toContain("unset");
+  });
+});
+
+describe("probeBinarySortImports", () => {
+  it("detects the flag, stale binaries, and probe failures", () => {
+    expect(probeBinarySortImports(() => "alya fmt [path] [--sort-imports]")).toBe(
+      "yes"
+    );
+    expect(probeBinarySortImports(() => "alya fmt [path] [--check]")).toBe(
+      "no (stale binary)"
+    );
+    expect(probeBinarySortImports(() => undefined)).toBe("unknown (probe failed)");
+    expect(
+      probeBinarySortImports(() => {
+        throw new Error("spawn");
+      })
+    ).toBe("unknown (probe failed)");
   });
 });
 

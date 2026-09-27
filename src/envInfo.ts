@@ -1,3 +1,4 @@
+import * as cp from "child_process";
 import * as vscode from "vscode";
 
 /**
@@ -46,8 +47,30 @@ function valueText(value: unknown): string {
   return JSON.stringify(value) ?? String(value);
 }
 
+/**
+ * Definitive server-age probe: runs `<lsp-path> fmt --help` and checks for
+ * the `--sort-imports` flag (shipped with the coloring fixes). Version
+ * strings cannot tell dev builds apart; this can.
+ */
+export function probeBinarySortImports(
+  runHelp: () => string | undefined
+): string {
+  try {
+    const out = runHelp();
+    if (out === undefined) {
+      return "unknown (probe failed)";
+    }
+    return out.includes("--sort-imports") ? "yes" : "no (stale binary)";
+  } catch {
+    return "unknown (probe failed)";
+  }
+}
+
 /** Pure info collector: easy to unit test, no VSCode writes. */
-export function collectEnvInfo(vscodeNs: EnvVscodeShim): string[] {
+export function collectEnvInfo(
+  vscodeNs: EnvVscodeShim,
+  binaryInfo?: string
+): string[] {
   const version =
     vscodeNs.extensions.getExtension("alya-lang.alya-lsp")?.packageJSON
       .version ?? "unknown";
@@ -71,12 +94,17 @@ export function collectEnvInfo(vscodeNs: EnvVscodeShim): string[] {
   const rainbow = vscodeNs.workspace
     .getConfiguration("alya")
     .get<boolean>("rainbowBrackets", true);
+  const semantic = vscodeNs.workspace
+    .getConfiguration("editor")
+    .get("semanticHighlighting.enabled");
   const serverVersion = "see `alya --version` (binary is versioned separately)";
   return [
     `Alya extension: ${valueText(version)}`,
     `LSP server path setting: ${valueText(lspPath)}`,
     `LSP server binary: ${serverVersion}`,
+    `LSP binary sort-imports support: ${valueText(binaryInfo)}`,
     `Color theme: ${valueText(colorTheme)}`,
+    `editor.semanticHighlighting.enabled: ${valueText(semantic)}`,
     `editor.bracketPairColorization.enabled (global): ${valueText(bracketGlobal)}`,
     `editor.bracketPairColorization.enabled ([alya]): ${valueText(bracketAlya)}`,
     `alya.rainbowBrackets: ${valueText(rainbow)}`,
@@ -90,8 +118,23 @@ export function registerEnvInfoCommand(
   const channel = vscodeNs.window.createOutputChannel("Alya");
   context.subscriptions.push(
     vscodeNs.commands.registerCommand("alya.showEnvInfo", () => {
+      const lspPath =
+        vscodeNs.workspace.getConfiguration("alya").get<string>("lsp.path", "alya") ??
+        "alya";
+      const binaryInfo = probeBinarySortImports(() => {
+        try {
+          const out = cp.execFileSync(lspPath, ["fmt", "--help"], {
+            timeout: 8000,
+            encoding: "utf8",
+            windowsHide: true,
+          });
+          return typeof out === "string" ? out : undefined;
+        } catch {
+          return undefined;
+        }
+      });
       channel.clear();
-      for (const line of collectEnvInfo(vscodeNs)) {
+      for (const line of collectEnvInfo(vscodeNs, binaryInfo)) {
         channel.appendLine(line);
       }
       channel.show(true);
