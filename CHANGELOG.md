@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **F-string interpolation colors (needs `alya` with LSP support)**: identifiers inside `f"..."` spans now get semantic highlighting matching bare usage instead of being painted over as plain string.
 - **Rainbow brackets**: native per-level `()`/`[]`/`{}` colorization enabled for Alya by default (plus active-pair guides), toggleable via `alya.rainbowBrackets`; backtick raw strings covered by the grammar.
 - **Alya Dark color theme**: official dark theme with the brand bracket palette (sky/violet/emerald) and semantic colors aligned with the language server.
+- **Alya Light color theme**: the same system on a light workspace (contrast-checked palette); `say`/`test`/`assert` stand apart from other keywords and inlay hints are toned down in both themes.
 
 ---
 

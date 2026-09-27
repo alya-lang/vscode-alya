@@ -3,37 +3,81 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 
 const root = path.resolve(__dirname, "..");
-const themePath = path.join(root, "themes", "alya-dark-color-theme.json");
 
-describe("Alya Dark color theme", () => {
-  const theme = JSON.parse(fs.readFileSync(themePath, "utf8"));
+interface ThemeCase {
+  file: string;
+  label: string;
+  uiTheme: string;
+  type: string;
+  brackets: string[];
+  checks: Array<[string, string]>;
+}
 
-  it("is a dark theme with the brand bracket palette", () => {
-    expect(theme.type).toBe("dark");
-    const brackets = [
+const THEMES: ThemeCase[] = [
+  {
+    file: "alya-dark-color-theme.json",
+    label: "Alya Dark",
+    uiTheme: "vs-dark",
+    type: "dark",
+    brackets: [
       "#38bdf8",
       "#c084fc",
       "#34d399",
       "#818cf8",
       "#e0f2fe",
       "#a855f7",
-    ];
-    brackets.forEach((color, i) => {
-      expect(theme.colors[`editorBracketHighlight.foreground${i + 1}`]).toBe(
+    ],
+    checks: [
+      ["keyword.other.unit-testing", "#38bdf8"],
+      ["string", "#34d399"],
+      ["entity.name.function", "#38bdf8"],
+    ],
+  },
+  {
+    file: "alya-light-color-theme.json",
+    label: "Alya Light",
+    uiTheme: "vs",
+    type: "light",
+    brackets: [
+      "#0284c7",
+      "#7c3aed",
+      "#059669",
+      "#4f46e5",
+      "#0369a1",
+      "#a21caf",
+    ],
+    checks: [
+      ["keyword.other.unit-testing", "#0284c7"],
+      ["string", "#047857"],
+      ["entity.name.function", "#0369a1"],
+    ],
+  },
+];
+
+describe.each(THEMES)("Alya theme $label", (theme) => {
+  const parsed = JSON.parse(
+    fs.readFileSync(path.join(root, "themes", theme.file), "utf8")
+  );
+
+  it("declares type, bracket palette, and inlay colors", () => {
+    expect(parsed.type).toBe(theme.type);
+    theme.brackets.forEach((color, i) => {
+      expect(parsed.colors[`editorBracketHighlight.foreground${i + 1}`]).toBe(
         color
       );
       expect(
-        theme.colors[`editorBracketPairGuide.activeBackground${i + 1}`]
+        parsed.colors[`editorBracketPairGuide.activeBackground${i + 1}`]
       ).toBe(color);
     });
     expect(
-      theme.colors["editorBracketHighlight.unexpectedBracket.foreground"]
+      parsed.colors["editorBracketHighlight.unexpectedBracket.foreground"]
     ).toBeDefined();
+    expect(parsed.colors["editorInlayHint.foreground"]).toBeDefined();
   });
 
   it("covers the grammar scopes the Alya TextMate grammar emits", () => {
     const covered = new Set<string>();
-    for (const rule of theme.tokenColors) {
+    for (const rule of parsed.tokenColors) {
       const scopes = Array.isArray(rule.scope) ? rule.scope : [rule.scope];
       for (const s of scopes) {
         covered.add(s);
@@ -42,6 +86,7 @@ describe("Alya Dark color theme", () => {
     for (const scope of [
       "comment",
       "keyword",
+      "keyword.other.unit-testing",
       "string",
       "punctuation.definition.string",
       "constant.numeric",
@@ -53,6 +98,14 @@ describe("Alya Dark color theme", () => {
       "invalid",
     ]) {
       expect(covered.has(scope)).toBe(true);
+    }
+    for (const [scope, color] of theme.checks) {
+      const rule = parsed.tokenColors.find((r: any) => {
+        const scopes = Array.isArray(r.scope) ? r.scope : [r.scope];
+        return scopes.includes(scope);
+      });
+      expect(rule).toBeDefined();
+      expect(rule.settings.foreground).toBe(color);
     }
   });
 
@@ -71,7 +124,7 @@ describe("Alya Dark color theme", () => {
       "string",
       "number",
     ]) {
-      expect(typeof theme.semanticTokenColors[type]).toBe("string");
+      expect(typeof parsed.semanticTokenColors[type]).toBe("string");
     }
   });
 
@@ -80,10 +133,10 @@ describe("Alya Dark color theme", () => {
       fs.readFileSync(path.join(root, "package.json"), "utf8")
     );
     const entry = (pkg.contributes.themes as Array<any>).find(
-      (t) => t.label === "Alya Dark"
+      (t) => t.label === theme.label
     );
     expect(entry).toBeDefined();
-    expect(entry.uiTheme).toBe("vs-dark");
+    expect(entry.uiTheme).toBe(theme.uiTheme);
     expect(fs.existsSync(path.join(root, entry.path))).toBe(true);
   });
 });

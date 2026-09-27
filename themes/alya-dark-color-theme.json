@@ -17,6 +17,8 @@
     "editorWhitespace.foreground": "#2a3550",
     "editorIndentGuide.background1": "#1c2742",
     "editorIndentGuide.activeBackground1": "#38bdf8",
+    "editorInlayHint.foreground": "#7d8fa3",
+    "editorInlayHint.background": "#141928",
 
     "editorBracketHighlight.foreground1": "#38bdf8",
     "editorBracketHighlight.foreground2": "#c084fc",
@@ -73,6 +75,10 @@
     {
       "scope": ["keyword", "keyword.control", "keyword.declaration", "keyword.operator", "keyword.other", "storage"],
       "settings": { "foreground": "#c084fc" }
+    },
+    {
+      "scope": ["keyword.other.unit-testing"],
+      "settings": { "foreground": "#38bdf8" }
     },
     {
       "scope": ["string", "string.quoted", "string.interpolated"],

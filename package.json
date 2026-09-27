@@ -72,6 +72,11 @@
         "label": "Alya Dark",
         "uiTheme": "vs-dark",
         "path": "./themes/alya-dark-color-theme.json"
+      },
+      {
+        "label": "Alya Light",
+        "uiTheme": "vs",
+        "path": "./themes/alya-light-color-theme.json"
       }
     ],
     "snippets": [
