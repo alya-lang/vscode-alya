@@ -25,6 +25,7 @@
   "config.lint.runOnSave": "保存 Alya 源文件时自动运行 'alya lint --fix'",
   "config.testing.autoRunOnSave": "保存 Alya 源文件时自动重新运行包测试",
   "config.inlayHints.enabled": "在编辑器中启用内联类型注解和参数名称提示",
+  "config.rainbowBrackets": "使用本机括号对引擎按嵌套级别为匹配的括号对 ((), [], {}) 着色；开关会将设置镜像到 Alya 文件中",
   "config.debug.path": "用于 DAP 调试的 alya 可执行文件路径",
   "debugger.label": "Alya 调试器",
   "debugger.program.description": "要调试的 Alya 源文件或测试目录的路径",

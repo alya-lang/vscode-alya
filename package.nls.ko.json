@@ -25,6 +25,7 @@
   "config.lint.runOnSave": "Alya 소스 파일 저장 시 'alya lint --fix' 자동 실행",
   "config.testing.autoRunOnSave": "Alya 소스 파일 저장 시 패키지 테스트 자동 다시 실행",
   "config.inlayHints.enabled": "편집기에서 인라인 형식 주석 및 매개 변수 이름 힌트 사용",
+  "config.rainbowBrackets": "네이티브 브래킷 페어 엔진을 사용하여 일치하는 브래킷 쌍((), [], {})을 중첩 수준별로 색칠합니다. 토글이 설정을 Alya 파일에 반영합니다",
   "config.debug.path": "DAP 디버깅에 사용할 alya 실행 파일 경로",
   "debugger.label": "Alya 디버거",
   "debugger.program.description": "디버그할 Alya 소스 파일 또는 테스트 디렉터리 경로",

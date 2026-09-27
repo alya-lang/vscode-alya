@@ -25,6 +25,7 @@
   "config.lint.runOnSave": "Automatisch 'alya lint --fix' uitvoeren bij het opslaan van een Alya-bronbestand",
   "config.testing.autoRunOnSave": "Pakkettests automatisch opnieuw uitvoeren bij het opslaan van een Alya-bronbestand",
   "config.inlayHints.enabled": "Inline-typeannotaties en hints voor parameternamen in de editor inschakelen",
+  "config.rainbowBrackets": "Overeenkomende haakjesparen ((), [], {}) per nestingsniveau kleuren met de native engine; de schakelaar spiegelt de instelling in Alya-bestanden",
   "config.debug.path": "Pad naar het uitvoerbare bestand alya voor DAP-foutopsporing",
   "debugger.label": "Alya-foutopsporing",
   "debugger.program.description": "Pad naar het te debuggen Alya-bronbestand of de testmap",

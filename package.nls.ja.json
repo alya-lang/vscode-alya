@@ -25,6 +25,7 @@
   "config.lint.runOnSave": "Alya ソースファイル保存時に 'alya lint --fix' を自動実行する",
   "config.testing.autoRunOnSave": "Alya ソースファイル保存時にパッケージテストを自動再実行する",
   "config.inlayHints.enabled": "エディターでインライン型注釈とパラメーター名ヒントを有効にする",
+  "config.rainbowBrackets": "ネイティブのブラケットペアエンジンを使用して、対応するブラケットペア ((), [], {}) をネストレベルごとに色付けします。切り替えは設定を Alya ファイルに反映します",
   "config.debug.path": "DAP デバッグに使用する alya 実行ファイルへのパス",
   "debugger.label": "Alya デバッガー",
   "debugger.program.description": "デバッグする Alya ソースファイルまたはテストディレクトリへのパス",

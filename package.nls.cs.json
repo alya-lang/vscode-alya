@@ -25,6 +25,7 @@
   "config.lint.runOnSave": "Automaticky spouštět 'alya lint --fix' při uložení zdrojového souboru Alya",
   "config.testing.autoRunOnSave": "Automaticky znovu spouštět testy balíčku při uložení zdrojového souboru Alya",
   "config.inlayHints.enabled": "Povolit vložené anotace typů a nápovědy názvů parametrů v editoru",
+  "config.rainbowBrackets": "Obarvit odpovídající páry závorek ((), [], {}) podle úrovně vnoření pomocí nativního enginu; přepínač promítne nastavení do souborů Alya",
   "config.debug.path": "Cesta ke spustitelnému souboru alya používanému pro ladění DAP",
   "debugger.label": "Ladicí program Alya",
   "debugger.program.description": "Cesta ke zdrojovému souboru Alya nebo adresáři testů k ladění",

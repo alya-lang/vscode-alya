@@ -25,6 +25,7 @@
   "config.lint.runOnSave": "Az 'alya lint --fix' automatikus futtatása Alya forrásfájl mentésekor",
   "config.testing.autoRunOnSave": "Csomagtesztek automatikus újrafuttatása Alya forrásfájl mentésekor",
   "config.inlayHints.enabled": "Sorba ágyazott típusjegyzetek és paraméternév-tippek engedélyezése a szerkesztőben",
+  "config.rainbowBrackets": "A zárójelpárok ((), [], {}) színezése egymásba ágyazási szintenként a natív motorral; a kapcsoló tükrözi a beállítást az Alya-fájlokban",
   "config.debug.path": "A DAP hibakereséshez használt alya végrehajtható fájl elérési útja",
   "debugger.label": "Alya hibakereső",
   "debugger.program.description": "A hibakeresendő Alya forrásfájl vagy tesztkönyvtár elérési útja",

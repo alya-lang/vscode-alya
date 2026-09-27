@@ -25,6 +25,7 @@
   "config.lint.runOnSave": "Kör automatiskt 'alya lint --fix' när en Alya-källfil sparas",
   "config.testing.autoRunOnSave": "Kör automatiskt om pakettester när en Alya-källfil sparas",
   "config.inlayHints.enabled": "Aktivera infogade typanteckningar och parameternamnstips i redigeraren",
+  "config.rainbowBrackets": "Färglägga matchande klammerpar ((), [], {}) per nestningsnivå med den inbyggda motorn; växeln speglar inställningen i Alya-filer",
   "config.debug.path": "Sökväg till körbara alya-filen som används för DAP-felsökning",
   "debugger.label": "Alya-felsökare",
   "debugger.program.description": "Sökväg till Alya-källfilen eller testkatalogen som ska felsökas",

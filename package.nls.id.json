@@ -25,6 +25,7 @@
   "config.lint.runOnSave": "Otomatis jalankan 'alya lint --fix' saat menyimpan berkas sumber Alya",
   "config.testing.autoRunOnSave": "Otomatis jalankan ulang pengujian paket saat berkas sumber Alya disimpan",
   "config.inlayHints.enabled": "Aktifkan anotasi tipe sebaris dan petunjuk nama parameter di editor",
+  "config.rainbowBrackets": "Warnai pasangan kurung yang cocok ((), [], {}) per tingkat penyarangan menggunakan mesin bawaan; tombol mencerminkan pengaturan ke file Alya",
   "config.debug.path": "Jalur ke executable alya yang digunakan untuk debugging DAP",
   "debugger.label": "Debugger Alya",
   "debugger.program.description": "Jalur ke berkas sumber Alya atau direktori pengujian untuk di-debug",

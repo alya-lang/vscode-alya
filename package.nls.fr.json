@@ -25,6 +25,7 @@
   "config.lint.runOnSave": "Exécuter automatiquement 'alya lint --fix' lors de l'enregistrement d'un fichier source Alya",
   "config.testing.autoRunOnSave": "Réexécuter automatiquement les tests du paquet lors de l'enregistrement d'un fichier source Alya",
   "config.inlayHints.enabled": "Activer les annotations de type en ligne et les indications de noms de paramètres dans l'éditeur",
+  "config.rainbowBrackets": "Colorer les paires de crochets correspondantes ((), [], {}) par niveau d'imbrication avec le moteur natif ; le commutateur répercute le réglage dans les fichiers Alya",
   "config.debug.path": "Chemin d'accès à l'exécutable alya utilisé pour le débogage DAP",
   "debugger.label": "Débogueur Alya",
   "debugger.program.description": "Chemin d'accès au fichier source Alya ou au répertoire de tests à déboguer",

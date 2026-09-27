@@ -25,6 +25,7 @@
   "config.lint.runOnSave": "Executar automaticamente 'alya lint --fix' ao salvar um arquivo-fonte Alya",
   "config.testing.autoRunOnSave": "Reexecutar automaticamente os testes do pacote ao salvar um arquivo-fonte Alya",
   "config.inlayHints.enabled": "Habilitar anotações de tipo embutidas e dicas de nomes de parâmetros no editor",
+  "config.rainbowBrackets": "Colorir os pares de colchetes correspondentes ((), [], {}) por nível de aninhamento com o mecanismo nativo; a alternância reflete a configuração nos arquivos Alya",
   "config.debug.path": "Caminho para o executável alya usado na depuração DAP",
   "debugger.label": "Depurador Alya",
   "debugger.program.description": "Caminho para o arquivo-fonte Alya ou diretório de testes a depurar",

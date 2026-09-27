@@ -25,6 +25,7 @@
   "config.lint.runOnSave": "儲存 Alya 原始檔時自動執行 'alya lint --fix'",
   "config.testing.autoRunOnSave": "儲存 Alya 原始檔時自動重新執行套件測試",
   "config.inlayHints.enabled": "在編輯器中啟用內嵌型別註解和參數名稱提示",
+  "config.rainbowBrackets": "使用原生括號配對引擎，依巢狀層級為相符的括號對 ((), [], {}) 著色；切換開關會將設定鏡像至 Alya 檔案",
   "config.debug.path": "用於 DAP 除錯的 alya 可執行檔路徑",
   "debugger.label": "Alya 除錯器",
   "debugger.program.description": "要除錯的 Alya 原始檔或測試目錄路徑",

@@ -25,6 +25,7 @@
   "config.lint.runOnSave": "'alya lint --fix' beim Speichern einer Alya-Quelldatei automatisch ausführen",
   "config.testing.autoRunOnSave": "Pakettests beim Speichern einer Alya-Quelldatei automatisch erneut ausführen",
   "config.inlayHints.enabled": "Inline-Typannotationen und Parameternamen-Hinweise im Editor aktivieren",
+  "config.rainbowBrackets": "Zugehörige Klammerpaare ((), [], {}) pro Verschachtelungsebene mit der nativen Klammerpaar-Engine einfärben; der Schalter spiegelt die Einstellung in Alya-Dateien",
   "config.debug.path": "Pfad zur ausführbaren alya-Datei für DAP-Debugging",
   "debugger.label": "Alya-Debugger",
   "debugger.program.description": "Pfad zur zu debuggenden Alya-Quelldatei oder zum Testverzeichnis",
