@@ -101,6 +101,11 @@ Powered by the native `alya dap` engine:
   * `Alya: Run Tests`: Step through test suites with full variable inspection.
   * `Alya: Run with Memory Leak Trace`: Debug programs with live allocation profiling and memory leak tracing.
 
+### 11. ✅ Built-in Task Definitions & Problem Matching
+* `Terminal ➔ Run Task` offers `Alya: Run Current File`, `Test/Build/Check/Format Project` out of the box (usable as `preLaunchTask`, customizable via `tasks.json` with `file`/`args`).
+* `alya check` diagnostics land in the Problems panel through the `$alya` problem matcher.
+* `a::b` chains count as one word (double-click, find, rename support).
+
 ---
 
 ### 11. 🌈 Bracket Pair Colorization

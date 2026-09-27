@@ -74,6 +74,48 @@
         "path": "./icons/alya-file-icon-theme.json"
       }
     ],
+    "taskDefinitions": [
+      {
+        "type": "alya",
+        "required": ["task"],
+        "properties": {
+          "task": {
+            "type": "string",
+            "enum": ["run", "test", "build", "check", "fmt"],
+            "description": "Alya command to run: run (current file), test, build, check, or fmt."
+          },
+          "file": {
+            "type": "string",
+            "description": "File for the run task (defaults to ${file} at execution time)."
+          },
+          "args": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Extra CLI args appended after the built-in ones."
+          }
+        }
+      }
+    ],
+    "problemMatchers": [
+      {
+        "name": "$alya",
+        "owner": "alya",
+        "fileLocation": "absolute",
+        "pattern": [
+          {
+            "regexp": "^(error|warning): (.*)$",
+            "severity": 1,
+            "message": 2
+          },
+          {
+            "regexp": "^\\s+--> (.+):(\\d+):(\\d+)$",
+            "file": 1,
+            "line": 2,
+            "column": 3
+          }
+        ]
+      }
+    ],
     "themes": [
       {
         "label": "Alya Dark",
