@@ -264,7 +264,7 @@
     "namespaces": {
       "patterns": [
         {
-          "name": "entity.name.namespace.alya",
+          "name": "entity.name.namespace.alya entity.name.type.alya",
           "match": "\\b([A-Za-z_][A-Za-z0-9_]*)(?=\\s*(::|\\.))"
         }
       ]

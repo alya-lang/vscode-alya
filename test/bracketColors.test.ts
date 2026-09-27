@@ -99,6 +99,24 @@ describe("bracket colorization static config", () => {
     ).toBe(true);
   });
 
+  it("scopes qualifier heads as namespace with a type fallback", () => {
+    const grammar = JSON.parse(
+      fs.readFileSync(
+        path.join(root, "syntaxes", "alya.tmLanguage.json"),
+        "utf8"
+      )
+    );
+    expect(grammar.patterns).toEqual(
+      expect.arrayContaining([{ include: "#namespaces" }])
+    );
+    const rule = grammar.repository["namespaces"].patterns[0];
+    // Dual scope: precise `namespace` for aware themes, `type` fallback
+    // so stock themes still paint qualifiers distinctly.
+    expect(rule.name).toBe(
+      "entity.name.namespace.alya entity.name.type.alya"
+    );
+  });
+
   it("covers backtick raw strings in the grammar", () => {
     const grammar = JSON.parse(
       fs.readFileSync(

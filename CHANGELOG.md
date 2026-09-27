@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Alya Dark color theme**: official dark theme with the brand bracket palette (sky/violet/emerald) and semantic colors aligned with the language server.
 - **Alya Light color theme**: the same system on a light workspace (contrast-checked palette); `say`/`test`/`assert` stand apart from other keywords and inlay hints are toned down in both themes.
 
+### Changed
+- Extension version 0.10.0 (new: import links, namespace colors, rainbow brackets, Alya Dark/Light themes).
+- Qualifier heads (`alias.` / `Type::`) carry a `entity.name.type` fallback scope, so themes without a `namespace` mapping still paint them distinctly.
+
 ---
 
 ## [0.9.0] - 2026-09-22
