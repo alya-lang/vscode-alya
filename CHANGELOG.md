@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Extension version 0.10.0 (new: import links, namespace colors, rainbow brackets, Alya Dark/Light themes).
 - Qualifier heads (`alias.` / `Type::`) carry a `entity.name.type` fallback scope, so themes without a `namespace` mapping still paint them distinctly.
+- New `Alya: Show Environment Info` command: prints extension/LSP versions, active theme, and bracket settings to the Alya output channel for issue triage.
 
 ---
 

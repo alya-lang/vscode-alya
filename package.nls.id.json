@@ -17,6 +17,7 @@
   "command.debugTest": "Alya: Debug Pengujian pada Kursor / Berkas Aktif",
   "command.debugFile": "Alya: Debug Berkas Saat Ini",
   "command.rerunFailedTests": "Alya: Jalankan Ulang Pengujian yang Gagal",
+  "command.showEnvInfo": "Alya: Tampilkan Info Lingkungan",
   "config.title": "Alya",
   "config.lsp.path": "Jalur ke executable alya",
   "config.lsp.arguments": "Argumen untuk diteruskan ke perintah alya guna memulai server bahasa",

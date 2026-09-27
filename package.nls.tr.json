@@ -17,6 +17,7 @@
   "command.debugTest": "Alya: İmleçteki / Etkin Dosyadaki Testi Hata Ayıkla",
   "command.debugFile": "Alya: Geçerli Dosyada Hata Ayıkla",
   "command.rerunFailedTests": "Alya: Başarısız Testleri Yeniden Çalıştır",
+  "command.showEnvInfo": "Alya: Ortam Bilgisini Göster",
   "config.title": "Alya",
   "config.lsp.path": "alya yürütülebilir dosyasının yolu",
   "config.lsp.arguments": "Dil sunucusunu başlatmak için alya komutuna geçirilecek bağımsız değişkenler",

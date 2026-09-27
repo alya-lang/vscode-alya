@@ -17,6 +17,7 @@
   "command.debugTest": "Alya: 除錯游標處/使用中檔案的測試",
   "command.debugFile": "Alya: 除錯目前檔案",
   "command.rerunFailedTests": "Alya: 重新執行失敗的測試",
+  "command.showEnvInfo": "Alya: 顯示環境資訊",
   "config.title": "Alya",
   "config.lsp.path": "alya 可執行檔的路徑",
   "config.lsp.arguments": "傳遞給 alya 命令以啟動語言伺服器的引數",

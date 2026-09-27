@@ -17,6 +17,7 @@
   "command.debugTest": "Alya: Отладить тест под курсором / в активном файле",
   "command.debugFile": "Alya: Отладить текущий файл",
   "command.rerunFailedTests": "Alya: Повторно запустить неудавшиеся тесты",
+  "command.showEnvInfo": "Alya: Показать информацию о среде",
   "config.title": "Alya",
   "config.lsp.path": "Путь к исполняемому файлу alya",
   "config.lsp.arguments": "Аргументы, передаваемые команде alya для запуска языкового сервера",

@@ -17,6 +17,7 @@
   "command.debugTest": "Alya: Felsök test vid markören / aktiv fil",
   "command.debugFile": "Alya: Felsök aktuell fil",
   "command.rerunFailedTests": "Alya: Kör misslyckade tester igen",
+  "command.showEnvInfo": "Alya: Visa miljöinformation",
   "config.title": "Alya",
   "config.lsp.path": "Sökväg till körbara alya-filen",
   "config.lsp.arguments": "Argument som skickas till kommandot alya för att starta språkservern",

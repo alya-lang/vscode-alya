@@ -20,6 +20,11 @@ mock.module("vscode", () => {
       showInformationMessage: () => {},
       showWarningMessage: () => {},
       createTerminal: () => ({ show: () => {}, sendText: () => {} }),
+      createOutputChannel: () => ({
+        clear: () => {},
+        appendLine: () => {},
+        show: () => {},
+      }),
       terminals: [],
     },
     workspace: {
@@ -44,6 +49,9 @@ mock.module("vscode", () => {
       registerDebugConfigurationProvider: () => ({ dispose: () => {} }),
       registerDebugAdapterDescriptorFactory: () => ({ dispose: () => {} }),
       startDebugging: () => Promise.resolve(true),
+    },
+    extensions: {
+      getExtension: () => undefined,
     },
     DebugAdapterExecutable: class {
       command: string;

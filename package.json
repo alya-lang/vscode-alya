@@ -173,6 +173,10 @@
         "command": "alya.rerunFailedTests",
         "title": "%command.rerunFailedTests%",
         "icon": "$(refresh)"
+      },
+      {
+        "command": "alya.showEnvInfo",
+        "title": "%command.showEnvInfo%"
       }
     ],
     "keybindings": [

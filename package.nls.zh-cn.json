@@ -17,6 +17,7 @@
   "command.debugTest": "Alya: 调试光标处/活动文件的测试",
   "command.debugFile": "Alya: 调试当前文件",
   "command.rerunFailedTests": "Alya: 重新运行失败的测试",
+  "command.showEnvInfo": "Alya: 显示环境信息",
   "config.title": "Alya",
   "config.lsp.path": "alya 可执行文件的路径",
   "config.lsp.arguments": "传递给 alya 命令以启动语言服务器的参数",

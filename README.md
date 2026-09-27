@@ -89,6 +89,7 @@ Tab-triggered templates for all major language idioms:
   * `Alya: View Assembly Output (-S)`
   * `Alya: View Abstract Syntax Tree (AST)`
   * `Alya: Restart Language Server`
+  * `Alya: Show Environment Info`
 
 ### 10. 🐞 Debug Adapter Protocol (DAP)
 Powered by the native `alya dap` engine:

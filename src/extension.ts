@@ -10,6 +10,7 @@ import {
 import { AlyaAssemblyViewer } from "./assemblyViewer";
 import { registerRainbowBracketsToggle } from "./bracketColors";
 import { registerDocGenerator } from "./docGenerator";
+import { registerEnvInfoCommand } from "./envInfo";
 import { AlyaDocumentLinkProvider } from "./documentLinks";
 import { AlyaStatusBar } from "./statusBar";
 import { AlyaTestController } from "./testController";
@@ -44,6 +45,9 @@ export function activate(context: vscode.ExtensionContext) {
 
   // 4. Automatic Docstring & Summary Generator
   registerDocGenerator(context);
+
+  // 4b. Environment diagnostics (`Alya: Show Environment Info`)
+  registerEnvInfoCommand(vscode, context);
 
   // 5. Initialize LSP Client (Native LSP handles formatting, symbols, references, folding)
   function startLspClient() {

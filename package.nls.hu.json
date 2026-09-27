@@ -17,6 +17,7 @@
   "command.debugTest": "Alya: Teszt hibakeresése a kurzornál / aktív fájl",
   "command.debugFile": "Alya: Aktuális fájl hibakeresése",
   "command.rerunFailedTests": "Alya: Sikertelen tesztek újrafuttatása",
+  "command.showEnvInfo": "Alya: Környezeti információk megjelenítése",
   "config.title": "Alya",
   "config.lsp.path": "Az alya végrehajtható fájl elérési útja",
   "config.lsp.arguments": "Az alya parancsnak átadott argumentumok a nyelvi kiszolgáló indításához",

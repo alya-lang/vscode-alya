@@ -17,6 +17,7 @@
   "command.debugTest": "Alya: Ladit test u kurzoru / aktivní soubor",
   "command.debugFile": "Alya: Ladit aktuální soubor",
   "command.rerunFailedTests": "Alya: Znovu spustit neúspěšné testy",
+  "command.showEnvInfo": "Alya: Zobrazit informace o prostředí",
   "config.title": "Alya",
   "config.lsp.path": "Cesta ke spustitelnému souboru alya",
   "config.lsp.arguments": "Argumenty předané příkazu alya pro spuštění jazykového serveru",

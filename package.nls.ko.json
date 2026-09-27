@@ -17,6 +17,7 @@
   "command.debugTest": "Alya: 커서/활성 파일의 테스트 디버그",
   "command.debugFile": "Alya: 현재 파일 디버그",
   "command.rerunFailedTests": "Alya: 실패한 테스트 다시 실행",
+  "command.showEnvInfo": "Alya: 환경 정보 표시",
   "config.title": "Alya",
   "config.lsp.path": "alya 실행 파일 경로",
   "config.lsp.arguments": "언어 서버를 시작하기 위해 alya 명령에 전달할 인수",

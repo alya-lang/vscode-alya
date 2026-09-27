@@ -17,6 +17,7 @@
   "command.debugTest": "Alya: Depurar prueba en el cursor / archivo activo",
   "command.debugFile": "Alya: Depurar archivo actual",
   "command.rerunFailedTests": "Alya: Repetir pruebas fallidas",
+  "command.showEnvInfo": "Alya: Mostrar información del entorno",
   "config.title": "Alya",
   "config.lsp.path": "Ruta al ejecutable de alya",
   "config.lsp.arguments": "Argumentos para pasar al comando alya para iniciar el servidor de lenguaje",

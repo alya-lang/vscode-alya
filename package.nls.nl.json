@@ -17,6 +17,7 @@
   "command.debugTest": "Alya: Test bij cursor / actief bestand debuggen",
   "command.debugFile": "Alya: Huidig bestand debuggen",
   "command.rerunFailedTests": "Alya: Mislukte tests opnieuw uitvoeren",
+  "command.showEnvInfo": "Alya: Omgevingsinfo weergeven",
   "config.title": "Alya",
   "config.lsp.path": "Pad naar het uitvoerbare bestand alya",
   "config.lsp.arguments": "Argumenten om door te geven aan de opdracht alya om de taalserver te starten",

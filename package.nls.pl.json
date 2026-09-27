@@ -17,6 +17,7 @@
   "command.debugTest": "Alya: Debuguj test pod kursorem / w aktywnym pliku",
   "command.debugFile": "Alya: Debuguj bieżący plik",
   "command.rerunFailedTests": "Alya: Uruchom ponownie nieudane testy",
+  "command.showEnvInfo": "Alya: Pokaż informacje o środowisku",
   "config.title": "Alya",
   "config.lsp.path": "Ścieżka do pliku wykonywalnego alya",
   "config.lsp.arguments": "Argumenty przekazywane do polecenia alya w celu uruchomienia serwera językowego",

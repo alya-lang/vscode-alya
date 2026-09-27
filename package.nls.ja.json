@@ -17,6 +17,7 @@
   "command.debugTest": "Alya: カーソル位置/アクティブファイルのテストをデバッグ",
   "command.debugFile": "Alya: 現在のファイルをデバッグ",
   "command.rerunFailedTests": "Alya: 失敗したテストを再実行",
+  "command.showEnvInfo": "Alya: 環境情報を表示",
   "config.title": "Alya",
   "config.lsp.path": "alya 実行ファイルへのパス",
   "config.lsp.arguments": "言語サーバー起動のために alya コマンドに渡す引数",
