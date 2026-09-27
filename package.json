@@ -558,7 +558,6 @@
                 "hcLight": "./media/walkthrough/step3-run-light.svg"
               },
               "altText": "%walkthrough.step3.alt%"
-              }
             },
             "completionEvents": ["onCommand:alya.runFile"]
           },
@@ -574,7 +573,6 @@
                 "hcLight": "./media/walkthrough/step4-theme-light.svg"
               },
               "altText": "%walkthrough.step4.alt%"
-              }
             },
             "completionEvents": ["onSettingChanged:workbench.colorTheme"]
           },
@@ -590,7 +588,6 @@
                 "hcLight": "./media/walkthrough/step5-docs-light.svg"
               },
               "altText": "%walkthrough.step5.alt%"
-              }
             },
             "completionEvents": ["onCommand:vscode.open"]
           }
