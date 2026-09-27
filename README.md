@@ -33,6 +33,7 @@ Powered by the native `alya lsp` engine:
 ### 3. 🎨 Official Brand File Icons & Theme
 * Embedded vector SVGs with automatic **Dark** and **Light** mode switching for `.alya` files.
 * Includes the standalone **`Alya File Icons`** theme (`Preferences: File Icon Theme` ➔ `Alya File Icons`).
+* Includes the **`Alya Dark`** color theme (`Preferences: Color Theme` ➔ `Alya Dark`): navy workspace matching the brand icons, sky/violet/emerald bracket-pair palette, and semantic colors aligned with the Alya language server.
 
 ### 4. 🧹 In-Place Code Formatter (`alya fmt`)
 * Native integration with the Alya compiler's formatter:

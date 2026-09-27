@@ -67,6 +67,13 @@
         "path": "./syntaxes/alya.tmLanguage.json"
       }
     ],
+    "themes": [
+      {
+        "label": "Alya Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/alya-dark-color-theme.json"
+      }
+    ],
     "snippets": [
       {
         "language": "alya",
