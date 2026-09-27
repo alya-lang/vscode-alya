@@ -226,6 +226,10 @@
       {
         "command": "alya.showEnvInfo",
         "title": "%command.showEnvInfo%"
+      },
+      {
+        "command": "alya.checkCompiler",
+        "title": "%command.checkCompiler%"
       }
     ],
     "keybindings": [
@@ -505,7 +509,81 @@
         "editor.bracketPairColorization.enabled": true,
         "editor.guides.bracketPairs": "active"
       }
-    }
+    },
+    "walkthroughs": [
+      {
+        "id": "alya.getStarted",
+        "title": "%walkthrough.getStarted.title%",
+        "description": "%walkthrough.getStarted.description%",
+        "steps": [
+          {
+            "id": "checkCompiler",
+            "title": "%walkthrough.step1.title%",
+            "description": "%walkthrough.step1.description%",
+            "media": {
+              "image": {
+                "dark": "./media/walkthrough/step1-terminal-dark.svg",
+                "light": "./media/walkthrough/step1-terminal-light.svg",
+                "altText": "%walkthrough.step1.alt%"
+              }
+            },
+            "completionEvents": ["onCommand:alya.checkCompiler"]
+          },
+          {
+            "id": "openFile",
+            "title": "%walkthrough.step2.title%",
+            "description": "%walkthrough.step2.description%",
+            "media": {
+              "image": {
+                "dark": "./media/walkthrough/step2-file-dark.svg",
+                "light": "./media/walkthrough/step2-file-light.svg",
+                "altText": "%walkthrough.step2.alt%"
+              }
+            },
+            "completionEvents": ["onLanguage:alya"]
+          },
+          {
+            "id": "runFile",
+            "title": "%walkthrough.step3.title%",
+            "description": "%walkthrough.step3.description%",
+            "media": {
+              "image": {
+                "dark": "./media/walkthrough/step3-run-dark.svg",
+                "light": "./media/walkthrough/step3-run-light.svg",
+                "altText": "%walkthrough.step3.alt%"
+              }
+            },
+            "completionEvents": ["onCommand:alya.runFile"]
+          },
+          {
+            "id": "themeAndTest",
+            "title": "%walkthrough.step4.title%",
+            "description": "%walkthrough.step4.description%",
+            "media": {
+              "image": {
+                "dark": "./media/walkthrough/step4-theme-dark.svg",
+                "light": "./media/walkthrough/step4-theme-light.svg",
+                "altText": "%walkthrough.step4.alt%"
+              }
+            },
+            "completionEvents": ["onSettingChanged:workbench.colorTheme"]
+          },
+          {
+            "id": "learnMore",
+            "title": "%walkthrough.step5.title%",
+            "description": "%walkthrough.step5.description%",
+            "media": {
+              "image": {
+                "dark": "./media/walkthrough/step5-docs-dark.svg",
+                "light": "./media/walkthrough/step5-docs-light.svg",
+                "altText": "%walkthrough.step5.alt%"
+              }
+            },
+            "completionEvents": ["onCommand:vscode.open"]
+          }
+        ]
+      }
+    ]
   },
   "scripts": {
     "build": "bun build ./src/extension.ts --target=node --outfile=./out/extension.js --external vscode",

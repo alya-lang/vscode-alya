@@ -212,6 +212,15 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
 
+  const checkCompilerCmd = vscode.commands.registerCommand(
+    "alya.checkCompiler",
+    () => {
+      const terminal = getAlyaTerminal();
+      terminal.show();
+      terminal.sendText("alya --version");
+    }
+  );
+
   const runFileWithMemTraceCmd = vscode.commands.registerCommand(
     "alya.runFileWithMemTrace",
     (uri?: vscode.Uri) => {
@@ -393,6 +402,7 @@ export function activate(context: vscode.ExtensionContext) {
     debugFactoryDisposable,
     runFileCmd,
     runFileWithMemTraceCmd,
+    checkCompilerCmd,
     debugFileCmd,
     runTestCmd,
     runTestAtCursorCmd,

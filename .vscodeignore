@@ -9,3 +9,4 @@ bun.lock
 *.vsix
 test/**
 bunfig.toml
+media/walkthrough/*.py

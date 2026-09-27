@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Qualifier heads (`alias.` / `Type::`) carry a `entity.name.type` fallback scope, so themes without a `namespace` mapping still paint them distinctly.
 - New `Alya: Show Environment Info` command: prints extension/LSP versions, active theme, and bracket settings to the Alya output channel for issue triage.
 - Built-in `alya` task definitions (run/test/build/check/fmt) with the `$alya` problem matcher for `alya check`; `::` chains count as one word.
+- Get Started walkthrough: five guided steps with hand-drawn dark/light illustrations, localized in 20 languages, plus the `alya.checkCompiler` command.
 - Interpolation highlighting in every string kind (`f`, plain, triple, raw, backtick): the shared grammar rule plus server-side tokens match runtime (all of them interpolate).
 - Wired `alya.inlayHints.enabled` toggle (was declared but dead); added `Alya File Icons` file-icon theme contribution for the bundled brand icons.
 - Stale server warning on activation with a shortcut to the environment report.

@@ -106,9 +106,13 @@ Powered by the native `alya dap` engine:
 * `alya check` diagnostics land in the Problems panel through the `$alya` problem matcher.
 * `a::b` chains count as one word (double-click, find, rename support).
 
+### 12. 👋 Get Started Walkthrough
+* Five guided steps with hand-drawn dark/light illustrations: compiler check, first file, first run, theme + tests, docs.
+* Fully localized in 20 languages; steps auto-complete as you work.
+
 ---
 
-### 11. 🌈 Bracket Pair Colorization
+### 13. 🌈 Bracket Pair Colorization
 Powered by VSCode's native bracket engine (no dependencies, theme-aware):
 * **Rainbow `()`, `[]`, `{}`**: matching pairs colored per nesting level, enabled for Alya out of the box with active-pair guides.
 * **Toggle**: `alya.rainbowBrackets` setting (default `true`) mirrors into Alya files; or use the standard `editor.bracketPairColorization.enabled` globally / per `[alya]`.
