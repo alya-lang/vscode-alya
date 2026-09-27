@@ -2,6 +2,7 @@
   "$schema": "vscode://schemas/color-theme",
   "name": "Alya Light",
   "type": "light",
+  "semanticHighlighting": true,
   "colors": {
     "focusBorder": "#0284c7",
     "foreground": "#1e293b",

@@ -61,6 +61,10 @@ describe.each(THEMES)("Alya theme $label", (theme) => {
 
   it("declares type, bracket palette, and inlay colors", () => {
     expect(parsed.type).toBe(theme.type);
+    // Semantic tokens must render under the default
+    // `configuredByTheme` setting: the theme has to opt in.
+    expect(parsed.semanticHighlighting).toBe(true);
+    expect(parsed.type).toBe(theme.type);
     theme.brackets.forEach((color, i) => {
       expect(parsed.colors[`editorBracketHighlight.foreground${i + 1}`]).toBe(
         color
