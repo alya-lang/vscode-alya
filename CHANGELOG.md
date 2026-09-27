@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **Import path links**: the module path in `import "..."` / `from "..." import ...` statements is now underlined; Ctrl+Click opens the resolved file (relative paths, `.alya/packages` installs, and path dependencies; embedded-stdlib modules have no on-disk target and produce no link).
-- **Import-aware go-to-definition (needs `alya` with LSP support)**: `alias::x` / `alias.x` jumps to the `import ... as alias` line; resting on an import path jumps to the target file.
+- **Import-aware go-to-definition (needs `alya` with LSP support)**: `alias` jumps to the `import ... as alias` line; `alias::Symbol` / `alias.Symbol` jumps to the symbol in the target file (functions, structs, enums, enum variants — facade re-exports followed); bare words fall back to unaliased imports; resting on an import path jumps to the target file.
 
 ---
 
