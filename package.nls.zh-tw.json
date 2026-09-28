@@ -18,6 +18,7 @@
   "command.debugFile": "Alya: 除錯目前檔案",
   "command.rerunFailedTests": "Alya: 重新執行失敗的測試",
   "command.showEnvInfo": "Alya: 顯示環境資訊",
+  "command.registerSystemFileIcons": "Alya: 註冊系統檔案圖示",
   "walkthrough.getStarted.title": "Alya 入門",
   "walkthrough.getStarted.description": "在兩分鐘內撰寫、執行並測試你的第一個 Alya 程式。",
   "walkthrough.step1.title": "檢查編譯器",

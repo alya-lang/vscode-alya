@@ -12,6 +12,7 @@ import { registerRainbowBracketsToggle } from "./bracketColors";
 import { registerDocGenerator } from "./docGenerator";
 import { registerInlayHintsToggle } from "./editorSync";
 import { registerEnvInfoCommand, warnIfStaleBinary } from "./envInfo";
+import { registerSystemFileIcons } from "./systemIcons";
 import { registerAlyaTasks } from "./tasks";
 import { AlyaDocumentLinkProvider } from "./documentLinks";
 import { AlyaStatusBar } from "./statusBar";
@@ -50,6 +51,9 @@ export function activate(context: vscode.ExtensionContext) {
 
   // 4b. Environment diagnostics (`Alya: Show Environment Info`)
   registerEnvInfoCommand(vscode, context);
+
+  // 4b2. OS file-manager icons (`alya icons install` via the binary).
+  registerSystemFileIcons(vscode, context);
 
   // 4c. Inlay hints follow the Alya toggle (the setting was declared
   // but never wired); stale server binaries get a one-time warning.

@@ -18,6 +18,7 @@
   "command.debugFile": "Alya: Felsök aktuell fil",
   "command.rerunFailedTests": "Alya: Kör misslyckade tester igen",
   "command.showEnvInfo": "Alya: Visa miljöinformation",
+  "command.registerSystemFileIcons": "Alya: Registrera systemfilikoner",
   "walkthrough.getStarted.title": "Kom igång med Alya",
   "walkthrough.getStarted.description": "Skriv, kör och testa ditt första Alya-program på under två minuter.",
   "walkthrough.step1.title": "Kontrollera kompilatorn",

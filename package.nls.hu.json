@@ -18,6 +18,7 @@
   "command.debugFile": "Alya: Aktuális fájl hibakeresése",
   "command.rerunFailedTests": "Alya: Sikertelen tesztek újrafuttatása",
   "command.showEnvInfo": "Alya: Környezeti információk megjelenítése",
+  "command.registerSystemFileIcons": "Alya: Rendszer-fájlikonok regisztrálása",
   "walkthrough.getStarted.title": "Ismerkedés az Alyával",
   "walkthrough.getStarted.description": "Írd meg, futtasd és teszteld az első Alya-programodat két percen belül.",
   "walkthrough.step1.title": "Fordító ellenőrzése",

@@ -18,6 +18,7 @@
   "command.debugFile": "Alya: Debug Berkas Saat Ini",
   "command.rerunFailedTests": "Alya: Jalankan Ulang Pengujian yang Gagal",
   "command.showEnvInfo": "Alya: Tampilkan Info Lingkungan",
+  "command.registerSystemFileIcons": "Alya: Daftarkan Ikon Berkas Sistem",
   "walkthrough.getStarted.title": "Mulai dengan Alya",
   "walkthrough.getStarted.description": "Tulis, jalankan, dan uji program Alya pertamamu dalam kurang dari dua menit.",
   "walkthrough.step1.title": "Periksa kompiler",

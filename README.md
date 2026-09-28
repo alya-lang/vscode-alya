@@ -90,6 +90,7 @@ Tab-triggered templates for all major language idioms:
   * `Alya: View Abstract Syntax Tree (AST)`
   * `Alya: Restart Language Server`
   * `Alya: Show Environment Info`
+  * `Alya: Register System File Icons` (Windows and Linux — system file icons for `.alya`)
 
 ### 10. 🐞 Debug Adapter Protocol (DAP)
 Powered by the native `alya dap` engine:

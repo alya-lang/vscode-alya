@@ -18,6 +18,7 @@
   "command.debugFile": "Alya: Debug Current File",
   "command.rerunFailedTests": "Alya: Re-run Failed Tests",
   "command.showEnvInfo": "Alya: Show Environment Info",
+  "command.registerSystemFileIcons": "Alya: Register System File Icons",
   "walkthrough.getStarted.title": "Alya'ya Başla",
   "walkthrough.getStarted.description": "İlk Alya programını iki dakikadan kısa sürede yaz, çalıştır ve test et.",
   "walkthrough.step1.title": "Derleyiciyi denetle",

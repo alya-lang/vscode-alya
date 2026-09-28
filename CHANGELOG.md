@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **System file icons**: new `Alya: Register System File Icons` command (Windows and Linux) that runs `alya icons install` — registers the brand `.alya` icon with the OS file manager while keeping the current default app; reversible via `alya icons uninstall`.
 - **Import path links**: the module path in `import "..."` / `from "..." import ...` statements is now underlined; Ctrl+Click opens the resolved file (relative paths, `.alya/packages` installs, and path dependencies; embedded-stdlib modules have no on-disk target and produce no link).
 - **Import-aware go-to-definition (needs `alya` with LSP support)**: `alias` jumps to the `import ... as alias` line; `alias::Symbol` / `alias.Symbol` jumps to the symbol in the target file (functions, structs, enums, enum variants — facade re-exports followed); `Enum::Variant` and struct literal `field:` keys resolve too (same file or imports); bare words fall back to unaliased imports; resting on an import path jumps to the target file.
 - **F-string interpolation colors (needs `alya` with LSP support)**: identifiers inside `f"..."` spans now get semantic highlighting matching bare usage instead of being painted over as plain string.

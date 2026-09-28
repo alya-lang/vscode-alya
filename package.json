@@ -230,6 +230,11 @@
       {
         "command": "alya.checkCompiler",
         "title": "%command.checkCompiler%"
+      },
+      {
+        "command": "alya.registerSystemFileIcons",
+        "title": "%command.registerSystemFileIcons%",
+        "icon": "$(file)"
       }
     ],
     "keybindings": [
@@ -359,6 +364,12 @@
       }
     ],
     "menus": {
+      "commandPalette": [
+        {
+          "command": "alya.registerSystemFileIcons",
+          "when": "isWindows || isLinux"
+        }
+      ],
       "editor/title": [
         {
           "command": "alya.runFile",

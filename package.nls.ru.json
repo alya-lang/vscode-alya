@@ -18,6 +18,7 @@
   "command.debugFile": "Alya: Отладить текущий файл",
   "command.rerunFailedTests": "Alya: Повторно запустить неудавшиеся тесты",
   "command.showEnvInfo": "Alya: Показать информацию о среде",
+  "command.registerSystemFileIcons": "Alya: Зарегистрировать системные значки файлов",
   "walkthrough.getStarted.title": "Начните с Alya",
   "walkthrough.getStarted.description": "Напишите, запустите и протестируйте первую программу Alya менее чем за две минуты.",
   "walkthrough.step1.title": "Проверьте компилятор",

@@ -18,6 +18,7 @@
   "command.debugFile": "Alya: Αποσφαλμάτωση Τρέχοντος Αρχείου",
   "command.rerunFailedTests": "Alya: Επανεκτέλεση Αποτυχημένων Δοκιμών",
   "command.showEnvInfo": "Alya: Προβολή πληροφοριών περιβάλλοντος",
+  "command.registerSystemFileIcons": "Alya: Καταχώριση εικονιδίων αρχείων συστήματος",
   "walkthrough.getStarted.title": "Ξεκινήστε με το Alya",
   "walkthrough.getStarted.description": "Γράψτε, εκτελέστε και δοκιμάστε το πρώτο σας πρόγραμμα Alya σε λιγότερο από δύο λεπτά.",
   "walkthrough.step1.title": "Έλεγχος μεταγλωττιστή",

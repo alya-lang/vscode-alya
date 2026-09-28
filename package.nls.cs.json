@@ -18,6 +18,7 @@
   "command.debugFile": "Alya: Ladit aktuální soubor",
   "command.rerunFailedTests": "Alya: Znovu spustit neúspěšné testy",
   "command.showEnvInfo": "Alya: Zobrazit informace o prostředí",
+  "command.registerSystemFileIcons": "Alya: Registrovat systémové ikony souborů",
   "walkthrough.getStarted.title": "Začínáme s Alya",
   "walkthrough.getStarted.description": "Napište, spusťte a otestujte svůj první program Alya do dvou minut.",
   "walkthrough.step1.title": "Zkontrolujte kompilátor",

@@ -18,6 +18,7 @@
   "command.debugFile": "Alya: Aktuelle Datei debuggen",
   "command.rerunFailedTests": "Alya: Fehlgeschlagene Tests erneut ausführen",
   "command.showEnvInfo": "Alya: Umgebungsinformationen anzeigen",
+  "command.registerSystemFileIcons": "Alya: System-Dateisymbole registrieren",
   "walkthrough.getStarted.title": "Erste Schritte mit Alya",
   "walkthrough.getStarted.description": "Schreibe, starte und teste dein erstes Alya-Programm in unter zwei Minuten.",
   "walkthrough.step1.title": "Compiler prüfen",

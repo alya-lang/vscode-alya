@@ -18,6 +18,7 @@
   "command.debugFile": "Alya: Geçerli Dosyada Hata Ayıkla",
   "command.rerunFailedTests": "Alya: Başarısız Testleri Yeniden Çalıştır",
   "command.showEnvInfo": "Alya: Ortam Bilgisini Göster",
+  "command.registerSystemFileIcons": "Alya: Sistem Dosya Simgelerini Kaydet",
   "walkthrough.getStarted.title": "Alya'ya Başla",
   "walkthrough.getStarted.description": "İlk Alya programını iki dakikadan kısa sürede yaz, çalıştır ve test et.",
   "walkthrough.step1.title": "Derleyiciyi denetle",
