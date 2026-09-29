@@ -54,6 +54,7 @@ Tab-triggered templates for all major language idioms:
 * `extern` ➔ Foreign Function Interface (`extern "C"`)
 * `spawn` ➔ Colorless concurrency fiber dispatch
 * `defer` ➔ Scope-exit deferred cleanup
+* `cfg` ➔ Feature gate (`@cfg(feature = "...")` for `alya.toml` `[features]`)
 
 ### 6. 📝 Smart Docstring & Summary Generator
 * **Automatic Specification Alignment**: Generates canonical `##` docstrings adhering to `Src/spec` (Section 1.2).
@@ -103,7 +104,8 @@ Powered by the native `alya dap` engine:
   * `Alya: Run with Memory Leak Trace`: Debug programs with live allocation profiling and memory leak tracing.
 
 ### 11. ✅ Built-in Task Definitions & Problem Matching
-* `Terminal ➔ Run Task` offers `Alya: Run Current File`, `Test/Build/Check/Format Project` out of the box (usable as `preLaunchTask`, customizable via `tasks.json` with `file`/`args`).
+* `Terminal ➔ Run Task` offers `Alya: Run Current File`, `Test/Build/Check/Format Project` out of the box (usable as `preLaunchTask`, customizable via `tasks.json` with `file`/`args`, e.g. `"args": ["--features", "simd", "--no-default-features"]` to select package features).
+* `alya lint` analyzes each file under its package's default features (matching `alya build`/`test`); pass `--features`/`--no-default-features` explicitly to gate another view.
 * `alya check` diagnostics land in the Problems panel through the `$alya` problem matcher.
 * `a::b` chains count as one word (double-click, find, rename support).
 

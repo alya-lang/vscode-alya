@@ -185,6 +185,14 @@
     ],
     "description": "Defer execution until scope exit"
   },
+  "Cfg Feature Gate": {
+    "prefix": "cfg",
+    "body": [
+      "@cfg(feature = \"${1:feature}\")",
+      "$0"
+    ],
+    "description": "Gate the next item on a package feature (alya.toml [features])"
+  },
   "Say Print": {
     "prefix": "say",
     "body": [
