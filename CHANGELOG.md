@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [Unreleased]
+## [0.12.0] - 2026-10-01
 
 ### Added
 - **System file icons**: new `Alya: Register System File Icons` command (Windows and Linux) that runs `alya icons install` — registers the brand `.alya` icon with the OS file manager while keeping the current default app; reversible via `alya icons uninstall`.
@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Alya Light color theme**: the same system on a light workspace (contrast-checked palette); `say`/`test`/`assert` stand apart from other keywords and inlay hints are toned down in both themes.
 
 ### Changed
-- Extension version 0.10.0 (new: import links, namespace colors, rainbow brackets, Alya Dark/Light themes).
+- Extension version 0.12.0 (new: import links, namespace colors, rainbow brackets, Alya Dark/Light themes).
 - Qualifier heads (`alias.` / `Type::`) carry a `entity.name.type` fallback scope, so themes without a `namespace` mapping still paint them distinctly.
 - New `Alya: Show Environment Info` command: prints extension/LSP versions, active theme, and bracket settings to the Alya output channel for issue triage.
 - Built-in `alya` task definitions (run/test/build/check/fmt) with the `$alya` problem matcher for `alya check`; `::` chains count as one word.
