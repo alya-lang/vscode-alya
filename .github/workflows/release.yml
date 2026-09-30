@@ -35,3 +35,8 @@ jobs:
         with:
           files: "*.vsix"
           generate_release_notes: true
+
+      - name: Publish to VS Code Marketplace
+        run: bunx @vscode/vsce publish --pat $VSCE_TOKEN --no-dependencies
+        env:
+          VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
