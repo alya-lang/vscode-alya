@@ -40,6 +40,8 @@
   "config.title": "Alya",
   "config.lsp.path": "Cesta ke spustitelnému souboru alya",
   "config.lsp.arguments": "Argumenty předané příkazu alya pro spuštění jazykového serveru",
+  "config.compiler.autoDownload": "Automaticky stáhnout předkompilovaný kompilátor alya, pokud není nalezen v PATH",
+  "config.compiler.version": "Verze kompilátoru k automatickému stažení (\"latest\" nebo verze jako \"0.0.21\")",
   "config.run.memTrace": "Vždy předat --mem-trace příkazu 'alya run' pro diagnostiku paměti a detekci úniků",
   "config.lint.enabled": "Povolit statickou analýzu kódu v reálném čase a diagnostiku linteru v jazykovém serveru",
   "config.lint.runOnSave": "Automaticky spouštět 'alya lint --fix' při uložení zdrojového souboru Alya",

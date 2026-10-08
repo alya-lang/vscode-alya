@@ -40,6 +40,8 @@
   "config.title": "Alya",
   "config.lsp.path": "Az alya végrehajtható fájl elérési útja",
   "config.lsp.arguments": "Az alya parancsnak átadott argumentumok a nyelvi kiszolgáló indításához",
+  "config.compiler.autoDownload": "Előre lefordított alya fordító automatikus letöltése, ha nem található a PATH-ban",
+  "config.compiler.version": "Automatikusan letöltendő fordítóverzió (\"latest\" vagy egy verzió, például \"0.0.21\")",
   "config.run.memTrace": "Mindig adja át a --mem-trace paramétert az 'alya run' parancsnak memóriadiagnosztikához és szivárgásészleléshez",
   "config.lint.enabled": "Valós idejű statikus kódelemzés és linter-diagnosztika engedélyezése a nyelvi kiszolgálón",
   "config.lint.runOnSave": "Az 'alya lint --fix' automatikus futtatása Alya forrásfájl mentésekor",

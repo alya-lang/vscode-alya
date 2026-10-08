@@ -40,6 +40,8 @@
   "config.title": "Alya",
   "config.lsp.path": "alya 実行ファイルへのパス",
   "config.lsp.arguments": "言語サーバー起動のために alya コマンドに渡す引数",
+  "config.compiler.autoDownload": "PATH に見つからない場合、ビルド済みの alya コンパイラを自動的にダウンロードする",
+  "config.compiler.version": "自動ダウンロードするコンパイラのバージョン（\"latest\" または \"0.0.21\" のようなバージョン）",
   "config.run.memTrace": "メモリ診断とリーク検出のため 'alya run' に常に --mem-trace を渡す",
   "config.lint.enabled": "言語サーバーでリアルタイムの静的コード解析と linter 診断を有効にする",
   "config.lint.runOnSave": "Alya ソースファイル保存時に 'alya lint --fix' を自動実行する",

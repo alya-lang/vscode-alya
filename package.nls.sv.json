@@ -40,6 +40,8 @@
   "config.title": "Alya",
   "config.lsp.path": "Sökväg till körbara alya-filen",
   "config.lsp.arguments": "Argument som skickas till kommandot alya för att starta språkservern",
+  "config.compiler.autoDownload": "Ladda automatiskt ned en förbyggd alya-kompilator när ingen hittas i PATH",
+  "config.compiler.version": "Kompilatorversion att ladda ned automatiskt (\"latest\" eller en version som \"0.0.21\")",
   "config.run.memTrace": "Skicka alltid --mem-trace till 'alya run' för minnesdiagnostik och läckdetektering",
   "config.lint.enabled": "Aktivera statisk kodanalys i realtid och linterdiagnostik i språkservern",
   "config.lint.runOnSave": "Kör automatiskt 'alya lint --fix' när en Alya-källfil sparas",

@@ -40,6 +40,8 @@
   "config.title": "Alya",
   "config.lsp.path": "Jalur ke executable alya",
   "config.lsp.arguments": "Argumen untuk diteruskan ke perintah alya guna memulai server bahasa",
+  "config.compiler.autoDownload": "Unduh otomatis kompiler alya bawaan ketika tidak ditemukan di PATH",
+  "config.compiler.version": "Versi kompiler yang diunduh otomatis (\"latest\" atau versi seperti \"0.0.21\")",
   "config.run.memTrace": "Selalu teruskan --mem-trace ke 'alya run' untuk diagnostik memori dan deteksi kebocoran",
   "config.lint.enabled": "Aktifkan analisis kode statis real-time dan diagnostik linter di server bahasa",
   "config.lint.runOnSave": "Otomatis jalankan 'alya lint --fix' saat menyimpan berkas sumber Alya",

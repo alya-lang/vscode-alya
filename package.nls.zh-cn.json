@@ -40,6 +40,8 @@
   "config.title": "Alya",
   "config.lsp.path": "alya 可执行文件的路径",
   "config.lsp.arguments": "传递给 alya 命令以启动语言服务器的参数",
+  "config.compiler.autoDownload": "在 PATH 中找不到时自动下载预构建的 alya 编译器",
+  "config.compiler.version": "要自动下载的编译器版本（\"latest\" 或如 \"0.0.21\" 的版本）",
   "config.run.memTrace": "始终将 --mem-trace 传递给 'alya run' 以进行内存诊断和泄漏检测",
   "config.lint.enabled": "在语言服务器中启用实时静态代码分析和 linter 诊断",
   "config.lint.runOnSave": "保存 Alya 源文件时自动运行 'alya lint --fix'",

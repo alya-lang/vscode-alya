@@ -40,6 +40,8 @@
   "config.title": "Alya",
   "config.lsp.path": "Pad naar het uitvoerbare bestand alya",
   "config.lsp.arguments": "Argumenten om door te geven aan de opdracht alya om de taalserver te starten",
+  "config.compiler.autoDownload": "Automatisch een vooraf gebouwde alya-compiler downloaden wanneer er geen wordt gevonden in PATH",
+  "config.compiler.version": "Compiler-versie om automatisch te downloaden (\"latest\" of een versie zoals \"0.0.21\")",
   "config.run.memTrace": "Altijd --mem-trace doorgeven aan 'alya run' voor geheugendiagnose en lekdetectie",
   "config.lint.enabled": "Realtime statische codeanalyse en linterdiagnose in de taalserver inschakelen",
   "config.lint.runOnSave": "Automatisch 'alya lint --fix' uitvoeren bij het opslaan van een Alya-bronbestand",
