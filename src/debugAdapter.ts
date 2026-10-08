@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import { getResolvedCliPath } from "./compilerManager";
 
 /**
  * Alya Debug Configuration Provider.
@@ -122,6 +123,7 @@ export class AlyaDebugAdapterDescriptorFactory
     const config = vscode.workspace.getConfiguration("alya");
     const dapPath =
       config.get<string>("debug.path") ||
+      getResolvedCliPath() ||
       config.get<string>("lsp.path") ||
       "alya";
 

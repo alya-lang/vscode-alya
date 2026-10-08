@@ -478,6 +478,16 @@
           ],
           "description": "%config.lsp.arguments%"
         },
+        "alya.compiler.autoDownload": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.compiler.autoDownload%"
+        },
+        "alya.compiler.version": {
+          "type": "string",
+          "default": "latest",
+          "description": "%config.compiler.version%"
+        },
         "alya.run.memTrace": {
           "type": "boolean",
           "default": false,

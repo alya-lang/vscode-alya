@@ -9,6 +9,7 @@ import {
 
 import { AlyaAssemblyViewer } from "./assemblyViewer";
 import { registerRainbowBracketsToggle } from "./bracketColors";
+import { ensureCompiler } from "./compilerManager";
 import { registerDocGenerator } from "./docGenerator";
 import { registerInlayHintsToggle } from "./editorSync";
 import { registerEnvInfoCommand, warnIfStaleBinary } from "./envInfo";
@@ -32,19 +33,22 @@ function getAlyaTerminal(): vscode.Terminal {
   return alyaTerminal;
 }
 
-export function activate(context: vscode.ExtensionContext) {
-  const config = vscode.workspace.getConfiguration("alya");
-  const serverPath = config.get<string>("lsp.path") || "alya";
-  const serverArgs = config.get<string[]>("lsp.arguments") || ["lsp"];
+export async function activate(context: vscode.ExtensionContext) {
+  // Resolves `alya`/`alya-lsp`: explicit setting > system PATH > cache >
+  // auto-download. Never throws; falls back to PATH names on failure.
+  const resolved = await ensureCompiler(context);
+  const cliPath = resolved.cliPath;
+  const serverPath = resolved.lspPath;
+  const serverArgs = resolved.lspArgs;
 
   // 1. Status Bar Item
-  const statusBar = new AlyaStatusBar(context, serverPath);
+  const statusBar = new AlyaStatusBar(context, cliPath);
 
   // 2. Assembly & AST Inspector
-  const assemblyViewer = new AlyaAssemblyViewer(serverPath);
+  const assemblyViewer = new AlyaAssemblyViewer(cliPath);
 
   // 3. Official Test Explorer Controller
-  const testController = new AlyaTestController(context, serverPath);
+  const testController = new AlyaTestController(context, cliPath);
 
   // 4. Automatic Docstring & Summary Generator
   registerDocGenerator(context);
@@ -59,9 +63,9 @@ export function activate(context: vscode.ExtensionContext) {
   // but never wired); stale server binaries get a one-time warning.
   context.subscriptions.push(registerInlayHintsToggle(vscode));
   registerAlyaTasks(context, vscode);
-  void warnIfStaleBinary(vscode, serverPath, () => {
+  void warnIfStaleBinary(vscode, cliPath, () => {
     try {
-      const out = cp.execFileSync(serverPath, ["fmt", "--help"], {
+      const out = cp.execFileSync(cliPath, ["fmt", "--help"], {
         timeout: 8000,
         encoding: "utf8",
         windowsHide: true,
@@ -212,7 +216,7 @@ export function activate(context: vscode.ExtensionContext) {
       terminal.show();
       const runConfig = vscode.workspace.getConfiguration("alya");
       const memTraceFlag = runConfig.get<boolean>("run.memTrace") ? " --mem-trace" : "";
-      terminal.sendText(`alya run${memTraceFlag} "${targetUri.fsPath}"`);
+      terminal.sendText(`"${cliPath}" run${memTraceFlag} "${targetUri.fsPath}"`);
     }
   );
 
@@ -221,7 +225,7 @@ export function activate(context: vscode.ExtensionContext) {
     () => {
       const terminal = getAlyaTerminal();
       terminal.show();
-      terminal.sendText("alya --version");
+      terminal.sendText(`"${cliPath}" --version`);
     }
   );
 
@@ -237,7 +241,7 @@ export function activate(context: vscode.ExtensionContext) {
       }
       const terminal = getAlyaTerminal();
       terminal.show();
-      terminal.sendText(`alya run --mem-trace "${targetUri.fsPath}"`);
+      terminal.sendText(`"${cliPath}" run --mem-trace "${targetUri.fsPath}"`);
     }
   );
 
@@ -248,14 +252,14 @@ export function activate(context: vscode.ExtensionContext) {
       const targetPath = targetUri ? `"${targetUri.fsPath}"` : "";
       const terminal = getAlyaTerminal();
       terminal.show();
-      terminal.sendText(`alya test ${targetPath}`.trim());
+      terminal.sendText(`"${cliPath}" test ${targetPath}`.trim());
     }
   );
 
   const openReplCmd = vscode.commands.registerCommand("alya.openRepl", () => {
     const terminal = getAlyaTerminal();
     terminal.show();
-    terminal.sendText("alya repl");
+    terminal.sendText(`"${cliPath}" repl`);
   });
 
   const showDocCmd = vscode.commands.registerCommand(
@@ -265,7 +269,7 @@ export function activate(context: vscode.ExtensionContext) {
       const targetPath = targetUri ? `"${targetUri.fsPath}"` : "";
       const terminal = getAlyaTerminal();
       terminal.show();
-      terminal.sendText(`alya doc ${targetPath}`.trim());
+      terminal.sendText(`"${cliPath}" doc ${targetPath}`.trim());
     }
   );
 
@@ -321,7 +325,7 @@ export function activate(context: vscode.ExtensionContext) {
       const targetPath = targetUri ? `"${targetUri.fsPath}"` : "";
       const terminal = getAlyaTerminal();
       terminal.show();
-      terminal.sendText(`alya lint ${targetPath}`.trim());
+      terminal.sendText(`"${cliPath}" lint ${targetPath}`.trim());
     }
   );
 
@@ -332,7 +336,7 @@ export function activate(context: vscode.ExtensionContext) {
       const targetPath = targetUri ? `"${targetUri.fsPath}"` : "";
       const terminal = getAlyaTerminal();
       terminal.show();
-      terminal.sendText(`alya lint ${targetPath} --fix`.trim());
+      terminal.sendText(`"${cliPath}" lint ${targetPath} --fix`.trim());
     }
   );
 
@@ -355,7 +359,7 @@ export function activate(context: vscode.ExtensionContext) {
     if (doc.languageId === "alya") {
       const lintConfig = vscode.workspace.getConfiguration("alya.lint");
       if (lintConfig.get<boolean>("runOnSave")) {
-        cp.execFile(serverPath, ["lint", doc.uri.fsPath, "--fix"], () => {});
+        cp.execFile(cliPath, ["lint", doc.uri.fsPath, "--fix"], () => {});
       }
       const testConfig = vscode.workspace.getConfiguration("alya.testing");
       if (testConfig.get<boolean>("autoRunOnSave")) {

@@ -122,13 +122,19 @@ Powered by VSCode's native bracket engine (no dependencies, theme-aware):
 * **Quote punctuation**: `"..."`, `'...'`, raw/backtick strings get distinct `punctuation.definition.string` scopes via the grammar.
 
 ## 🚀 Prerequisites
-Ensure the `alya` compiler is installed and available in your system `PATH`:
+No manual install needed: if no `alya` compiler is found on your system `PATH`,
+the extension downloads a prebuilt release (`alya` + `alya-lsp`) from
+[alya-lang/alya](https://github.com/alya-lang/alya/releases) on activation,
+verifies its SHA-256 checksum, and caches it in global storage. Prefer a
+system install? It is used first when present:
 
 ```bash
 alya --version
 ```
 
-If not installed, install or build Alya from the [official repository](https://github.com/alya-lang/alya).
+Auto-download can be pinned or disabled via `alya.compiler.version`
+(`"latest"` default) and `alya.compiler.autoDownload`, or bypassed with an
+explicit `alya.lsp.path`.
 
 ---
 

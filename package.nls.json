@@ -40,6 +40,8 @@
   "config.title": "Alya",
   "config.lsp.path": "Path to the alya executable",
   "config.lsp.arguments": "Arguments to pass to the alya command to start the language server",
+  "config.compiler.autoDownload": "Automatically download a prebuilt alya compiler when none is found on PATH",
+  "config.compiler.version": "Compiler version to auto-download (\"latest\" or a version like \"0.0.21\")",
   "config.run.memTrace": "Always pass --mem-trace to 'alya run' for memory diagnostics and leak detection",
   "config.lint.enabled": "Enable real-time static code analysis and linter diagnostics in language server",
   "config.lint.runOnSave": "Automatically run 'alya lint --fix' when saving an Alya source file",

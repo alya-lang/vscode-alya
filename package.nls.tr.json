@@ -40,6 +40,8 @@
   "config.title": "Alya",
   "config.lsp.path": "alya yürütülebilir dosyasının yolu",
   "config.lsp.arguments": "Dil sunucusunu başlatmak için alya komutuna geçirilecek bağımsız değişkenler",
+  "config.compiler.autoDownload": "PATH üzerinde bulunamazsa önceden derlenmiş alya derleyicisini otomatik indir",
+  "config.compiler.version": "Otomatik indirilecek derleyici sürümü (\"latest\" ya da \"0.0.21\" gibi bir sürüm)",
   "config.run.memTrace": "Bellek tanılama ve sızıntı tespiti için 'alya run' komutuna her zaman --mem-trace geçir",
   "config.lint.enabled": "Dil sunucusunda gerçek zamanlı statik kod analizi ve linter tanılamayı etkinleştir",
   "config.lint.runOnSave": "Alya kaynak dosyası kaydedildiğinde otomatik olarak 'alya lint --fix' çalıştır",
