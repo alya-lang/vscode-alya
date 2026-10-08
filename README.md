@@ -178,7 +178,7 @@ bun run package
 
 To install the built `.vsix` into VS Code:
 ```bash
-code --install-extension alya-lsp-0.12.0.vsix
+code --install-extension alya-lsp-0.13.0.vsix
 ```
 
 ---

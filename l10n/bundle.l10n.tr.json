@@ -87,5 +87,8 @@
   "offline": "çevrimdışı",
   "Alya Language Toolchain": "Alya Dil Araç Zinciri",
   "Compiler": "Derleyici",
-  "Click for quick actions": "Hızlı eylemler için tıklayın"
+  "Click for quick actions": "Hızlı eylemler için tıklayın",
+  "Alya compiler not found and auto-download failed: {0}. Install it manually or set alya.lsp.path.": "Alya derleyicisi bulunamadı ve otomatik indirme başarısız: {0}. Manuel kurun veya alya.lsp.path ayarlayın.",
+  "Alya compiler not found and this platform ({0}/{1}) has no prebuilt binary. Install alya manually and set alya.lsp.path.": "Alya derleyicisi bulunamadı ve bu platform ({0}/{1}) için önceden derlenmiş ikili yok. Alya'yı manuel kurun ve alya.lsp.path ayarlayın.",
+  "Alya compiler not found on PATH. Install it, enable alya.compiler.autoDownload, or set alya.lsp.path.": "PATH üzerinde Alya derleyicisi bulunamadı. Kurun, alya.compiler.autoDownload seçeneğini etkinleştirin veya alya.lsp.path ayarlayın."
 }

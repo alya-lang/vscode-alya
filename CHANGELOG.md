@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.13.0] - 2026-10-08
+
+### Added
+- **Zero-setup compiler**: when no `alya` is found on `PATH`, the extension downloads a prebuilt `alya-lang/alya` release for the current platform (checksum-verified, cached in global storage, with progress notifications) instead of failing to start. Pin it via `alya.compiler.version` (`"latest"` default) or turn it off via `alya.compiler.autoDownload`.
+- **Standalone `alya-lsp` support**: the LSP client now spawns the dedicated `alya-lsp` server (no arguments) whenever it sits next to the resolved `alya` binary — system install, cache, or fresh download — and falls back to `alya lsp` for older compilers. Run/test/lint/debug/DAP keep using the full `alya` binary at the same resolved path.
+- **20-language coverage for the new strings**: `alya.compiler.autoDownload` / `alya.compiler.version` setting descriptions (`package.nls.*.json`) and the three new runtime messages (`l10n/bundle.l10n.*.json`) translated in all 19 locales (92/92 key parity).
+
+### Changed
+- Extension version 0.13.0 (new: compiler auto-download, standalone LSP).
+- Prerequisites section rewritten: manual install is now optional — a system `alya` is preferred when present, otherwise the matching release is fetched automatically.
+
+---
+
 ## [0.12.0] - 2026-10-01
 
 ### Added

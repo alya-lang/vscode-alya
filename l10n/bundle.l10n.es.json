@@ -87,5 +87,8 @@
   "offline": "sin conexión",
   "Alya Language Toolchain": "Cadena de herramientas del lenguaje Alya",
   "Compiler": "Compilador",
-  "Click for quick actions": "Clic para acciones rápidas"
+  "Click for quick actions": "Clic para acciones rápidas",
+  "Alya compiler not found and auto-download failed: {0}. Install it manually or set alya.lsp.path.": "Compilador Alya no encontrado y descarga automática fallida: {0}. Instálelo manualmente o establezca alya.lsp.path.",
+  "Alya compiler not found and this platform ({0}/{1}) has no prebuilt binary. Install alya manually and set alya.lsp.path.": "Compilador Alya no encontrado y no hay binario precompilado para esta plataforma ({0}/{1}). Instale alya manualmente y establezca alya.lsp.path.",
+  "Alya compiler not found on PATH. Install it, enable alya.compiler.autoDownload, or set alya.lsp.path.": "Compilador Alya no encontrado en el PATH. Instálelo, habilite alya.compiler.autoDownload o establezca alya.lsp.path."
 }

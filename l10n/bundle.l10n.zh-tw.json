@@ -87,5 +87,8 @@
   "offline": "離線",
   "Alya Language Toolchain": "Alya 語言工具鏈",
   "Compiler": "編譯器",
-  "Click for quick actions": "按一下以使用快速動作"
+  "Click for quick actions": "按一下以使用快速動作",
+  "Alya compiler not found and auto-download failed: {0}. Install it manually or set alya.lsp.path.": "找不到 Alya 編譯器，自動下載失敗：{0}。請手動安裝或設定 alya.lsp.path。",
+  "Alya compiler not found and this platform ({0}/{1}) has no prebuilt binary. Install alya manually and set alya.lsp.path.": "找不到 Alya 編譯器，且此平台 ({0}/{1}) 沒有預先建置的二進位檔。請手動安裝 alya 並設定 alya.lsp.path。",
+  "Alya compiler not found on PATH. Install it, enable alya.compiler.autoDownload, or set alya.lsp.path.": "在 PATH 中找不到 Alya 編譯器。請安裝、啟用 alya.compiler.autoDownload 或設定 alya.lsp.path。"
 }

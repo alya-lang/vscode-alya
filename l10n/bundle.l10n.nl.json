@@ -87,5 +87,8 @@
   "offline": "offline",
   "Alya Language Toolchain": "Alya-taaltoolchain",
   "Compiler": "Compiler",
-  "Click for quick actions": "Klik voor snelle acties"
+  "Click for quick actions": "Klik voor snelle acties",
+  "Alya compiler not found and auto-download failed: {0}. Install it manually or set alya.lsp.path.": "Alya-compiler niet gevonden en automatisch downloaden mislukt: {0}. Installeer deze handmatig of stel alya.lsp.path in.",
+  "Alya compiler not found and this platform ({0}/{1}) has no prebuilt binary. Install alya manually and set alya.lsp.path.": "Alya-compiler niet gevonden en geen vooraf gebouwde binaire bestanden voor dit platform ({0}/{1}). Installeer alya handmatig en stel alya.lsp.path in.",
+  "Alya compiler not found on PATH. Install it, enable alya.compiler.autoDownload, or set alya.lsp.path.": "Alya-compiler niet gevonden in PATH. Installeer deze, schakel alya.compiler.autoDownload in of stel alya.lsp.path in."
 }

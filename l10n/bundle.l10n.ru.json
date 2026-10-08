@@ -87,5 +87,8 @@
   "offline": "офлайн",
   "Alya Language Toolchain": "Набор инструментов языка Alya",
   "Compiler": "Компилятор",
-  "Click for quick actions": "Нажмите для быстрых действий"
+  "Click for quick actions": "Нажмите для быстрых действий",
+  "Alya compiler not found and auto-download failed: {0}. Install it manually or set alya.lsp.path.": "Компилятор Alya не найден, автоматическое скачивание не удалось: {0}. Установите его вручную или задайте alya.lsp.path.",
+  "Alya compiler not found and this platform ({0}/{1}) has no prebuilt binary. Install alya manually and set alya.lsp.path.": "Компилятор Alya не найден, и для этой платформы ({0}/{1}) нет готовой сборки. Установите alya вручную и задайте alya.lsp.path.",
+  "Alya compiler not found on PATH. Install it, enable alya.compiler.autoDownload, or set alya.lsp.path.": "Компилятор Alya не найден в PATH. Установите его, включите alya.compiler.autoDownload или задайте alya.lsp.path."
 }

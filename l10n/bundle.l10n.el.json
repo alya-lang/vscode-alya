@@ -87,5 +87,8 @@
   "offline": "εκτός σύνδεσης",
   "Alya Language Toolchain": "Εργαλειοθήκη Γλώσσας Alya",
   "Compiler": "Μεταγλωττιστής",
-  "Click for quick actions": "Κάντε κλικ για γρήγορες ενέργειες"
+  "Click for quick actions": "Κάντε κλικ για γρήγορες ενέργειες",
+  "Alya compiler not found and auto-download failed: {0}. Install it manually or set alya.lsp.path.": "Δεν βρέθηκε ο μεταγλωττιστής Alya και η αυτόματη λήψη απέτυχε: {0}. Εγκαταστήστε τον χειροκίνητα ή ορίστε το alya.lsp.path.",
+  "Alya compiler not found and this platform ({0}/{1}) has no prebuilt binary. Install alya manually and set alya.lsp.path.": "Δεν βρέθηκε ο μεταγλωττιστής Alya και δεν υπάρχει προμεταγλωττισμένο δυαδικό για αυτήν την πλατφόρμα ({0}/{1}). Εγκαταστήστε το alya χειροκίνητα και ορίστε το alya.lsp.path.",
+  "Alya compiler not found on PATH. Install it, enable alya.compiler.autoDownload, or set alya.lsp.path.": "Δεν βρέθηκε ο μεταγλωττιστής Alya στο PATH. Εγκαταστήστε τον, ενεργοποιήστε το alya.compiler.autoDownload ή ορίστε το alya.lsp.path."
 }
