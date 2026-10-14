@@ -18,10 +18,14 @@ import { registerAlyaTasks } from "./tasks";
 import { AlyaDocumentLinkProvider } from "./documentLinks";
 import { AlyaStatusBar } from "./statusBar";
 import { AlyaTestController } from "./testController";
-import {
-  AlyaDebugConfigurationProvider,
+import { AlyaDebugConfigurationProvider,
   AlyaDebugAdapterDescriptorFactory,
 } from "./debugAdapter";
+import {
+  ALYA_LSP_PROTOCOL_VERSION,
+  checkProtocolVersion,
+  serverVersionOf,
+} from "./lspProtocol";
 
 let client: LanguageClient | undefined;
 let alyaTerminal: vscode.Terminal | undefined;
@@ -97,8 +101,32 @@ export async function activate(context: vscode.ExtensionContext) {
       clientOptions
     );
 
-    client.start().then(
-      () => statusBar.setLspStatus("Ready"),
+    const started = client;
+    started.start().then(
+      () => {
+        statusBar.setLspStatus("Ready");
+        // Protocol handshake (alya-lang/alya#192): the start promise
+        // resolves after `initialize`, so `initializeResult` is live
+        // here. Fail loud on skew instead of serving broken
+        // completions/hover silently.
+        const check = checkProtocolVersion(started.initializeResult);
+        if (!check.ok) {
+          const serverVersion = serverVersionOf(started.initializeResult);
+          const channel = vscode.window.createOutputChannel("Alya");
+          channel.appendLine(
+            `[lsp] protocol mismatch (expected ${ALYA_LSP_PROTOCOL_VERSION}): ${check.reason}; server version ${serverVersion}`
+          );
+          channel.show(true);
+          void vscode.window.showErrorMessage(
+            vscode.l10n.t(
+              "Alya language server protocol mismatch ({0}). Server version: {1}. Update the Alya compiler or the extension so both sides match.",
+              check.reason,
+              serverVersion
+            )
+          );
+          statusBar.setLspStatus("Error");
+        }
+      },
       () => statusBar.setLspStatus("Error")
     );
   }
